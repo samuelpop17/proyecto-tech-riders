@@ -13,6 +13,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
+import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya
     MenuComponent,
     EditarusuarioComponent,
     ModificarcontrasenyaComponent,
+    EditartecnologiastechriderComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [appRoutingProvider, ServicePrincipal],

@@ -16,6 +16,7 @@ export class PerfilusuarioComponent implements OnInit {
   public provincia!: Provincia;
   public empresaCentro!: EmpresaCentro;
   public role!: Role;
+  public tecnologias!: any[];
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -39,6 +40,14 @@ export class PerfilusuarioComponent implements OnInit {
         this._service.findRole(this.usuario.idRole).subscribe((response) => {
           this.role = response;
         });
+        if (this.usuario.idRole == 3) {
+          // TechRider
+          this._service
+            .findTecnologiasTechRider(this.usuario.idUsuario)
+            .subscribe((response) => {
+              this.tecnologias = response;
+            });
+        }
       });
     } else this._router.navigate(['/']);
   }

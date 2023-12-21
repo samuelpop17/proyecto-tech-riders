@@ -6,6 +6,7 @@ import { PerfilusuarioComponent } from './components/perfilusuario/perfilusuario
 import { LogoutComponent } from './components/logout/logout.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
+import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +14,10 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilusuarioComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'editar-usuario', component: EditarusuarioComponent },
+  {
+    path: 'editar-tecnologias-tech-rider',
+    component: EditartecnologiastechriderComponent,
+  },
   { path: 'modificar-contrasenya', component: ModificarcontrasenyaComponent },
 ];
 

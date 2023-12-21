@@ -1,0 +1,50 @@
+<div class="shadow-card p-4">
+  <h1 class="fw-bold">Editar tecnologías</h1>
+  <hr class="border border-dark opacity-50" />
+  <div class="row">
+    <div class="col-6">
+      <h2 class="text-center">Tus tecnologías</h2>
+      <table *ngIf="tecnologias" class="mt-3 w-100">
+        <tbody>
+          <tr
+            *ngFor="let tecnologia of tecnologias"
+            class="row d-flex align-items-center"
+          >
+            <td class="col-6">{{ tecnologia.tecnologia }}</td>
+            <td class="col-6">
+              <button
+                class="btn btn-dark my-2 w-100"
+                (click)="eliminarTecnologia(tecnologia.idTecnologia)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-6">
+      <h2 class="text-center">Otras tecnologías</h2>
+      <table *ngIf="allTecnologias" class="mt-3 w-100">
+        <tbody>
+          <tr
+            *ngFor="let tecnologia of allTecnologias"
+            class="row d-flex align-items-center"
+          >
+            <td class="col-6">
+              {{ tecnologia.nombreTecnologia }}
+            </td>
+            <td class="col-6">
+              <button
+                class="btn btn-dark my-2 w-100"
+                (click)="anyadirTecnologia(tecnologia.idTecnologia)"
+              >
+                Añadir
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

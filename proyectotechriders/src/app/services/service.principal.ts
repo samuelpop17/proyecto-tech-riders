@@ -97,4 +97,44 @@ export class ServicePrincipal {
     });
     return this._http.put(url + request, json, { headers: header });
   }
+
+  findTecnologiasTechRider(id: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindTecnologiasTechrider';
+    let header = new HttpHeaders({
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.get(url + request, {
+      headers: header,
+      params: { idtechrider: id },
+    });
+  }
+
+  getTecnologias(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Tecnologias';
+    return this._http.get(url + request);
+  }
+
+  deleteTecnologiaTechRider(idUsuario: number, idTecnologia: number) {
+    let url = environment.urlApi;
+    let request =
+      'api/TecnologiasTechRiders/Delete/' + idUsuario + '/' + idTecnologia;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.delete(url + request, { headers: header });
+  }
+
+  insertTecnologiaTechRider(idUsuario: number, idTecnologia: number) {
+    let url = environment.urlApi;
+    let request = 'api/TecnologiasTechRiders';
+    let json = JSON.stringify({
+      idUsuario: idUsuario,
+      idTecnologia: idTecnologia,
+    });
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
+  }
 }
