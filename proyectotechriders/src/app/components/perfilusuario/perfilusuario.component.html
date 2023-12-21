@@ -1,30 +1,60 @@
 <div *ngIf="usuario && role && provincia">
   <div class="shadows p-4">
-    <h1>Tu perfil de usuario</h1>
+    <h1 class="fw-bold">Tu perfil de usuario</h1>
     <hr class="border border-dark opacity-50" />
-    <div class="row mt-3">
-      <h3 class="fw-bold mb-3">{{ usuario.nombre }} {{ usuario.apellidos }}</h3>
-      <div class="mb-3">
-        <h4>
+    <div class="mt-3">
+      <h4 class="fw-bold mb-3">{{ usuario.nombre }} {{ usuario.apellidos }}</h4>
+      <div>
+        <h5>
           {{ role.tipoRole }}
           <span *ngIf="empresaCentro"> en {{ empresaCentro.nombre }}</span>
-        </h4>
+        </h5>
       </div>
-      <div class="mb-3">
-        <span class="material-symbols-outlined d-inline mt-3"> mail </span>
-        <h5 class="d-inline">{{ usuario.email }}</h5>
+      <div class="row">
+        <div class="col-6 mt-3">
+          <label class="form-label fw-bold">Correo</label>
+          <input
+            type="text"
+            readonly
+            class="form-control"
+            [value]="usuario.email"
+          />
+        </div>
+        <div class="col-6 mt-3">
+          <label class="form-label fw-bold">Teléfono</label>
+          <input
+            type="text"
+            readonly
+            class="form-control"
+            [value]="usuario.telefono"
+          />
+        </div>
+        <div class="col-6 mt-3">
+          <label class="form-label fw-bold">Provincia</label>
+          <input
+            type="text"
+            readonly
+            class="form-control"
+            [value]="provincia.nombreProvincia"
+          />
+        </div>
+        <div class="col-6 mt-3">
+          <label class="form-label fw-bold">LinkedIn</label>
+          <a
+            class="linkedin-button form-control"
+            [href]="'https://' + usuario.linkedIn"
+          >
+            {{ usuario.linkedIn }}
+          </a>
+        </div>
       </div>
-      <div class="mb-3">
-        <span class="material-symbols-outlined d-inline"> call </span>
-        <h5 class="d-inline">{{ usuario.telefono }}</h5>
-      </div>
-      <a [href]="'https://' + usuario.linkedIn">
-        <h5>Perfil de LinkedIn</h5>
-      </a>
     </div>
+    <a class="btn btn-dark w-100 mt-3" [routerLink]="['/editar-usuario']">
+      Editar perfil
+    </a>
+    <a class="btn btn-dark w-100 mt-3">Modificar contraseña</a>
   </div>
 </div>
-
 <img
   *ngIf="!usuario || !role || !provincia"
   class="d-block mx-auto"

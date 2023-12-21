@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
+import { Usuario } from '../models/Usuario';
 
 @Injectable()
 export class ServicePrincipal {
@@ -18,16 +19,9 @@ export class ServicePrincipal {
     return this._http.post(url + request, json, { headers: header });
   }
 
-  getPerfilUsuario(token: string): Observable<any> {
+  getPerfilUsuario(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Usuarios/PerfilUsuario';
-    let header = new HttpHeaders({ Authorization: 'bearer ' + token });
-    return this._http.get(url + request, { headers: header });
-  }
-
-  findUsuario(id: number): Observable<any> {
-    let url = environment.urlApi;
-    let request = 'api/Usuarios/' + id;
     let header = new HttpHeaders({
       Authorization: 'bearer ' + localStorage.getItem('token'),
     });
@@ -49,6 +43,41 @@ export class ServicePrincipal {
   findRole(id: number): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Roles/' + id;
+    let header = new HttpHeaders({
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.get(url + request, { headers: header });
+  }
+
+  getProvincias(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Provincias';
+    return this._http.get(url + request);
+  }
+
+  editUsuario(usuario: Usuario): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Usuarios';
+    let json = JSON.stringify(usuario);
+    let header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.put(url + request, json, { headers: header });
+  }
+
+  getUsuarios(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Usuarios';
+    let header = new HttpHeaders({
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.get(url + request, { headers: header });
+  }
+
+  findUsuario(id: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Usuarios/' + id;
     let header = new HttpHeaders({
       Authorization: 'bearer ' + localStorage.getItem('token'),
     });

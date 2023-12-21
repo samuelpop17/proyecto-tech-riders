@@ -1,0 +1,64 @@
+<div class="shadows p-4" *ngIf="usuario && provincias">
+  <h1 class="fw-bold">Editar perfil</h1>
+  <hr class="border border-dark opacity-50" />
+  <form #editarusuarioform="ngForm" (ngSubmit)="editarPerfil()">
+    <div class="mt-3">
+      <label class="form-label fw-bold">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="usuario.nombre"
+        name="controlnombre"
+        #controlnombre
+      />
+    </div>
+    <div class="mt-3">
+      <label class="form-label fw-bold">Apellidos</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="usuario.apellidos"
+        name="controlapellidos"
+        #controlapellidos
+      />
+    </div>
+    <div class="mt-3">
+      <label class="form-label fw-bold">Teléfono</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="usuario.telefono"
+        name="controltelefono"
+        #controltelefono
+      />
+    </div>
+    <div class="mt-3">
+      <label class="form-label fw-bold">LinkedIn</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="usuario.linkedIn"
+        name="controllinkedin"
+        #controllinkedin
+      />
+    </div>
+    <div class="mt-3">
+      <label class="form-label fw-bold">Provincia</label>
+      <select class="form-select" name="selectprovincia" #selectprovincia>
+        <option
+          *ngFor="let provincia of provincias"
+          [value]="provincia.idProvincia"
+          [selected]="provincia.idProvincia == usuario.idProvincia"
+        >
+          {{ provincia.nombreProvincia }}
+        </option>
+      </select>
+    </div>
+    <button class="btn btn-dark w-100 mt-3">Editar perfil</button>
+  </form>
+</div>
+<img
+  *ngIf="!usuario || !provincias"
+  class="d-block mx-auto"
+  src="../../../assets/images/loading.gif"
+/>

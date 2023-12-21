@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-black" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Tech Riders</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -13,9 +13,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <!-- NAVBAR PARA PARTE PÚBLICA-->
+      <ul class="navbar-nav" *ngIf="!role">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/']">Home</a>
+          <a class="nav-link" [routerLink]="['/']">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">Iniciar sesión</a>
+        </li>
+      </ul>
+
+      <!-- NAVBAR PARA USUARIOS -->
+      <ul class="navbar-nav" *ngIf="role">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Inicio</a>
         </li>
         <li class="nav-item dropdown">
           <a

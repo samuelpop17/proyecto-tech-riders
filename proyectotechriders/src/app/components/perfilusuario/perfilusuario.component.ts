@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Usuario } from 'src/app/models/Usuario';
 import { Router } from '@angular/router';
@@ -20,9 +20,14 @@ export class PerfilusuarioComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    let idUsuario = localStorage.getItem('idUsuario');
-    if (idUsuario) {
-      this._service.findUsuario(parseInt(idUsuario)).subscribe((response) => {
+    this.getPerfilUsuario();
+  }
+
+  getPerfilUsuario(): void {
+    let token = localStorage.getItem('token');
+    if (token) {
+      let id: number = parseInt(localStorage.getItem('idUsuario') ?? '0');
+      this._service.findUsuario(id).subscribe((response) => {
         this.usuario = response;
         this._service
           .findProvincia(this.usuario.idProvincia)

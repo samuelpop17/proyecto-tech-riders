@@ -22,12 +22,10 @@ export class LoginComponent implements OnInit {
     let password = this.controlPassword.nativeElement.value;
     this._service.loginUser(email, password).subscribe((response) => {
       localStorage.setItem('token', response.response);
-      this._service
-        .getPerfilUsuario(response.response)
-        .subscribe((response) => {
-          localStorage.setItem('idUsuario', response.idUsuario);
-          localStorage.setItem('role', response.idRole);
-        });
+      this._service.getPerfilUsuario().subscribe((response) => {
+        localStorage.setItem('idUsuario', response.idUsuario);
+        localStorage.setItem('role', response.idRole);
+      });
       this._router.navigate(['/perfil']);
     });
   }
