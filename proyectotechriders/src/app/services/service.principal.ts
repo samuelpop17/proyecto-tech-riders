@@ -83,4 +83,18 @@ export class ServicePrincipal {
     });
     return this._http.get(url + request, { headers: header });
   }
+
+  updatePasswordUsuario(id: number, password: string) {
+    let url = environment.urlApi;
+    let request = 'api/Usuarios/UpdatePasswordUsuario';
+    let json = JSON.stringify({
+      idUser: id,
+      password: password,
+    });
+    let header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.put(url + request, json, { headers: header });
+  }
 }

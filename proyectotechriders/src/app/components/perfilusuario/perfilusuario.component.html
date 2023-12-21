@@ -1,15 +1,49 @@
 <div *ngIf="usuario && role && provincia">
-  <div class="shadows p-4">
+  <div class="shadow-card p-4">
     <h1 class="fw-bold">Tu perfil de usuario</h1>
     <hr class="border border-dark opacity-50" />
     <div class="mt-3">
-      <h4 class="fw-bold mb-3">{{ usuario.nombre }} {{ usuario.apellidos }}</h4>
-      <div>
-        <h5>
-          {{ role.tipoRole }}
-          <span *ngIf="empresaCentro"> en {{ empresaCentro.nombre }}</span>
-        </h5>
+      <div class="row">
+        <div class="col-6">
+          <h4 class="fw-bold mb-3">
+            {{ usuario.nombre }} {{ usuario.apellidos }}
+          </h4>
+          <div>
+            <h5>
+              {{ role.tipoRole }}
+              <span *ngIf="empresaCentro"> en {{ empresaCentro.nombre }}</span>
+            </h5>
+          </div>
+        </div>
+        <div class="col-6 d-flex">
+          <div class="dropdown-center ms-auto">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Opciones
+            </button>
+            <ul class="dropdown-menu" data-bs-theme="dark">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/editar-usuario']">
+                  Editar perfil
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/modificar-contrasenya']"
+                >
+                  Modificar contraseña
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+
       <div class="row">
         <div class="col-6 mt-3">
           <label class="form-label fw-bold">Correo</label>
@@ -49,10 +83,6 @@
         </div>
       </div>
     </div>
-    <a class="btn btn-dark w-100 mt-3" [routerLink]="['/editar-usuario']">
-      Editar perfil
-    </a>
-    <a class="btn btn-dark w-100 mt-3">Modificar contraseña</a>
   </div>
 </div>
 <img

@@ -19,21 +19,17 @@ export class EditarusuarioComponent implements OnInit {
   public usuario!: Usuario;
   public provincias!: Provincia[];
 
-  @ViewChild('controlnombre') controlnombre!: ElementRef;
-  @ViewChild('controlapellidos') controlapellidos!: ElementRef;
-  @ViewChild('controltelefono') controltelefono!: ElementRef;
-  @ViewChild('controllinkedin') controllinkedin!: ElementRef;
-  @ViewChild('selectprovincia') selectprovincia!: ElementRef;
+  @ViewChild('controlnombre') controlNombre!: ElementRef;
+  @ViewChild('controlapellidos') controlApellidos!: ElementRef;
+  @ViewChild('controlemail') controlEmail!: ElementRef;
+  @ViewChild('controltelefono') controlTelefono!: ElementRef;
+  @ViewChild('controllinkedin') controlLinkedin!: ElementRef;
+  @ViewChild('selectprovincia') selectProvincia!: ElementRef;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.getPerfilUsuario();
-  }
-
-  getPerfilUsuario(): void {
-    let token = localStorage.getItem('token') ?? '0';
-    if (token) {
+    if (localStorage.getItem('idUsuario')) {
       let id: number = parseInt(localStorage.getItem('idUsuario') ?? '0');
       this._service.findUsuario(id).subscribe((response) => {
         this.usuario = response;
@@ -41,20 +37,20 @@ export class EditarusuarioComponent implements OnInit {
           this.provincias = response;
         });
       });
-    } else this._router.navigate(['/']);
+    } else this._router.navigate(['/login']);
   }
 
   editarPerfil(): void {
     let usuario: Usuario = {
       idUsuario: this.usuario.idUsuario,
-      nombre: this.controlnombre.nativeElement.value,
-      apellidos: this.controlapellidos.nativeElement.value,
-      email: this.usuario.email,
-      telefono: this.controltelefono.nativeElement.value,
-      linkedIn: this.controllinkedin.nativeElement.value,
+      nombre: this.controlNombre.nativeElement.value,
+      apellidos: this.controlApellidos.nativeElement.value,
+      email: this.controlEmail.nativeElement.value,
+      telefono: this.controlTelefono.nativeElement.value,
+      linkedIn: this.controlLinkedin.nativeElement.value,
       password: this.usuario.password,
       idRole: this.usuario.idRole,
-      idProvincia: this.selectprovincia.nativeElement.selectedOptions[0].value,
+      idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
       idEmpresaCentro: this.usuario.idEmpresaCentro,
       estado: this.usuario.estado,
     };

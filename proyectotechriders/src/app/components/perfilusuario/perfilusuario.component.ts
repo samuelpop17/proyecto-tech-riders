@@ -20,12 +20,7 @@ export class PerfilusuarioComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.getPerfilUsuario();
-  }
-
-  getPerfilUsuario(): void {
-    let token = localStorage.getItem('token');
-    if (token) {
+    if (localStorage.getItem('idUsuario')) {
       let id: number = parseInt(localStorage.getItem('idUsuario') ?? '0');
       this._service.findUsuario(id).subscribe((response) => {
         this.usuario = response;
