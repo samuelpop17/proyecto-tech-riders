@@ -1,0 +1,32 @@
+<div *ngIf="usuario && role && provincia">
+  <div class="shadows p-4">
+    <h1>Tu perfil de usuario</h1>
+    <hr class="border border-dark opacity-50" />
+    <div class="row mt-3">
+      <h3 class="fw-bold mb-3">{{ usuario.nombre }} {{ usuario.apellidos }}</h3>
+      <div class="mb-3">
+        <h4>
+          {{ role.tipoRole }}
+          <span *ngIf="empresaCentro"> en {{ empresaCentro.nombre }}</span>
+        </h4>
+      </div>
+      <div class="mb-3">
+        <span class="material-symbols-outlined d-inline mt-3"> mail </span>
+        <h5 class="d-inline">{{ usuario.email }}</h5>
+      </div>
+      <div class="mb-3">
+        <span class="material-symbols-outlined d-inline"> call </span>
+        <h5 class="d-inline">{{ usuario.telefono }}</h5>
+      </div>
+      <a [href]="'https://' + usuario.linkedIn">
+        <h5>Perfil de LinkedIn</h5>
+      </a>
+    </div>
+  </div>
+</div>
+
+<img
+  *ngIf="!usuario || !role || !provincia"
+  class="d-block mx-auto"
+  src="../../../assets/images/loading.gif"
+/>
