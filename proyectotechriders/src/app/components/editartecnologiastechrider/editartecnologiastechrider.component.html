@@ -22,6 +22,11 @@
           </tr>
         </tbody>
       </table>
+      <img
+        *ngIf="!tecnologias"
+        class="d-block mx-auto w-50"
+        src="../../../assets/images/loading.gif"
+      />
     </div>
     <div class="col-6">
       <h2 class="text-center">Otras tecnologías</h2>
@@ -45,6 +50,11 @@
           </tr>
         </tbody>
       </table>
+      <img
+        *ngIf="!allTecnologias"
+        class="d-block mx-auto w-50"
+        src="../../../assets/images/loading.gif"
+      />
     </div>
   </div>
 </div>

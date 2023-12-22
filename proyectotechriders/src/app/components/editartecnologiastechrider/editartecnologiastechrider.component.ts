@@ -15,7 +15,7 @@ export class EditartecnologiastechriderComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('idUsuario')) {
+    if (localStorage.getItem('token')) {
       this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
       this._service.findTecnologiasTechRider(this.id).subscribe((response) => {
         this.tecnologias = response;
@@ -41,6 +41,7 @@ export class EditartecnologiastechriderComponent implements OnInit {
   }
 
   anyadirTecnologia(idTecnologia: number): void {
+    console.log(this.id);
     console.log(idTecnologia);
     this._service
       .insertTecnologiaTechRider(this.id, idTecnologia)

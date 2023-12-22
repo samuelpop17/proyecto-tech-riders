@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
+import { Tecnologia } from '../models/Tecnologia';
+import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
 
 @Injectable()
 export class ServicePrincipal {
@@ -127,14 +129,16 @@ export class ServicePrincipal {
   insertTecnologiaTechRider(idUsuario: number, idTecnologia: number) {
     let url = environment.urlApi;
     let request = 'api/TecnologiasTechRiders';
-    let json = JSON.stringify({
-      idUsuario: idUsuario,
-      idTecnologia: idTecnologia,
-    });
     let header = {
       'Content-Type': 'application/json',
       Authorization: 'bearer ' + localStorage.getItem('token'),
     };
-    return this._http.post(url + request, json, { headers: header });
+    return this._http.post(url + request, null, {
+      headers: header,
+      params: {
+        idtechrider: idUsuario,
+        idtecnologia: idTecnologia,
+      },
+    });
   }
 }

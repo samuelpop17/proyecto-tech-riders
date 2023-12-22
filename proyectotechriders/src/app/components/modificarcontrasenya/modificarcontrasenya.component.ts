@@ -15,15 +15,14 @@ export class ModificarcontrasenyaComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    if (!localStorage.getItem('idUsuario')) this._router.navigate(['/login']);
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
   }
 
   updatePassword(): void {
     let antigua = this.controlAntigua.nativeElement.value;
     let nueva = this.controlNueva.nativeElement.value;
     let repetir = this.controlRepetir.nativeElement.value;
-    let id: number = parseInt(localStorage.getItem('idUsuario') ?? '0');
-    this._service.findUsuario(id).subscribe((response) => {
+    this._service.getPerfilUsuario().subscribe((response) => {
       if (response.password != antigua) {
         alert('Contraseña antigua errónea');
         return;
