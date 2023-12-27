@@ -118,7 +118,10 @@ export class ServicePrincipal {
     return this._http.get(url + request);
   }
 
-  deleteTecnologiaTechRider(idUsuario: number, idTecnologia: number) {
+  deleteTecnologiaTechRider(
+    idUsuario: number,
+    idTecnologia: number
+  ): Observable<any> {
     let url = environment.urlApi;
     let request =
       'api/TecnologiasTechRiders/Delete/' + idUsuario + '/' + idTecnologia;
@@ -126,7 +129,10 @@ export class ServicePrincipal {
     return this._http.delete(url + request, { headers: header });
   }
 
-  insertTecnologiaTechRider(idUsuario: number, idTecnologia: number) {
+  insertTecnologiaTechRider(
+    idUsuario: number,
+    idTecnologia: number
+  ): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/TecnologiasTechRiders';
     let header = {
@@ -140,5 +146,21 @@ export class ServicePrincipal {
         idtecnologia: idTecnologia,
       },
     });
+  }
+
+  getEmpresasCentros(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/EmpresasCentros';
+    return this._http.get(url + request);
+  }
+
+  createUsuario(usuario: Usuario): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Usuarios';
+    let header = {
+      'Content-Type': 'application/json',
+    };
+    let json = JSON.stringify(usuario);
+    return this._http.post(url + request, json, { headers: header });
   }
 }

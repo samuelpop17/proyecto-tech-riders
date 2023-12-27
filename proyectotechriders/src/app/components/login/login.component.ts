@@ -23,10 +23,16 @@ export class LoginComponent implements OnInit {
     this._service.loginUser(email, password).subscribe((response) => {
       localStorage.setItem('token', response.response);
       this._service.getPerfilUsuario().subscribe((response) => {
-        localStorage.setItem('idUsuario', response.idUsuario);
-        localStorage.setItem('role', response.idRole);
+        if (response.estado == 1) {
+          localStorage.setItem('idUsuario', response.idUsuario);
+          localStorage.setItem('role', response.idRole);
+          this._router.navigate(['/perfil']);
+        } else {
+          localStorage.removeItem('token');
+          alert('Usuario no dado de alta por el administrador');
+          this._router.navigate(['/login']);
+        }
       });
-      this._router.navigate(['/perfil']);
     });
   }
 }

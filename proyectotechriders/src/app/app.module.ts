@@ -14,6 +14,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
+import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { EditartecnologiastechriderComponent } from './components/editartecnolog
     EditarusuarioComponent,
     ModificarcontrasenyaComponent,
     EditartecnologiastechriderComponent,
+    RegisterusuarioComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [appRoutingProvider, ServicePrincipal],

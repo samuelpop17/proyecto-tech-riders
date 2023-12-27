@@ -7,6 +7,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
+import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     component: EditartecnologiastechriderComponent,
   },
   { path: 'modificar-contrasenya', component: ModificarcontrasenyaComponent },
+  { path: 'registrar-usuario', component: RegisterusuarioComponent },
 ];
 
 export const appRoutingProvider: any[] = [];
