@@ -12,14 +12,17 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'perfil', component: PerfilusuarioComponent },
+  { path: 'usuario/perfil', component: PerfilusuarioComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'editar-usuario', component: EditarusuarioComponent },
   {
-    path: 'editar-tecnologias-tech-rider',
+    path: 'usuario/editar-tecnologias',
     component: EditartecnologiastechriderComponent,
   },
-  { path: 'modificar-contrasenya', component: ModificarcontrasenyaComponent },
+  {
+    path: 'usuario/modificar-contrasenya',
+    component: ModificarcontrasenyaComponent,
+  },
   { path: 'registrar-usuario', component: RegisterusuarioComponent },
 ];
 

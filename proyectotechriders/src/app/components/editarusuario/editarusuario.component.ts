@@ -57,7 +57,7 @@ export class EditarusuarioComponent implements OnInit {
       this._service.findUsuario(usuario.idUsuario).subscribe((response) => {
         console.log(response);
       });
-      this._router.navigate(['/perfil']);
+      this._router.navigate(['/usuario/perfil']);
     });
   }
 }

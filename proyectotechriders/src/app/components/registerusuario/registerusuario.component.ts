@@ -5,6 +5,7 @@ import { Provincia } from 'src/app/models/Provincia';
 import { Role } from 'src/app/models/Role';
 import { Usuario } from 'src/app/models/Usuario';
 import { ServicePrincipal } from 'src/app/services/service.principal';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registerusuario',
@@ -71,8 +72,17 @@ export class RegisterusuarioComponent implements OnInit {
       estado: 2,
     };
     this._service.createUsuario(usuario).subscribe((response) => {
-      alert('Usuario creado. Tendrá que ser validado por el administrador');
-      this._router.navigate(['/login']);
+      Swal.fire({
+        color: '#333333',
+        icon: 'success',
+        showConfirmButton: false,
+        text: 'Usuario creado. Tendrá que ser validado por el administrador',
+        timer: 4000,
+        timerProgressBar: true,
+        title: 'Registro con éxito',
+      }).then((result) => {
+        this._router.navigate(['/login']);
+      });
     });
   }
 }

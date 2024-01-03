@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) this._router.navigate(['/perfil']);
+    if (localStorage.getItem('token'))
+      this._router.navigate(['/usuario/perfil']);
   }
 
   iniciarSesion(): void {
@@ -26,11 +28,17 @@ export class LoginComponent implements OnInit {
         if (response.estado == 1) {
           localStorage.setItem('idUsuario', response.idUsuario);
           localStorage.setItem('role', response.idRole);
-          this._router.navigate(['/perfil']);
+          this._router.navigate(['/usuario/perfil']);
         } else {
           localStorage.removeItem('token');
-          alert('Usuario no dado de alta por el administrador');
-          this._router.navigate(['/login']);
+          Swal.fire({
+            color: '#333333',
+            confirmButtonColor: '#212529',
+            confirmButtonText: 'Cerrar',
+            icon: 'error',
+            text: 'Usuario no dado de alta por el administrador',
+            title: 'Error',
+          });
         }
       });
     });

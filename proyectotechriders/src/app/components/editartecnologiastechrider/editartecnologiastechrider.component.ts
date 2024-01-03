@@ -36,7 +36,7 @@ export class EditartecnologiastechriderComponent implements OnInit {
     this._service
       .deleteTecnologiaTechRider(this.id, idTecnologia)
       .subscribe((response) => {
-        this._router.navigate(['/perfil']);
+        this._router.navigate(['/usuario/perfil']);
       });
   }
 
@@ -46,7 +46,7 @@ export class EditartecnologiastechriderComponent implements OnInit {
     this._service
       .insertTecnologiaTechRider(this.id, idTecnologia)
       .subscribe((response) => {
-        this._router.navigate(['/perfil']);
+        this._router.navigate(['/usuario/perfil']);
       });
   }
 }

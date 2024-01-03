@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServicePrincipal } from 'src/app/services/service.principal';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modificarcontrasenya',
@@ -8,6 +9,8 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
   styleUrls: ['./modificarcontrasenya.component.css'],
 })
 export class ModificarcontrasenyaComponent implements OnInit {
+  public modal!: string;
+
   @ViewChild('controlantigua') controlAntigua!: ElementRef;
   @ViewChild('controlnueva') controlNueva!: ElementRef;
   @ViewChild('controlrepetir') controlRepetir!: ElementRef;
@@ -24,20 +27,39 @@ export class ModificarcontrasenyaComponent implements OnInit {
     let repetir = this.controlRepetir.nativeElement.value;
     this._service.getPerfilUsuario().subscribe((response) => {
       if (response.password != antigua) {
-        alert('Contraseña antigua errónea');
-        return;
-      } else if (nueva != repetir) {
-        alert('Las dos contraseñas nuevas no son iguales');
-        return;
-      } else if (response.password == nueva) {
-        alert('La contraseña nueva es igual a la antigua');
-        return;
-      }
-      this._service
-        .updatePasswordUsuario(response.idUsuario, nueva)
-        .subscribe((response) => {
-          this._router.navigate(['/perfil']);
+        Swal.fire({
+          color: '#333333',
+          confirmButtonColor: '#212529',
+          confirmButtonText: 'Cerrar',
+          icon: 'error',
+          text: 'Contraseña antigua errónea',
+          title: 'Error',
         });
+      } else if (nueva != repetir) {
+        Swal.fire({
+          color: '#333333',
+          confirmButtonColor: '#212529',
+          confirmButtonText: 'Cerrar',
+          icon: 'error',
+          text: 'Las dos contraseñas nuevas no son iguales',
+          title: 'Error',
+        });
+      } else if (response.password == nueva) {
+        Swal.fire({
+          color: '#333333',
+          confirmButtonColor: '#212529',
+          confirmButtonText: 'Cerrar',
+          icon: 'error',
+          text: 'La contraseña nueva es igual a la antigua',
+          title: 'Error',
+        });
+      } else {
+        this._service
+          .updatePasswordUsuario(response.idUsuario, nueva)
+          .subscribe((response) => {
+            this._router.navigate(['/usuario/perfil']);
+          });
+      }
     });
   }
 }
