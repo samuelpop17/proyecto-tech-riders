@@ -9,6 +9,7 @@ export class MenuComponent implements DoCheck {
   public role!: string | null;
 
   ngDoCheck(): void {
-    this.role = localStorage.getItem('role');
+    if (this.role != localStorage.getItem('role'))
+      this.role = localStorage.getItem('role');
   }
 }
