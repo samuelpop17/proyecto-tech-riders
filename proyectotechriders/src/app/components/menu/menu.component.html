@@ -15,47 +15,48 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- NAVBAR PARA PARTE PÚBLICA-->
-      <ul class="navbar-nav" *ngIf="!role">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/']">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Iniciar sesión</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/registrar-usuario']">
-            Registrarse
-          </a>
-        </li>
-      </ul>
-
-      <!-- NAVBAR PARA USUARIOS -->
-      <ul class="navbar-nav" *ngIf="role">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/']">Inicio</a>
         </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
-            href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
             Usuario
           </a>
+
           <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" [routerLink]="['/usuario/perfil']"
-                >Perfil</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/logout']">
-                Cerrar sesión
-              </a>
-            </li>
+            <!-- NAVBAR PARA PARTE PÚBLICA-->
+            <div *ngIf="!role">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/login']">
+                  Iniciar sesión
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/registrar-usuario']">
+                  Registrarse
+                </a>
+              </li>
+            </div>
+
+            <!-- NAVBAR PARA USUARIOS -->
+            <div *ngIf="role">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/usuario/perfil']">
+                  Perfil
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/logout']">
+                  Cerrar sesión
+                </a>
+              </li>
+            </div>
           </ul>
         </li>
       </ul>
