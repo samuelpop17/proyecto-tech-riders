@@ -27,6 +27,16 @@ export class RegisterusuarioComponent implements OnInit {
   public provincias!: Provincia[];
   public empresasCentros!: EmpresaCentro[];
   public publicEmpresasCentros!: EmpresaCentro[];
+  private empresaPersonal: EmpresaCentro = {
+    idEmpresaCentro: 0,
+    nombre: ' - A título personal - ',
+    direccion: '',
+    telefono: '',
+    personaContacto: '',
+    cif: '',
+    idProvincia: 0,
+    idTipoEmpresa: 1,
+  };
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -43,6 +53,7 @@ export class RegisterusuarioComponent implements OnInit {
       this.publicEmpresasCentros = this.empresasCentros.filter(
         (empresaCentro) => empresaCentro.idTipoEmpresa == 1
       );
+      this.publicEmpresasCentros.push(this.empresaPersonal);
     });
   }
 
@@ -54,9 +65,14 @@ export class RegisterusuarioComponent implements OnInit {
     this.publicEmpresasCentros = this.empresasCentros.filter(
       (empresaCentro) => empresaCentro.idTipoEmpresa == tipoEmpresa
     );
+    if (this.selectRole.nativeElement.selectedOptions[0].value == 3)
+      this.publicEmpresasCentros.push(this.empresaPersonal);
   }
 
   registerUsu(): void {
+    let idEmpresaCentro =
+      this.selectEmpresaCentro.nativeElement.selectedOptions[0].value;
+    if (idEmpresaCentro == 0) idEmpresaCentro = null;
     let usuario: Usuario = {
       idUsuario: 0,
       nombre: this.controlNombre.nativeElement.value,
@@ -67,9 +83,8 @@ export class RegisterusuarioComponent implements OnInit {
       password: this.controlPassword.nativeElement.value,
       idRole: this.selectRole.nativeElement.selectedOptions[0].value,
       idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
-      idEmpresaCentro:
-        this.selectEmpresaCentro.nativeElement.selectedOptions[0].value,
-      estado: 2,
+      idEmpresaCentro: idEmpresaCentro,
+      estado: 0,
     };
     this._service.createUsuario(usuario).subscribe((response) => {
       Swal.fire({

@@ -86,7 +86,7 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
-  updatePasswordUsuario(id: number, password: string) {
+  updatePasswordUsuario(id: number, password: string): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Usuarios/UpdatePasswordUsuario';
     let json = JSON.stringify({
