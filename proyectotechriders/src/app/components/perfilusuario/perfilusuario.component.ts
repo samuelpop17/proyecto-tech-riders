@@ -50,11 +50,7 @@ export class PerfilusuarioComponent implements OnInit {
             });
         }
 
-        if (
-          this.usuario.idRole == 2 &&
-          this.empresaCentro &&
-          this.empresaCentro.idEmpresaCentro == 2
-        ) {
+        if (this.usuario.idRole == 2) {
           // Profesor no responsable de empresa
           this._service
             .findCursosProfesor(this.usuario.idUsuario)
