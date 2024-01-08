@@ -17,6 +17,7 @@ export class PerfilusuarioComponent implements OnInit {
   public empresaCentro!: EmpresaCentro;
   public role!: Role;
   public tecnologias!: any[];
+  public cursos!: any[];
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -39,12 +40,26 @@ export class PerfilusuarioComponent implements OnInit {
         this._service.findRole(this.usuario.idRole).subscribe((response) => {
           this.role = response;
         });
+
         if (this.usuario.idRole == 3) {
           // TechRider
           this._service
             .findTecnologiasTechRider(this.usuario.idUsuario)
             .subscribe((response) => {
               this.tecnologias = response;
+            });
+        }
+
+        if (
+          this.usuario.idRole == 2 &&
+          this.empresaCentro &&
+          this.empresaCentro.idEmpresaCentro == 2
+        ) {
+          // Profesor no responsable de empresa
+          this._service
+            .findCursosProfesor(this.usuario.idUsuario)
+            .subscribe((response) => {
+              this.cursos = response;
             });
         }
       });

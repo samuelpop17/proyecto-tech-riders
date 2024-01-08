@@ -8,6 +8,7 @@ import { EditarusuarioComponent } from './components/editarusuario/editarusuario
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
+import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
     component: ModificarcontrasenyaComponent,
   },
   { path: 'registrar-usuario', component: RegisterusuarioComponent },
+  { path: 'usuario/editar-cursos', component: EditarcursosComponent },
 ];
 
 export const appRoutingProvider: any[] = [];

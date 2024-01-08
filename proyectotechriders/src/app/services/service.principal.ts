@@ -163,4 +163,14 @@ export class ServicePrincipal {
     let json = JSON.stringify(usuario);
     return this._http.post(url + request, json, { headers: header });
   }
+
+  findCursosProfesor(idprofesor: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCursosProfesor/' + idprofesor;
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.get(url + request, { headers: header });
+  }
 }
