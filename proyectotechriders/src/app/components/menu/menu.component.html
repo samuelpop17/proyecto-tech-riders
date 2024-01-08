@@ -19,6 +19,8 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/']">Inicio</a>
         </li>
+
+        <!-- DROPDOWN USUARIO -->
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -30,7 +32,7 @@
           </a>
 
           <ul class="dropdown-menu">
-            <!-- NAVBAR PARA PARTE PÚBLICA-->
+            <!-- NAVBAR PARA PARTE PÚBLICA -->
             <div *ngIf="!role">
               <li>
                 <a class="dropdown-item" [routerLink]="['/login']">
@@ -44,7 +46,7 @@
               </li>
             </div>
 
-            <!-- NAVBAR PARA USUARIOS -->
+            <!-- NAVBAR PARTE PRIVADA -->
             <div *ngIf="role">
               <li>
                 <a class="dropdown-item" [routerLink]="['/usuario/perfil']">
