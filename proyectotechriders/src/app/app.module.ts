@@ -16,6 +16,8 @@ import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
+import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
+import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { EditarcursosComponent } from './components/editarcursos/editarcursos.co
     EditartecnologiastechriderComponent,
     RegisterusuarioComponent,
     EditarcursosComponent,
+    CharlasprofesorComponent,
+    DetallescharlaComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [appRoutingProvider, ServicePrincipal],

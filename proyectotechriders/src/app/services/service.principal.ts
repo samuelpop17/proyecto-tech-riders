@@ -214,4 +214,40 @@ export class ServicePrincipal {
       },
     });
   }
+
+  getCharlasView(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/CharlasViewAll';
+    let header = {
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  getEstadosCharlas(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/EstadosCharlas';
+    return this._http.get(url + request);
+  }
+
+  findCharlaView(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCharlaView';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, {
+      headers: header,
+      params: { idcharla: idCharla },
+    });
+  }
+
+  updateEstadoCharla(
+    idCharla: number,
+    idEstadoCharla: number
+  ): Observable<any> {
+    let url = environment.urlApi;
+    let request =
+      'api/Charlas/UpdateEstadoCharla/' + idCharla + '/' + idEstadoCharla;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.put(url + request, null, { headers: header });
+  }
 }
