@@ -3,8 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
-import { Tecnologia } from '../models/Tecnologia';
-import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
+import { Charla } from '../models/Charla';
 
 @Injectable()
 export class ServicePrincipal {
@@ -249,5 +248,30 @@ export class ServicePrincipal {
       'api/Charlas/UpdateEstadoCharla/' + idCharla + '/' + idEstadoCharla;
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.put(url + request, null, { headers: header });
+  }
+
+  createCharla(charla: Charla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas';
+    let json = JSON.stringify(charla);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
+  }
+
+  getTecnologiasCharla(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/TecnologiasCharlas/ByCharla/' + idCharla;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  findTecnologia(idTecnologia: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Tecnologias/' + idTecnologia;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
   }
 }

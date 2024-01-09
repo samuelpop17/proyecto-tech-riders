@@ -1,7 +1,11 @@
 <div class="shadow-card p-4">
   <h1 class="fw-bold">Solicitar charla</h1>
   <hr class="border border-dark opacity-50" />
-  <form #solicitarCharla="ngForm" class="row">
+  <form
+    #solicitarCharlaForm="ngForm"
+    class="row"
+    (ngSubmit)="solicitarCharla()"
+  >
     <div class="col-12">
       <div class="mt-1" *ngIf="tecnologias">
         <label class="form-label fw-bold">Elige una o más tecnologías</label>
@@ -28,13 +32,22 @@
       />
     </div>
 
-    <div class="mt-3 col-6">
+    <div class="mt-3 col-12">
       <label class="form-label fw-bold">Descripción</label>
       <input
         type="text"
         class="form-control"
         #controldescripcion
         name="controldescripcion"
+      />
+    </div>
+    <div class="mt-3 col-6">
+      <label class="form-label fw-bold">Fecha Charla</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        #controlfecha
+        name="controlfecha"
       />
     </div>
     <div class="mt-3 col-6">
@@ -52,20 +65,38 @@
         src="../../../assets/images/loading.gif"
       />
     </div>
-    <div class="mt-3 col-6">
+    <div class="mt-3 col-4">
       <label class="form-label fw-bold">Turno</label>
       <select class="form-select" #selectturno name="selectturno">
         <option value="MAÑANA">MAÑANA</option>
         <option value="TARDE">TARDE</option>
       </select>
     </div>
-    <div class="mt-3 col-6">
+    <div class="mt-3 col-4">
       <label class="form-label fw-bold">Modalidad</label>
       <select class="form-select" #selectmodalidad name="selectmodalidad">
         <option [value]="null">SIN DEFINIR</option>
         <option value="ONLINE">ONLINE</option>
         <option value="PRESENCIAL">PRESENCIAL</option>
       </select>
+    </div>
+    <div class="mt-3 col-4">
+      <div *ngIf="provincias">
+        <label class="form-label fw-bold">Provincia</label>
+        <select class="form-select" #selectprovincia name="selectprovincia">
+          <option
+            *ngFor="let provincia of provincias"
+            [value]="provincia.idProvincia"
+          >
+            {{ provincia.nombreProvincia }}
+          </option>
+        </select>
+      </div>
+      <img
+        *ngIf="!provincias"
+        class="d-block mx-auto w-50"
+        src="../../../assets/images/loading.gif"
+      />
     </div>
     <div class="mt-3">
       <label class="form-label fw-bold">Observaciones</label>

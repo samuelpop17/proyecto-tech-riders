@@ -1,4 +1,5 @@
 import { Component, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 
 @Component({
@@ -10,7 +11,7 @@ export class MenuComponent implements DoCheck {
   public role!: number | null;
   public tipoEmpresaCentro!: number;
 
-  constructor(private _service: ServicePrincipal) {}
+  constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngDoCheck(): void {
     if (this.role != localStorage.getItem('role')) {
@@ -26,6 +27,9 @@ export class MenuComponent implements DoCheck {
               });
           }
         });
+      } else {
+        localStorage.removeItem('idUsuario');
+        localStorage.removeItem('role');
       }
     }
   }

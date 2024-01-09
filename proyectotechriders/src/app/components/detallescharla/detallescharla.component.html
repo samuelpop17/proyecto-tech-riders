@@ -12,7 +12,11 @@
     </div>
     <div class="col-6">
       <label class="form-label fw-bold">Fecha Charla</label>
-      <input type="text" class="form-control" [value]="charla.fechaCharla" />
+      <input
+        type="text"
+        class="form-control"
+        [value]="charla.fechaCharla | date : 'medium'"
+      />
     </div>
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">Estado</label>
@@ -32,7 +36,7 @@
       <input
         type="text"
         class="form-control"
-        [value]="charla.fechaSolicitudCharla"
+        [value]="charla.fechaSolicitudCharla | date : 'medium'"
       />
     </div>
     <div class="col-6 mt-3">
@@ -43,6 +47,19 @@
       <label class="form-label fw-bold">TechRider</label>
       <input type="text" class="form-control" [value]="charla.techRider" />
     </div>
+    <div class="col-12 mt-3" *ngIf="tecnologiasCargadas">
+      <label class="form-label fw-bold">Tecnologías</label>
+      <select class="form-select" multiple [size]="tecnologias.length">
+        <option *ngFor="let tecnologia of tecnologias">
+          {{ tecnologia }}
+        </option>
+      </select>
+    </div>
+    <img
+      *ngIf="!tecnologiasCargadas"
+      class="d-block mx-auto w-25 mt-3"
+      src="../../../assets/images/loading.gif"
+    />
     <div class="mt-3">
       <label class="form-label fw-bold">Observaciones</label>
       <textarea class="form-control" [value]="charla.observacionesCharla">
