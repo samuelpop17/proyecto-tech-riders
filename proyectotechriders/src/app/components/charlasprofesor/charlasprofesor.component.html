@@ -2,7 +2,7 @@
   <h1 class="fw-bold">Mis charlas</h1>
   <hr class="border border-dark opacity-50" />
   <div class="row" *ngIf="estados">
-    <div class="col-5">
+    <div class="col-4">
       <select class="form-select" name="selectestado" #selectestado>
         <option *ngFor="let estado of estados" [value]="estado.idEstadosCharla">
           {{ estado.tipo }}
@@ -19,7 +19,7 @@
         Reiniciar
       </button>
     </div>
-    <div class="col-1">
+    <div class="col-2">
       <button class="btn btn-dark rounded w-100" (click)="recargarCharlas()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@
   </div>
   <img
     *ngIf="!estados"
-    class="d-block mx-auto w-50"
+    class="d-block mx-auto w-25"
     src="../../../assets/images/loading.gif"
   />
 
@@ -87,8 +87,8 @@
     </tbody>
   </table>
   <img
-    *ngIf="!charlas"
-    class="d-block mx-auto"
+    *ngIf="!charlasFiltradas"
+    class="d-block mx-auto w-25"
     src="../../../assets/images/loading.gif"
   />
 </div>

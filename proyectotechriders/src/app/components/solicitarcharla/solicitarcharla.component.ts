@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Curso } from 'src/app/models/Curso';
 import { Tecnologia } from 'src/app/models/Tecnologia';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 
@@ -10,6 +11,7 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 })
 export class SolicitarcharlaComponent implements OnInit {
   public tecnologias!: Tecnologia[];
+  public cursos!: Curso[];
 
   @ViewChild('selecttecnologias') selectTecnologias!: ElementRef;
   @ViewChild('selectturno') selectTurno!: ElementRef;
@@ -21,6 +23,10 @@ export class SolicitarcharlaComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this._service.getTecnologias().subscribe((response) => {
         this.tecnologias = response;
+      });
+      let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+      this._service.findCursosProfesor(id).subscribe((response) => {
+        this.cursos = response;
       });
     } else this._router.navigate(['/login']);
   }
