@@ -6,6 +6,7 @@
       <label class="form-label fw-bold">Descripción</label>
       <input
         type="text"
+        readonly
         class="form-control"
         [value]="charla.descripcionCharla"
       />
@@ -14,38 +15,65 @@
       <label class="form-label fw-bold">Fecha Charla</label>
       <input
         type="text"
+        readonly
         class="form-control"
         [value]="charla.fechaCharla | date : 'medium'"
       />
     </div>
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">Estado</label>
-      <input type="text" class="form-control" [value]="charla.estadoCharla" />
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        [value]="charla.estadoCharla"
+      />
     </div>
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">Provincia</label>
-      <input type="text" class="form-control" [value]="charla.provincia" />
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        [value]="charla.provincia"
+      />
     </div>
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">Curso</label>
-      <input type="text" class="form-control" [value]="charla.nombreCurso" />
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        [value]="charla.nombreCurso"
+      />
     </div>
 
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">Fecha Solicitud</label>
       <input
         type="text"
+        readonly
         class="form-control"
         [value]="charla.fechaSolicitudCharla | date : 'medium'"
       />
     </div>
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">Modalidad</label>
-      <input type="text" class="form-control" [value]="charla.modalidad" />
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        [value]="charla.modalidad"
+      />
     </div>
     <div class="col-6 mt-3">
       <label class="form-label fw-bold">TechRider</label>
-      <input type="text" class="form-control" [value]="charla.techRider" />
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        [value]="charla.techRider"
+      />
     </div>
     <div class="col-12 mt-3" *ngIf="tecnologiasCargadas">
       <label class="form-label fw-bold">Tecnologías</label>

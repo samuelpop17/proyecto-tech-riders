@@ -63,7 +63,7 @@ export class SolicitarcharlaComponent implements OnInit {
       let charla: Charla = {
         idCharla: 1,
         descripcion: this.controlDescripcion.nativeElement.value,
-        idEstadoCharla: 2, // PENDIENTE,
+        idEstadoCharla: 2, // PENDIENTE
         fechaCharla: fechaCharla,
         observaciones: this.controlObservaciones.nativeElement.value,
         idTechRider: null,
@@ -75,15 +75,40 @@ export class SolicitarcharlaComponent implements OnInit {
         idProvincia:
           this.selectProvincia.nativeElement.selectedOptions[0].value,
       };
-      this._service.createCharla(charla).subscribe((response) => {
-        let idCharla = response.idCharla;
-        let tecnologias = this.selectTecnologias.nativeElement.selectedOptions;
-        for (let i = 0; i < tecnologias.length; i++) {
-          this._service
-            .createTecnologiaCharla(idCharla, tecnologias[i].value)
-            .subscribe((response) => {});
+      this._service.getCharlas().subscribe((response) => {
+        let charlas = response;
+        charlas = charlas.filter(
+          (chrl: Charla) =>
+            chrl.idCurso == charla.idCurso &&
+            Math.abs(
+              new Date(chrl.fechaCharla).getTime() -
+                new Date(charla.fechaCharla).getTime()
+            ) /
+              (1000 * 60 * 60 * 24) <
+              365
+        );
+        if (charlas.length == 0) {
+          this._service.createCharla(charla).subscribe((response) => {
+            let idCharla = response.idCharla;
+            let tecnologias =
+              this.selectTecnologias.nativeElement.selectedOptions;
+            for (let i = 0; i < tecnologias.length; i++) {
+              this._service
+                .createTecnologiaCharla(idCharla, tecnologias[i].value)
+                .subscribe((response) => {});
+            }
+            this._router.navigate(['/charlas/mis-charlas']);
+          });
+        } else {
+          Swal.fire({
+            color: '#333333',
+            confirmButtonColor: '#212529',
+            confirmButtonText: 'Cerrar',
+            icon: 'error',
+            text: 'Existe ya una charla para este curso realizada hace menos de un año o pendiente en menos de un año',
+            title: 'Error',
+          });
         }
-        this._router.navigate(['/charlas/mis-charlas']);
       });
     }
   }

@@ -293,4 +293,27 @@ export class ServicePrincipal {
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
+
+  getCharlas(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas';
+    return this._http.get(url + request);
+  }
+
+  findCharla(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas/' + idCharla;
+    return this._http.get(url + request);
+  }
+
+  updateCharla(charla: Charla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas';
+    let json = JSON.stringify(charla);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.put(url + request, json, { headers: header });
+  }
 }
