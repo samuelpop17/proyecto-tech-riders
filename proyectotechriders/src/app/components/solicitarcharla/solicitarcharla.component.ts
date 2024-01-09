@@ -113,7 +113,7 @@ export class SolicitarcharlaComponent implements OnInit {
             confirmButtonColor: '#212529',
             confirmButtonText: 'Cerrar',
             icon: 'error',
-            text: 'Existe ya una charla para este curso realizada hace menos de un año o pendiente en menos de un año',
+            text: 'Existe ya una charla para este curso solicitada en el curso escolar marcado',
             title: 'Error',
           });
         }
