@@ -59,17 +59,25 @@ export class EditarcharlaComponent implements OnInit {
     };
     this._service.getCharlas().subscribe((response) => {
       let charlas = response;
-      charlas = charlas.filter(
-        (chrl: Charla) =>
+      let fecha = new Date(charla.fechaCharla);
+      charlas = charlas.filter((chrl: Charla) => {
+        let otraFecha = new Date(chrl.fechaCharla);
+        if (otraFecha.getMonth() >= 0 && otraFecha.getMonth() <= 7) {
+          var principio = new Date(otraFecha.getFullYear() - 1, 8, 1);
+          var final = new Date(otraFecha.getFullYear(), 7, 31);
+        } else {
+          var principio = new Date(otraFecha.getFullYear(), 8, 1);
+          var final = new Date(otraFecha.getFullYear() + 1, 7, 31);
+        }
+        console.log(principio);
+        console.log(final);
+        return (
           chrl.idCurso == charla.idCurso &&
           chrl.idCharla != charla.idCharla &&
-          Math.abs(
-            new Date(chrl.fechaCharla).getTime() -
-              new Date(charla.fechaCharla).getTime()
-          ) /
-            (1000 * 60 * 60 * 24) <
-            365
-      );
+          fecha >= principio &&
+          fecha <= final
+        );
+      });
       if (charlas.length == 0) {
         this._service.updateCharla(charla).subscribe((response) => {
           this._router.navigate(['/charlas/mis-charlas']);

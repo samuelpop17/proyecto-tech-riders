@@ -46,7 +46,7 @@
     src="../../../assets/images/loading.gif"
   />
 
-  <table class="table table-responsive mt-3" *ngIf="charlasFiltradas">
+  <table class="table table-responsive mt-3" *ngIf="charlasCargadas">
     <thead class="border-dark">
       <tr>
         <th>Descripción</th>
@@ -97,7 +97,7 @@
     </tbody>
   </table>
   <img
-    *ngIf="!charlasFiltradas"
+    *ngIf="!charlasCargadas"
     class="d-block mx-auto w-25"
     src="../../../assets/images/loading.gif"
   />
