@@ -41,8 +41,6 @@ export class EditartecnologiastechriderComponent implements OnInit {
   }
 
   anyadirTecnologia(idTecnologia: number): void {
-    console.log(this.id);
-    console.log(idTecnologia);
     this._service
       .insertTecnologiaTechRider(this.id, idTecnologia)
       .subscribe((response) => {
