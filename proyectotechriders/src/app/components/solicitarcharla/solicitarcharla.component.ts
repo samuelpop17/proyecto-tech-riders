@@ -57,26 +57,34 @@ export class SolicitarcharlaComponent implements OnInit {
       let fechaCharla = null;
       if (this.controlFecha.nativeElement.value != '')
         fechaCharla = this.controlFecha.nativeElement.value;
+      let fechaSolicitud = new Date().toISOString();
+      let modalidad = this.selectModalidad.nativeElement.value;
+      if (modalidad == 'SIN DEFINIR') modalidad = null;
       let charla: Charla = {
         idCharla: 1,
         descripcion: this.controlDescripcion.nativeElement.value,
         idEstadoCharla: 2, // PENDIENTE,
         fechaCharla: fechaCharla,
         observaciones: this.controlObservaciones.nativeElement.value,
-        idTechRider: undefined,
-        fechaSolicitud: Date.now.toString(),
+        idTechRider: null,
+        fechaSolicitud: fechaSolicitud,
         turno: this.selectTurno.nativeElement.selectedOptions[0].value,
-        modalidad: this.selectModalidad.nativeElement.selectedOptions[0].value,
-        acreditacionLinkedIn: undefined,
+        modalidad: modalidad,
+        acreditacionLinkedIn: null,
         idCurso: this.selectCurso.nativeElement.selectedOptions[0].value,
         idProvincia:
           this.selectProvincia.nativeElement.selectedOptions[0].value,
       };
-      /*
       this._service.createCharla(charla).subscribe((response) => {
+        let idCharla = response.idCharla;
+        let tecnologias = this.selectTecnologias.nativeElement.selectedOptions;
+        for (let i = 0; i < tecnologias.length; i++) {
+          this._service
+            .createTecnologiaCharla(idCharla, tecnologias[i].value)
+            .subscribe((response) => {});
+        }
         this._router.navigate(['/charlas/mis-charlas']);
       });
-      */
     }
   }
 }

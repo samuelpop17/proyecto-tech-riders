@@ -8,9 +8,9 @@ export class Charla {
     public turno: string,
     public idCurso: number,
     public idProvincia: number,
-    public modalidad?: string,
-    public observaciones?: string,
-    public idTechRider?: number,
-    public acreditacionLinkedIn?: string
+    public modalidad: string | null,
+    public observaciones: string | null,
+    public idTechRider: number | null,
+    public acreditacionLinkedIn: string | null
   ) {}
 }
