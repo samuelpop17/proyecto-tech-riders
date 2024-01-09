@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,8 @@
   padding: 0;
 }
 
-a {
+a,
+.dropdown-menu {
   transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
   -webkit-transition: 0.3s all ease;
@@ -15,7 +16,7 @@ a {
 
 body {
   color: #333;
-  font-family: "Montserrat", sans-serif !important;
+  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -30,6 +31,19 @@ body#bodyprincipal {
   -webkit-box-shadow: 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -2px rgba(0, 0, 0, 0.1);
   background-color: white;
+}
+
+.btn {
+  font-weight: 700;
+}
+
+.nav-link,
+.btn-sm {
+  font-weight: 600;
+}
+
+.dropdown-item {
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
@@ -78,4 +92,8 @@ body#bodyprincipal {
 .dropdown-menu {
   -webkit-animation-name: slideIn;
   animation-name: slideIn;
+}
+
+.dropdown-center > .dropdown-menu {
+  inset: auto !important;
 }
