@@ -1,0 +1,44 @@
+<div class="shadow-card p-4">
+  <h1 class="fw-bold">Solicitar charla</h1>
+  <hr class="border border-dark opacity-50" />
+  <form #solicitarCharla="ngForm" class="row">
+    <div class="mt-1">
+      <label class="form-label fw-bold">Elige una o más tecnologías</label>
+      <select
+        class="form-select"
+        multiple
+        #selecttecnologias
+        name="selecttecnologias"
+        size="5"
+      >
+        <option *ngFor="let tecnologia of tecnologias">
+          {{ tecnologia.nombreTecnologia }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-3 col-6">
+      <label class="form-label fw-bold">Descripción</label>
+      <input
+        type="text"
+        class="form-control"
+        #controldescripcion
+        name="controldescripcion"
+      />
+    </div>
+    <div class="mt-3 col-6">
+      <label class="form-label fw-bold">Turno</label>
+      <select class="form-select" #selectturno name="selectturno">
+        <option value="MAÑANA">MAÑANA</option>
+        <option value="TARDE">TARDE</option>
+      </select>
+    </div>
+    <div class="mt-3 col-6">
+      <label class="form-label fw-bold">Modalidad</label>
+      <select class="form-select" #selectmodalidad name="selectmodalidad">
+        <option [value]="null">SIN DEFINIR</option>
+        <option value="ONLINE">ONLINE</option>
+        <option value="PRESENCIAL">PRESENCIAL</option>
+      </select>
+    </div>
+  </form>
+</div>

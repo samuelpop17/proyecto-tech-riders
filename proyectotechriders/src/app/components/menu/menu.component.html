@@ -25,14 +25,36 @@
           a
         </div>
 
-        <!-- PROFESOR -->
-        <div *ngIf="role == 2 && tipoEmpresaCentro && tipoEmpresaCentro == 2">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/charlas/mis-charlas']">
-              Mis charlas
-            </a>
-          </li>
-        </div>
+        <!-- DROPDOWN CHARLAS PROFESOR -->
+        <li
+          class="nav-item dropdown"
+          *ngIf="role == 2 && tipoEmpresaCentro && tipoEmpresaCentro == 2"
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Charlas
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/charlas/mis-charlas']">
+                Mis charlas
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['/charlas/solicitar-charla']"
+              >
+                Solicitar charla
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <!-- DROPDOWN USUARIO -->
         <li class="nav-item dropdown">

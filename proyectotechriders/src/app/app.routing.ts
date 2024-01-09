@@ -11,6 +11,7 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
 import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
+import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'registrar-usuario', component: RegisterusuarioComponent },
   { path: 'usuario/editar-cursos', component: EditarcursosComponent },
   { path: 'charlas/mis-charlas', component: CharlasprofesorComponent },
+  { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
 ];
 
