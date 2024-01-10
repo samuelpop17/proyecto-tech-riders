@@ -69,10 +69,10 @@ export class CharlasprofesorComponent implements OnInit {
       cancelButtonText: 'No',
       color: '#333333',
       confirmButtonColor: '#212529',
-      confirmButtonText: 'Si',
+      confirmButtonText: 'Si, cancelar',
       icon: 'question',
       showCancelButton: true,
-      text: 'No podrás revertir la cancelación',
+      text: 'No podrás revertir esta acción',
       title: '¿Quieres cancelar esta charla?',
     }).then((result) => {
       if (result.isConfirmed) {
