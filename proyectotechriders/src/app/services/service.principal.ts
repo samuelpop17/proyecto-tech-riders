@@ -316,4 +316,16 @@ export class ServicePrincipal {
     };
     return this._http.put(url + request, json, { headers: header });
   }
+
+  createPeticionAltaUser(idUsuario: number, token: string): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/PeticionesAltaUsers';
+    let header = {
+      Authorization: 'bearer ' + token,
+    };
+    return this._http.post(url + request, null, {
+      headers: header,
+      params: { iduser: idUsuario },
+    });
+  }
 }
