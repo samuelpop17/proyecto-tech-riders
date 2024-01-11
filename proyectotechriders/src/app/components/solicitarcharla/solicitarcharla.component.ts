@@ -63,7 +63,7 @@ export class SolicitarcharlaComponent implements OnInit {
       let charla: Charla = {
         idCharla: 1,
         descripcion: this.controlDescripcion.nativeElement.value,
-        idEstadoCharla: 2, // PENDIENTE,
+        idEstadoCharla: 2, // PENDIENTE
         fechaCharla: fechaCharla,
         observaciones: this.controlObservaciones.nativeElement.value,
         idTechRider: null,
@@ -75,15 +75,48 @@ export class SolicitarcharlaComponent implements OnInit {
         idProvincia:
           this.selectProvincia.nativeElement.selectedOptions[0].value,
       };
-      this._service.createCharla(charla).subscribe((response) => {
-        let idCharla = response.idCharla;
-        let tecnologias = this.selectTecnologias.nativeElement.selectedOptions;
-        for (let i = 0; i < tecnologias.length; i++) {
-          this._service
-            .createTecnologiaCharla(idCharla, tecnologias[i].value)
-            .subscribe((response) => {});
+      this._service.getCharlas().subscribe((response) => {
+        let charlas = response;
+        let fecha = new Date(charla.fechaCharla);
+        charlas = charlas.filter((chrl: Charla) => {
+          let otraFecha = new Date(chrl.fechaCharla);
+          if (otraFecha.getMonth() >= 0 && otraFecha.getMonth() <= 7) {
+            var principio = new Date(otraFecha.getFullYear() - 1, 8, 1);
+            var final = new Date(otraFecha.getFullYear(), 7, 31);
+          } else {
+            var principio = new Date(otraFecha.getFullYear(), 8, 1);
+            var final = new Date(otraFecha.getFullYear() + 1, 7, 31);
+          }
+          console.log(principio);
+          console.log(final);
+          return (
+            chrl.idCurso == charla.idCurso &&
+            fecha >= principio &&
+            fecha <= final
+          );
+        });
+        if (charlas.length == 0) {
+          this._service.createCharla(charla).subscribe((response) => {
+            let idCharla = response.idCharla;
+            let tecnologias =
+              this.selectTecnologias.nativeElement.selectedOptions;
+            for (let i = 0; i < tecnologias.length; i++) {
+              this._service
+                .createTecnologiaCharla(idCharla, tecnologias[i].value)
+                .subscribe((response) => {});
+            }
+            this._router.navigate(['/charlas/mis-charlas']);
+          });
+        } else {
+          Swal.fire({
+            color: '#333333',
+            confirmButtonColor: '#212529',
+            confirmButtonText: 'Cerrar',
+            icon: 'error',
+            text: 'Existe ya una charla para este curso solicitada en el curso escolar marcado',
+            title: 'Error',
+          });
         }
-        this._router.navigate(['/charlas/mis-charlas']);
       });
     }
   }

@@ -87,16 +87,26 @@ export class RegisterusuarioComponent implements OnInit {
       estado: 0,
     };
     this._service.createUsuario(usuario).subscribe((response) => {
-      Swal.fire({
-        color: '#333333',
-        icon: 'success',
-        showConfirmButton: false,
-        text: 'Usuario creado. Tendrá que ser validado por el administrador',
-        timer: 4000,
-        timerProgressBar: true,
-        title: 'Registro con éxito',
-      }).then((result) => {
-        this._router.navigate(['/login']);
+      let idUsuario = response.idUsuario;
+      let email = response.email;
+      let password = response.password;
+      this._service.loginUser(email, password).subscribe((response) => {
+        let token = response.response;
+        this._service
+          .createPeticionAltaUser(idUsuario, token)
+          .subscribe((response) => {
+            Swal.fire({
+              color: '#333333',
+              icon: 'success',
+              showConfirmButton: false,
+              text: 'Usuario creado. Tendrá que ser validado por el administrador',
+              timer: 4000,
+              timerProgressBar: true,
+              title: 'Registro con éxito',
+            }).then((result) => {
+              this._router.navigate(['/login']);
+            });
+          });
       });
     });
   }

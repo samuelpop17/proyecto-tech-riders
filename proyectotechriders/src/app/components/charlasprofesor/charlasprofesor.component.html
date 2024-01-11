@@ -16,7 +16,7 @@
     </div>
     <div class="col-3">
       <button class="btn btn-dark rounded w-100" (click)="reiniciarFiltro()">
-        Reiniciar
+        Reestablecer filtro
       </button>
     </div>
     <div class="col-2">
@@ -46,7 +46,7 @@
     src="../../../assets/images/loading.gif"
   />
 
-  <table class="table table-responsive mt-3" *ngIf="charlasFiltradas">
+  <table class="table table-responsive mt-3" *ngIf="charlasCargadas">
     <thead class="border-dark">
       <tr>
         <th>Descripción</th>
@@ -72,6 +72,16 @@
             Detalles
           </a>
           <a
+            class="btn btn-dark btn-sm me-1"
+            [routerLink]="['/charlas/editar', charla.idCharla]"
+            *ngIf="
+              charla.estadoCharla == 'PROCESO' ||
+              charla.estadoCharla == 'PENDIENTE'
+            "
+          >
+            Editar
+          </a>
+          <a
             class="btn btn-dark btn-sm"
             *ngIf="
               charla.estadoCharla != 'CERRADA' &&
@@ -87,7 +97,7 @@
     </tbody>
   </table>
   <img
-    *ngIf="!charlasFiltradas"
+    *ngIf="!charlasCargadas"
     class="d-block mx-auto w-25"
     src="../../../assets/images/loading.gif"
   />

@@ -22,6 +22,7 @@ import { DetallescharlaComponent } from './components/detallescharla/detallescha
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
+import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -40,6 +41,7 @@ registerLocaleData(localeEs, 'es');
     CharlasprofesorComponent,
     DetallescharlaComponent,
     SolicitarcharlaComponent,
+    EditarcharlaComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [

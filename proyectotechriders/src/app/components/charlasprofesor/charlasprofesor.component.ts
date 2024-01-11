@@ -13,6 +13,7 @@ export class CharlasprofesorComponent implements OnInit {
   public charlas!: any[];
   public charlasFiltradas!: any[];
   public estados!: EstadoCharla[];
+  public charlasCargadas: boolean = false;
   private cursos!: any[];
 
   @ViewChild('selectestado') selectEstado!: ElementRef;
@@ -31,6 +32,7 @@ export class CharlasprofesorComponent implements OnInit {
             this.cursos.includes(charla.idCurso)
           );
           this.charlasFiltradas = this.charlas;
+          this.charlasCargadas = true;
         });
       });
       this._service.getEstadosCharlas().subscribe((response) => {
@@ -51,12 +53,14 @@ export class CharlasprofesorComponent implements OnInit {
   }
 
   recargarCharlas(): void {
+    this.charlasCargadas = false;
     this._service.getCharlasView().subscribe((response) => {
       this.charlas = response;
       this.charlas = this.charlas.filter((charla) =>
         this.cursos.includes(charla.idCurso)
       );
       this.charlasFiltradas = this.charlas;
+      this.charlasCargadas = true;
     });
   }
 
@@ -65,10 +69,10 @@ export class CharlasprofesorComponent implements OnInit {
       cancelButtonText: 'No',
       color: '#333333',
       confirmButtonColor: '#212529',
-      confirmButtonText: 'Si',
+      confirmButtonText: 'Si, cancelar',
       icon: 'question',
       showCancelButton: true,
-      text: 'No podrás revertir la cancelación',
+      text: 'No podrás revertir esta acción',
       title: '¿Quieres cancelar esta charla?',
     }).then((result) => {
       if (result.isConfirmed) {

@@ -12,6 +12,7 @@ import { EditarcursosComponent } from './components/editarcursos/editarcursos.co
 import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
+import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'charlas/mis-charlas', component: CharlasprofesorComponent },
   { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
+  { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
 ];
 
 export const appRoutingProvider: any[] = [];
