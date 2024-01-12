@@ -21,18 +21,10 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Charla } from 'src/app/models/Charla';
 
 const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
+  grey: {
+    primary: "#4D5154",
+    secondary: "FAE3E3"
+  }
 };
 
 @Component({
@@ -88,7 +80,7 @@ export class CalendarioComponent implements OnInit{
           allDay: true,
           actions: [],
           
-          color: { ...colors['blue'] },}
+          color: { ...colors['grey'] },}
           )
       });
     })
