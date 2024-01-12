@@ -20,9 +20,16 @@ import { CharlasprofesorComponent } from './components/charlasprofesor/charlaspr
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 
 import localeEs from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+import { CharlasComponent } from './components/charlas/charlas.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'
+import { FlatpickrModule } from 'angularx-flatpickr';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -42,8 +49,17 @@ registerLocaleData(localeEs, 'es');
     DetallescharlaComponent,
     SolicitarcharlaComponent,
     EditarcharlaComponent,
+    CharlasComponent,
+    CalendarioComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, routing],
+  imports: [BrowserModule, FormsModule, HttpClientModule, routing,  CommonModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),],
   providers: [
     appRoutingProvider,
     ServicePrincipal,

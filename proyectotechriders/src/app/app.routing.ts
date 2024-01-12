@@ -13,6 +13,7 @@ import { CharlasprofesorComponent } from './components/charlasprofesor/charlaspr
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+import { CharlasComponent } from './components/charlas/charlas.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
+  {path: 'charlas', component: CharlasComponent}
 ];
 
 export const appRoutingProvider: any[] = [];
