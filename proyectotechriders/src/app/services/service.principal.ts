@@ -118,6 +118,12 @@ export class ServicePrincipal {
     return this._http.get(url + request);
   }
 
+  getTipoTecnologias(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/TipoTecnologias';
+    return this._http.get(url + request);
+  }
+
   deleteTecnologiaTechRider(
     idUsuario: number,
     idTecnologia: number
@@ -163,4 +169,184 @@ export class ServicePrincipal {
     let json = JSON.stringify(usuario);
     return this._http.post(url + request, json, { headers: header });
   }
+<<<<<<< Updated upstream
+=======
+
+  findCursosProfesor(idProfesor: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCursosProfesor/' + idProfesor;
+    let header = {
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  getCursos(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Cursos';
+    return this._http.get(url + request);
+  }
+
+  findEmpresaCentroUsuario(idUsuario: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindEmpresaTechRider/' + idUsuario;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  deleteCursoProfesor(idCurso: number, idProfesor: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/CursosProfesores';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.delete(url + request, {
+      headers: header,
+      params: {
+        idcurso: idCurso,
+        idprofesor: idProfesor,
+      },
+    });
+  }
+
+  insertCursoProfesor(idCurso: number, idProfesor: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/CursosProfesores';
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, null, {
+      headers: header,
+      params: {
+        idcurso: idCurso,
+        idprofesor: idProfesor,
+      },
+    });
+  }
+
+  getCharlasView(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/CharlasViewAll';
+    let header = {
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  getEstadosCharlas(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/EstadosCharlas';
+    return this._http.get(url + request);
+  }
+
+  findCharlaView(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCharlaView';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, {
+      headers: header,
+      params: { idcharla: idCharla },
+    });
+  }
+
+  updateEstadoCharla(
+    idCharla: number,
+    idEstadoCharla: number
+  ): Observable<any> {
+    let url = environment.urlApi;
+    let request =
+      'api/Charlas/UpdateEstadoCharla/' + idCharla + '/' + idEstadoCharla;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.put(url + request, null, { headers: header });
+  }
+
+  createCharla(charla: Charla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas';
+    let json = JSON.stringify(charla);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
+  }
+
+  createTecnologiaCharla(
+    idCharla: number,
+    idTecnologia: number
+  ): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/TecnologiasCharlas';
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, null, {
+      headers: header,
+      params: {
+        idcharla: idCharla,
+        idtecnologia: idTecnologia,
+      },
+    });
+  }
+
+  getTecnologiasCharla(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/TecnologiasCharlas/ByCharla/' + idCharla;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  findTecnologia(idTecnologia: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Tecnologias/' + idTecnologia;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  getCharlas(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas';
+    return this._http.get(url + request);
+  }
+
+  findCharla(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas/' + idCharla;
+    return this._http.get(url + request);
+  }
+
+  updateCharla(charla: Charla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas';
+    let json = JSON.stringify(charla);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.put(url + request, json, { headers: header });
+  }
+
+  createPeticionAltaUser(idUsuario: number, token: string): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/PeticionesAltaUsers';
+    let header = {
+      Authorization: 'bearer ' + token,
+    };
+    return this._http.post(url + request, null, {
+      headers: header,
+      params: { iduser: idUsuario },
+    });
+  }
+  charlasPorVerTechRiders(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+>>>>>>> Stashed changes
 }
+
+
+
+
