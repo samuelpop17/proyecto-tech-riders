@@ -9,17 +9,22 @@
         </h4>
         <div>
           <h5>
-            <span *ngIf="!this.empresaCentro">{{ role.tipoRole }}</span>
+            <span *ngIf="role.idRole == 1">ADMINISTRADOR</span>
+            <span *ngIf="role.idRole == 3">TECH RIDER</span>
             <span
               *ngIf="
-                this.empresaCentro && this.empresaCentro.idTipoEmpresa == 1
+                role.idRole == 2 &&
+                this.empresaCentro &&
+                this.empresaCentro.idTipoEmpresa == 1
               "
             >
               REPRESENTANTE
             </span>
             <span
               *ngIf="
-                this.empresaCentro && this.empresaCentro.idTipoEmpresa == 2
+                role.idRole == 2 &&
+                this.empresaCentro &&
+                this.empresaCentro.idTipoEmpresa == 2
               "
             >
               PROFESOR
@@ -224,7 +229,12 @@
         </select>
       </div>
       <img
-        *ngIf="!cursos && empresaCentro && empresaCentro.idTipoEmpresa == 2"
+        *ngIf="
+          !cursos &&
+          role.idRole == 2 &&
+          empresaCentro &&
+          empresaCentro.idTipoEmpresa == 2
+        "
         class="d-block mx-auto w-50"
         src="../../../assets/images/loading.gif"
       />
