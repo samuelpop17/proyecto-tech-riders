@@ -3,6 +3,11 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
+<<<<<<< Updated upstream
+=======
+import { Tecnologia } from '../models/Tecnologia';
+import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
+>>>>>>> Stashed changes
 import { Charla } from '../models/Charla';
 
 @Injectable()
@@ -117,6 +122,12 @@ export class ServicePrincipal {
     return this._http.get(url + request);
   }
 
+  getTipoTecnologias(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/TipoTecnologias';
+    return this._http.get(url + request);
+  }
+
   deleteTecnologiaTechRider(
     idUsuario: number,
     idTecnologia: number
@@ -162,6 +173,8 @@ export class ServicePrincipal {
     let json = JSON.stringify(usuario);
     return this._http.post(url + request, json, { headers: header });
   }
+<<<<<<< Updated upstream
+=======
 
   findCursosProfesor(idProfesor: number): Observable<any> {
     let url = environment.urlApi;
@@ -328,4 +341,12 @@ export class ServicePrincipal {
       params: { iduser: idUsuario },
     });
   }
+  charlasPorVerTechRiders(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+>>>>>>> Stashed changes
 }

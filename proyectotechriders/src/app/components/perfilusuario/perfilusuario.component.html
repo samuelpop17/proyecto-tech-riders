@@ -54,23 +54,6 @@
                 Editar tecnologías
               </a>
             </li>
-
-            <!-- PROFESOR, NO RESPONSABLE -->
-            <li
-              *ngIf="
-                role.idRole == 2 &&
-                empresaCentro &&
-                empresaCentro.idTipoEmpresa == 2
-              "
-            >
-              <a
-                class="dropdown-item"
-                [routerLink]="['/usuario/editar-cursos']"
-              >
-                Editar cursos
-              </a>
-            </li>
-
             <li>
               <a
                 class="dropdown-item"
