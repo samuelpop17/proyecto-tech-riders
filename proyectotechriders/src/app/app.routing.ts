@@ -8,7 +8,15 @@ import { EditarusuarioComponent } from './components/editarusuario/editarusuario
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
+import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
+import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
+import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
+import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+>>>>>>> main
 
 =======
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
@@ -35,18 +43,24 @@ const routes: Routes = [
     component: ModificarcontrasenyaComponent,
   },
   { path: 'registrar-usuario', component: RegisterusuarioComponent },
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> main
   { path: 'usuario/editar-cursos', component: EditarcursosComponent },
   { path: 'charlas/mis-charlas', component: CharlasprofesorComponent },
   { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
+<<<<<<< HEAD
   { path: 'proponertecno', component: ProponerTecnologiaComponent },
   { path: 'conatctadmin', component: ContactarAdminComponent },
   { path: 'charlastechariders', component: CharlasTechRidersComponent },
 
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
 ];
 
 export const appRoutingProvider: any[] = [];

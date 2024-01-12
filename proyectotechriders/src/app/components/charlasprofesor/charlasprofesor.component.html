@@ -1,0 +1,104 @@
+<div class="shadow-card p-4">
+  <h1 class="fw-bold">Mis charlas</h1>
+  <hr class="border border-dark opacity-50" />
+  <div class="row" *ngIf="estados">
+    <div class="col-4">
+      <select class="form-select" name="selectestado" #selectestado>
+        <option *ngFor="let estado of estados" [value]="estado.idEstadosCharla">
+          {{ estado.tipo }}
+        </option>
+      </select>
+    </div>
+    <div class="col-3">
+      <button class="btn btn-dark rounded w-100" (click)="filtrarCharlas()">
+        Filtrar
+      </button>
+    </div>
+    <div class="col-3">
+      <button class="btn btn-dark rounded w-100" (click)="reiniciarFiltro()">
+        Reestablecer filtro
+      </button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-dark rounded w-100" (click)="recargarCharlas()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-clockwise"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"
+          />
+          <path
+            d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <img
+    *ngIf="!estados"
+    class="d-block mx-auto w-25"
+    src="../../../assets/images/loading.gif"
+  />
+
+  <table class="table table-responsive mt-3" *ngIf="charlasCargadas">
+    <thead class="border-dark">
+      <tr>
+        <th>Descripción</th>
+        <th>Curso</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>TechRider</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let charla of charlasFiltradas">
+        <td>{{ charla.descripcionCharla }}</td>
+        <td>{{ charla.nombreCurso }}</td>
+        <td>{{ charla.fechaCharla | date : "medium" }}</td>
+        <td>{{ charla.estadoCharla }}</td>
+        <td>{{ charla.techRider }}</td>
+        <td class="text-center">
+          <a
+            class="btn btn-dark btn-sm me-1"
+            [routerLink]="['/charlas', charla.idCharla]"
+          >
+            Detalles
+          </a>
+          <a
+            class="btn btn-dark btn-sm me-1"
+            [routerLink]="['/charlas/editar', charla.idCharla]"
+            *ngIf="
+              charla.estadoCharla == 'PROCESO' ||
+              charla.estadoCharla == 'PENDIENTE'
+            "
+          >
+            Editar
+          </a>
+          <a
+            class="btn btn-dark btn-sm"
+            *ngIf="
+              charla.estadoCharla != 'CERRADA' &&
+              charla.estadoCharla != 'COMPLETADA' &&
+              charla.estadoCharla != 'ACREDITADA'
+            "
+            (click)="cancelarCharla(charla.idCharla)"
+          >
+            Cancelar
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <img
+    *ngIf="!charlasCargadas"
+    class="d-block mx-auto w-25"
+    src="../../../assets/images/loading.gif"
+  />
+</div>
