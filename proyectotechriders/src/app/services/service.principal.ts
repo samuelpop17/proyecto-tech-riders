@@ -3,11 +3,8 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
-<<<<<<< Updated upstream
-=======
 import { Tecnologia } from '../models/Tecnologia';
 import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
->>>>>>> Stashed changes
 import { Charla } from '../models/Charla';
 
 @Injectable()
@@ -173,8 +170,6 @@ export class ServicePrincipal {
     let json = JSON.stringify(usuario);
     return this._http.post(url + request, json, { headers: header });
   }
-<<<<<<< Updated upstream
-=======
 
   findCursosProfesor(idProfesor: number): Observable<any> {
     let url = environment.urlApi;
@@ -347,6 +342,4 @@ export class ServicePrincipal {
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
-
->>>>>>> Stashed changes
 }

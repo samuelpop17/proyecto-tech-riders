@@ -15,6 +15,16 @@ import { EditarusuarioComponent } from './components/editarusuario/editarusuario
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
+import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
+import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
+import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
+import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
+import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -28,6 +38,11 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
     ModificarcontrasenyaComponent,
     EditartecnologiastechriderComponent,
     RegisterusuarioComponent,
+    EditarcursosComponent,
+    CharlasprofesorComponent,
+    DetallescharlaComponent,
+    SolicitarcharlaComponent,
+    EditarcharlaComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [
