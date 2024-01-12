@@ -8,6 +8,7 @@ import { EditarusuarioComponent } from './components/editarusuario/editarusuario
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -24,10 +25,17 @@ import { CharlasprofesorComponent } from './components/charlasprofesor/charlaspr
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+=======
+// import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
+// import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
+// import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
+// import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
+// import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+>>>>>>> Stashed changes
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
->>>>>>> Stashed changes
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -43,6 +51,7 @@ const routes: Routes = [
     component: ModificarcontrasenyaComponent,
   },
   { path: 'registrar-usuario', component: RegisterusuarioComponent },
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -54,13 +63,23 @@ const routes: Routes = [
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
 <<<<<<< HEAD
+=======
+  // { path: 'usuario/editar-cursos', component: EditarcursosComponent },
+  // { path: 'charlas/mis-charlas', component: CharlasprofesorComponent },
+  // { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
+  // { path: 'charlas/:idcharla', component: DetallescharlaComponent },
+  // { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
+>>>>>>> Stashed changes
   { path: 'proponertecno', component: ProponerTecnologiaComponent },
   { path: 'conatctadmin', component: ContactarAdminComponent },
   { path: 'charlastechariders', component: CharlasTechRidersComponent },
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> main
+=======
+>>>>>>> Stashed changes
 ];
 
 export const appRoutingProvider: any[] = [];
