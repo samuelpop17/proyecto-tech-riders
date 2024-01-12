@@ -1,45 +1,42 @@
 <div class="shadow-card p-4">
-    <h1 class="fw-bold">Solicitud de Nueva Tecnologia</h1>
-    <hr class="border border-dark opacity-50" />
-  
-    <form  (ngSubmit)="enviarSolicitud()" class="row">
-      <div class="mt-3 col-12">
-        <label class="form-label fw-bold">Nombre de nueva Tecnología</label>
-        <input
-          type="text"
-          class="form-control"
-          name="controlnombre"
-          #controlnombre
-        />
-      </div>
-  
-      <div class="mt-3 col-12">
-        <label class="form-label fw-bold">Comentarios</label>
-        <textarea
-          class="form-control"
-          name="controlcomentarios"
-          #controlcomentarios
-          rows="3" 
-          style=" resize: none;"
-          
-        ></textarea>
-      </div>
-      <div class="mt-3 col-12">
-        <label class="form-label fw-bold">Tipo de Charla</label>
-        <select class="form-select" name="selectprovincia" #selectprovincia>
-          <option
-            *ngFor="let tecnologia of tecnologias"
-            [value]="tecnologia.idTipoTecnologia"
-            
-          >
-            {{ tecnologia.descripcion }}
-          </option>
-        </select>
-      </div>
-  
-      <div class="col-12">
-        <button class="btn btn-dark w-100 mt-3 py-2">Enviar Solicitud</button>
-      </div>
-    </form>
-  </div>
-  
+  <h1 class="fw-bold">Solicitud de Nueva Tecnologia</h1>
+  <hr class="border border-dark opacity-50" />
+
+  <form (ngSubmit)="enviarSolicitud()" class="row">
+    <div class="mt-3 col-12">
+      <label class="form-label fw-bold">Nombre de nueva Tecnología</label>
+      <input
+        type="text"
+        class="form-control"
+        name="controlnombre"
+        #controlnombre
+      />
+    </div>
+
+    <div class="mt-3 col-12">
+      <label class="form-label fw-bold">Comentarios</label>
+      <textarea
+        class="form-control"
+        name="controlcomentarios"
+        #controlcomentarios
+        rows="3"
+        style="resize: none"
+      ></textarea>
+    </div>
+    <div class="mt-3 col-12">
+      <label class="form-label fw-bold">Tipo de Charla</label>
+      <select class="form-select" name="selectprovincia" #selectprovincia>
+        <option
+          *ngFor="let tecnologia of tecnologias"
+          [value]="tecnologia.idTipoTecnologia"
+        >
+          {{ tecnologia.descripcion }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-dark w-100 mt-3 py-2">Enviar Solicitud</button>
+    </div>
+  </form>
+</div>

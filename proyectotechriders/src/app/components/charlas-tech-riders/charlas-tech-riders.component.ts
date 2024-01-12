@@ -4,24 +4,16 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 @Component({
   selector: 'app-charlas-tech-riders',
   templateUrl: './charlas-tech-riders.component.html',
-  styleUrls: ['./charlas-tech-riders.component.css']
+  styleUrls: ['./charlas-tech-riders.component.css'],
 })
 export class CharlasTechRidersComponent implements OnInit {
+  constructor(private _service: ServicePrincipal) {}
 
-constructor(private _service: ServicePrincipal) {
-  
-}
+  charlas: CharlasPendientes[] = [];
 
-charlas: CharlasPendientes[] = [];
-
-ngOnInit(): void {
-    
-
-this._service.charlasPorVerTechRiders().subscribe((response) => {
-
-  this.charlas=response;
- 
-});
-
-}
+  ngOnInit(): void {
+    this._service.charlasPorVerTechRiders().subscribe((response) => {
+      this.charlas = response;
+    });
+  }
 }
