@@ -9,15 +9,13 @@
         </option>
       </select>
     </div>
-    <div class="col-3">
-      <button class="btn btn-dark rounded w-100" (click)="filtrarCharlas()">
-        Filtrar
-      </button>
-    </div>
-    <div class="col-3">
-      <button class="btn btn-dark rounded w-100" (click)="reiniciarFiltro()">
-        Reestablecer
-      </button>
+    <div class="col-6">
+      <div class="btn-group w-100">
+        <button class="btn btn-dark" (click)="filtrarCharlas()">Filtrar</button>
+        <button class="btn btn-dark" (click)="reiniciarFiltro()">
+          Reestablecer
+        </button>
+      </div>
     </div>
     <div class="col-2">
       <button class="btn btn-dark rounded w-100" (click)="recargarCharlas()">
