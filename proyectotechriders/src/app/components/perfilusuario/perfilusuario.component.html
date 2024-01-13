@@ -162,11 +162,13 @@
           </svg>
           LinkedIn
         </label>
-        <a
-          class="linkedin-button form-control"
-          [href]="'https://' + usuario.linkedIn"
-        >
-          {{ usuario.linkedIn }}
+        <a class="linkedin-button" [href]="'https://' + usuario.linkedIn">
+          <input
+            type="text"
+            readonly
+            class="form-control"
+            [value]="usuario.linkedIn"
+          />
         </a>
       </div>
 

@@ -16,7 +16,7 @@
     </div>
     <div class="col-3">
       <button class="btn btn-dark rounded w-100" (click)="reiniciarFiltro()">
-        Reestablecer filtro
+        Reestablecer
       </button>
     </div>
     <div class="col-2">
@@ -46,56 +46,71 @@
     src="../../../assets/images/loading.gif"
   />
 
-  <table class="table table-responsive mt-3" *ngIf="charlasCargadas">
-    <thead class="border-dark">
-      <tr>
-        <th>Descripción</th>
-        <th>Curso</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-        <th>TechRider</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let charla of charlasFiltradas">
-        <td>{{ charla.descripcionCharla }}</td>
-        <td>{{ charla.nombreCurso }}</td>
-        <td>{{ charla.fechaCharla | date : "medium" }}</td>
-        <td>{{ charla.estadoCharla }}</td>
-        <td>{{ charla.techRider }}</td>
-        <td class="text-center">
-          <a
-            class="btn btn-dark btn-sm me-1"
-            [routerLink]="['/charlas', charla.idCharla]"
-          >
-            Detalles
-          </a>
-          <a
-            class="btn btn-dark btn-sm me-1"
-            [routerLink]="['/charlas/editar', charla.idCharla]"
-            *ngIf="
-              charla.estadoCharla == 'PROCESO' ||
-              charla.estadoCharla == 'PENDIENTE'
-            "
-          >
-            Editar
-          </a>
-          <a
-            class="btn btn-dark btn-sm"
-            *ngIf="
-              charla.estadoCharla != 'CERRADA' &&
-              charla.estadoCharla != 'COMPLETADA' &&
-              charla.estadoCharla != 'ACREDITADA'
-            "
-            (click)="cancelarCharla(charla.idCharla)"
-          >
-            Cancelar
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive" *ngIf="charlasCargadas">
+    <table class="table mt-3">
+      <thead class="border-dark">
+        <tr>
+          <th>Descripción</th>
+          <th>Curso</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>TechRider</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let charla of charlasFiltradas">
+          <td>{{ charla.descripcionCharla }}</td>
+          <td>{{ charla.nombreCurso }}</td>
+          <td>{{ charla.fechaCharla | date : "medium" }}</td>
+          <td>{{ charla.estadoCharla }}</td>
+          <td>{{ charla.techRider }}</td>
+          <td class="text-center">
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas', charla.idCharla]"
+            >
+              Detalles
+            </a>
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas/editar', charla.idCharla]"
+              *ngIf="
+                charla.estadoCharla == 'PROCESO' ||
+                charla.estadoCharla == 'PENDIENTE'
+              "
+            >
+              Editar
+            </a>
+            <a
+              class="btn btn-dark btn-sm me-1"
+              *ngIf="charla.estadoCharla == 'PROCESO'"
+              (click)="cerrarCharla(charla.idCharla)"
+            >
+              Cerrar
+            </a>
+            <a
+              class="btn btn-dark btn-sm me-1"
+              *ngIf="charla.estadoCharla == 'CERRADA'"
+              (click)="completarCharla(charla.idCharla)"
+            >
+              Completar
+            </a>
+            <a
+              class="btn btn-dark btn-sm"
+              *ngIf="
+                charla.estadoCharla != 'COMPLETADA' &&
+                charla.estadoCharla != 'ACREDITADA'
+              "
+              (click)="cancelarCharla(charla.idCharla)"
+            >
+              Cancelar
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <img
     *ngIf="!charlasCargadas"
     class="d-block mx-auto w-25"
