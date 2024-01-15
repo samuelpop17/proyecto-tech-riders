@@ -59,6 +59,15 @@
                 Editar tecnologías
               </a>
             </li>
+            <li *ngIf="role.idRole == 3">
+              <a
+                class="dropdown-item"
+                [routerLink]="['/conatctadmin']"
+              >
+                Contactar Admin
+              </a>
+            </li>
+
             <li>
               <a
                 class="dropdown-item"

@@ -14,6 +14,7 @@ export class CharlasTechRidersComponent implements OnInit {
   ngOnInit(): void {
     this._service.charlasPorVerTechRiders().subscribe((response) => {
       this.charlas = response;
+      console.log("hola: "+response)
     });
   }
 }
