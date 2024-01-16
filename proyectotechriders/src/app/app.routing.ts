@@ -44,7 +44,6 @@ const routes: Routes = [
     path: 'charlas/valoracion/:idcharla',
     component: ValoracioncharlaComponent,
   },
-
   { path: 'proponertecno', component: ProponerTecnologiaComponent },
   { path: 'contactadmin', component: ContactarAdminComponent },
   { path: 'charlastechriders', component: CharlasTechRidersComponent },
