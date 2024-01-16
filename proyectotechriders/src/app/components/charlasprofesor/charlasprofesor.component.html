@@ -95,6 +95,16 @@
               Completar
             </a>
             <a
+              class="btn btn-dark btn-sm me-1"
+              *ngIf="
+                charla.estadoCharla == 'COMPLETADA' ||
+                charla.estadoCharla == 'ACREDITADA'
+              "
+              [routerLink]="['/charlas/valoracion', charla.idCharla]"
+            >
+              Valorar
+            </a>
+            <a
               class="btn btn-dark btn-sm"
               *ngIf="
                 charla.estadoCharla != 'COMPLETADA' &&

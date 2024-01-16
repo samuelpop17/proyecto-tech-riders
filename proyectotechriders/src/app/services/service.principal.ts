@@ -6,6 +6,7 @@ import { Usuario } from '../models/Usuario';
 import { Tecnologia } from '../models/Tecnologia';
 import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
 import { Charla } from '../models/Charla';
+import { ValoracionCharla } from '../models/ValoracionCharla';
 
 @Injectable()
 export class ServicePrincipal {
@@ -336,6 +337,7 @@ export class ServicePrincipal {
       params: { iduser: idUsuario },
     });
   }
+
   charlasPorVerTechRiders(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
@@ -350,5 +352,34 @@ export class ServicePrincipal {
     let request = 'api/QueryTools/CharlasTechRider/?idtechrider='+environment.idUsuario;
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
+  }
+
+  findValoracionCharla(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/ValoracionesCharlas/Valoraciones/' + idCharla;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  createValoracionCharla(valoracion: ValoracionCharla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/ValoracionesCharlas';
+    let json = JSON.stringify(valoracion);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
+  }
+
+  updateValoracionCharla(valoracion: ValoracionCharla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/ValoracionesCharlas';
+    let json = JSON.stringify(valoracion);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.put(url + request, json, { headers: header });
   }
 }
