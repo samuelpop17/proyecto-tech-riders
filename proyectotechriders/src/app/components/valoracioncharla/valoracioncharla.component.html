@@ -3,16 +3,15 @@
   <hr class="border border-dark opacity-50" />
   <form #valoracionForm="ngForm" (ngSubmit)="editarValoracion()" class="row">
     <div class="mt-1 col-md-2">
-      <label class="form-label fw-bold"> {{ puntuacionValo }}/10</label>
+      <label class="form-label fw-bold">Valoración</label>
       <input
-        class="form-range"
-        type="range"
+        class="form-control"
+        type="number"
         min="0"
         max="10"
         #controlvaloracion
         name="controlvaloracion"
         [value]="valoracion.valoracion"
-        (change)="changePunt()"
       />
     </div>
     <div class="mt-1 col-md-10">

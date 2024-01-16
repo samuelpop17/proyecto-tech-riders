@@ -11,7 +11,6 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 export class ValoracioncharlaComponent implements OnInit {
   public valoracion!: ValoracionCharla;
   public valoExiste: boolean = false;
-  public puntuacionValo!: number;
 
   @ViewChild('controlvaloracion') controlValoracion!: ElementRef;
   @ViewChild('controlcomentario') controlComentario!: ElementRef;
@@ -36,15 +35,10 @@ export class ValoracioncharlaComponent implements OnInit {
           this._service.findValoracionCharla(idcharla).subscribe((response) => {
             if (response[0] != undefined) this.valoracion = response[0];
             this.valoExiste = true;
-            this.puntuacionValo = this.valoracion.valoracion;
           });
         }
       });
     } else this._router.navigate(['/login']);
-  }
-
-  changePunt(): void {
-    this.puntuacionValo = this.controlValoracion.nativeElement.value;
   }
 
   editarValoracion(): void {
