@@ -21,15 +21,10 @@
         </li>
 
         <!-- RESPONSABLE EMPRESA -->
-        <div *ngIf="role == 2 && tipoEmpresaCentro && tipoEmpresaCentro == 1">
-          responsable
-        </div>
+        <div *ngIf="role == 4">responsable</div>
 
         <!-- DROPDOWN CHARLAS PROFESOR -->
-        <li
-          class="nav-item dropdown"
-          *ngIf="role == 2 && tipoEmpresaCentro && tipoEmpresaCentro == 2"
-        >
+        <li class="nav-item dropdown" *ngIf="role == 2">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -99,15 +94,12 @@
         </li>
 
         <!-- DropDown charlas TechRiders -->
-
         <li class="nav-item dropdown" *ngIf="role == 3">
           <a
             class="nav-link dropdown-toggle"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            [routerLink]="['/charlastechriders']"
-            *ngIf="role == 3"
           >
             Charlas
           </a>
@@ -118,7 +110,7 @@
             <!-- NAVBAR PARTE PRIVADA -->
             <div>
               <li>
-                <a class="dropdown-item" [routerLink]="['/charlastechariders']">
+                <a class="dropdown-item" [routerLink]="['/charlastechriders']">
                   Charlas Disponibles
                 </a>
               </li>

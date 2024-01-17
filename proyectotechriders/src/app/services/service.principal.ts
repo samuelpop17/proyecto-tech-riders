@@ -326,14 +326,10 @@ export class ServicePrincipal {
     return this._http.put(url + request, json, { headers: header });
   }
 
-  createPeticionAltaUser(idUsuario: number, token: string): Observable<any> {
+  createPeticionAltaUser(idUsuario: number): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/PeticionesAltaUsers';
-    let header = {
-      Authorization: 'bearer ' + token,
-    };
     return this._http.post(url + request, null, {
-      headers: header,
       params: { iduser: idUsuario },
     });
   }
@@ -341,15 +337,16 @@ export class ServicePrincipal {
   charlasPorVerTechRiders(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
-    console.log("hola2: "+localStorage.getItem('token'))
-    console.log("hola3: "+url+request)
+    console.log('hola2: ' + localStorage.getItem('token'));
+    console.log('hola3: ' + url + request);
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
 
   estadoCharlasTechRiders(): Observable<any> {
     let url = environment.urlApi;
-    let request = 'api/QueryTools/CharlasTechRider/?idtechrider='+environment.idUsuario;
+    let request =
+      'api/QueryTools/CharlasTechRider/?idtechrider=' + environment.idUsuario;
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }

@@ -60,9 +60,9 @@ export class RegisterusuarioComponent implements OnInit {
 
   changeEmpresasCentros(): void {
     let tipoEmpresa!: number;
-    this.selectRole.nativeElement.selectedOptions[0].value == 3
-      ? (tipoEmpresa = 1)
-      : (tipoEmpresa = 2);
+    this.selectRole.nativeElement.selectedOptions[0].value == 2
+      ? (tipoEmpresa = 2)
+      : (tipoEmpresa = 1);
     this.publicEmpresasCentros = this.empresasCentros.filter(
       (empresaCentro) => empresaCentro.idTipoEmpresa == tipoEmpresa
     );
@@ -89,25 +89,18 @@ export class RegisterusuarioComponent implements OnInit {
     };
     this._service.createUsuario(usuario).subscribe((response) => {
       let idUsuario = response.idUsuario;
-      let email = response.email;
-      let password = response.password;
-      this._service.loginUser(email, password).subscribe((response) => {
-        let token = response.response;
-        this._service
-          .createPeticionAltaUser(idUsuario, token)
-          .subscribe((response) => {
-            Swal.fire({
-              color: '#333333',
-              icon: 'success',
-              showConfirmButton: false,
-              text: 'Usuario creado. Tendrá que ser validado por el administrador',
-              timer: 4000,
-              timerProgressBar: true,
-              title: 'Registro con éxito',
-            }).then((result) => {
-              this._router.navigate(['/login']);
-            });
-          });
+      this._service.createPeticionAltaUser(idUsuario).subscribe((response) => {
+        Swal.fire({
+          color: '#333333',
+          icon: 'success',
+          showConfirmButton: false,
+          text: 'Usuario creado. Tendrá que ser validado por el administrador',
+          timer: 4000,
+          timerProgressBar: true,
+          title: 'Registro con éxito',
+        }).then((result) => {
+          this._router.navigate(['/login']);
+        });
       });
     });
   }

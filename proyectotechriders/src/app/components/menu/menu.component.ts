@@ -19,13 +19,6 @@ export class MenuComponent implements DoCheck {
       if (localStorage.getItem('token')) {
         this._service.getPerfilUsuario().subscribe((response) => {
           let usuario = response;
-          if (usuario.idEmpresaCentro) {
-            this._service
-              .findEmpresaCentro(usuario.idEmpresaCentro)
-              .subscribe((response) => {
-                this.tipoEmpresaCentro = response.idTipoEmpresa;
-              });
-          }
         });
       } else {
         localStorage.removeItem('idUsuario');
