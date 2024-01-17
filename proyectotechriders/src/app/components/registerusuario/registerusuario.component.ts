@@ -85,7 +85,7 @@ export class RegisterusuarioComponent implements OnInit {
       idRole: this.selectRole.nativeElement.selectedOptions[0].value,
       idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
       idEmpresaCentro: idEmpresaCentro,
-      estado: 0,
+      estado: 2,
     };
     this._service.createUsuario(usuario).subscribe((response) => {
       let idUsuario = response.idUsuario;

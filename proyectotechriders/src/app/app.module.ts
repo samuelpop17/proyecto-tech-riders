@@ -29,6 +29,7 @@ import { CharlasTechRidersComponent } from './components/charlas-tech-riders/cha
 import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
+import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MischarrlasTechridersComponent } from './components/mischarrlas-techrid
     ContactarAdminComponent,
     ProponerTecnologiaComponent,
     MischarrlasTechridersComponent,
+    ValoracioncharlaComponent,
   ],
   imports: [
     CommonModule,

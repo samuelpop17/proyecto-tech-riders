@@ -1,0 +1,38 @@
+<div class="shadow-card p-4" *ngIf="valoExiste">
+  <h1 class="fw-bold">Valoración de la charla {{ valoracion.idCharla }}</h1>
+  <hr class="border border-dark opacity-50" />
+  <form #valoracionForm="ngForm" (ngSubmit)="editarValoracion()" class="row">
+    <div class="mt-1 col-md-2">
+      <label class="form-label fw-bold">Valoración</label>
+      <input
+        class="form-control"
+        type="number"
+        min="0"
+        max="10"
+        #controlvaloracion
+        name="controlvaloracion"
+        [value]="valoracion.valoracion"
+      />
+    </div>
+    <div class="mt-1 col-md-10">
+      <label class="form-label fw-bold">Comentario</label>
+      <input
+        class="form-control"
+        type="text"
+        #controlcomentario
+        name="controlcomentario"
+        [value]="valoracion.comentario"
+      />
+    </div>
+    <div class="col-12">
+      <button class="btn btn-dark rounded w-100 mt-3 py-2">
+        Editar valoración
+      </button>
+    </div>
+  </form>
+</div>
+<img
+  *ngIf="!valoExiste"
+  class="d-block mx-auto w-50"
+  src="../../../assets/images/loading.gif"
+/>
