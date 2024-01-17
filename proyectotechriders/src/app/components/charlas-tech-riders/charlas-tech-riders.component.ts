@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CharlasPendientes } from 'src/app/models/CharlasPnedientesTechRiders';
+import { CharlasPendientes } from 'src/app/models/CharlasPendientesTechRiders';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 @Component({
   selector: 'app-charlas-tech-riders',
@@ -14,7 +14,7 @@ export class CharlasTechRidersComponent implements OnInit {
   ngOnInit(): void {
     this._service.charlasPorVerTechRiders().subscribe((response) => {
       this.charlas = response;
-      console.log("hola: "+response)
+      console.log('hola: ' + response);
     });
   }
 }
