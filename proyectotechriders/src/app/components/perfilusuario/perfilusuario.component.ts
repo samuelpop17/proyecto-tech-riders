@@ -62,5 +62,13 @@ export class PerfilusuarioComponent implements OnInit {
         }
       });
     } else this._router.navigate(['/login']);
+
+
+
+
+
+
+
+    
   }
 }

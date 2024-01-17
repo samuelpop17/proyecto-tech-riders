@@ -45,8 +45,9 @@ export class RegisterusuarioComponent implements OnInit {
       this.provincias = response;
     });
     this.roles = [
-      { idRole: 2, tipoRole: 'PROFESOR/REPRESENTANTE' },
+      { idRole: 2, tipoRole: 'PROFESOR' },
       { idRole: 3, tipoRole: 'TECHRIDER' },
+      { idRole: 4, tipoRole: 'REPRESENTANTE' },
     ];
     this._service.getEmpresasCentros().subscribe((response) => {
       this.empresasCentros = response;
