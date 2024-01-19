@@ -7,6 +7,7 @@ import { Tecnologia } from '../models/Tecnologia';
 import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
 import { Charla } from '../models/Charla';
 import { ValoracionCharla } from '../models/ValoracionCharla';
+import { EmpresaCentro } from '../models/EmpresaCentro';
 
 @Injectable()
 export class ServicePrincipal {
@@ -69,6 +70,19 @@ export class ServicePrincipal {
     });
     return this._http.put(url + request, json, { headers: header });
   }
+
+
+  editEmpresaUsuarioRepresentante(empresa: EmpresaCentro): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/EmpresasCentros';
+    let json = JSON.stringify(empresa);
+    let header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.put(url + request, json, { headers: header });
+  }
+
 
   getUsuarios(): Observable<any> {
     let url = environment.urlApi;
@@ -161,7 +175,7 @@ export class ServicePrincipal {
     let request = 'api/EmpresasCentros';
     return this._http.get(url + request);
   }
-
+  
   createUsuario(usuario: Usuario): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Usuarios';
