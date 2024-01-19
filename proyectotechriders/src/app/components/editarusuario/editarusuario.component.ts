@@ -38,8 +38,7 @@ export class EditarusuarioComponent implements OnInit {
   @ViewChild('personaContacto') personaContacto!: ElementRef;
   @ViewChild('razonsocial') razonsocial!: ElementRef;
 
-
-  constructor(private _service: ServicePrincipal, private _router: Router) { }
+  constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
@@ -52,16 +51,11 @@ export class EditarusuarioComponent implements OnInit {
             .findEmpresaCentro(this.usuario.idEmpresaCentro)
             .subscribe((response) => {
               this.empresaCentro = response;
-              console.log(response)
+              console.log(response);
             });
-
         });
       });
-
-
     } else this._router.navigate(['/login']);
-
-
   }
 
   editarPerfil(): void {
@@ -79,31 +73,26 @@ export class EditarusuarioComponent implements OnInit {
       estado: this.usuario.estado,
     };
 
-    let empresa:EmpresaCentro={
-      idEmpresaCentro: this.empresaCentro.idEmpresaCentro,
-  nombre: this.controlnombreempresa.nativeElement.value,
-  direccion: this.direccion.nativeElement.value,
-  telefono: this.controltelefonoempresa.nativeElement.value,
-  personaContacto: this.personaContacto.nativeElement.value,
-  cif: this.cif.nativeElement.value,
-  idProvincia: this.empresaCentro.idProvincia,
-  razonSocial: this.razonsocial.nativeElement.value,
-  idTipoEmpresa: this.empresaCentro.idTipoEmpresa
-
-    }
     this._service.editUsuario(usuario).subscribe((response) => {
       if (this.role == 4) {
-        this._service.editEmpresaUsuarioRepresentante(empresa).subscribe((response) => {
-      
-          this._router.navigate(['/usuario/perfil']);
-        });
-      } else 
-      this._router.navigate(['/usuario/perfil']);
+        let empresa: EmpresaCentro = {
+          idEmpresaCentro: this.empresaCentro.idEmpresaCentro,
+          nombre: this.controlnombreempresa.nativeElement.value,
+          direccion: this.direccion.nativeElement.value,
+          telefono: this.controltelefonoempresa.nativeElement.value,
+          personaContacto: this.personaContacto.nativeElement.value,
+          cif: this.cif.nativeElement.value,
+          idProvincia: this.empresaCentro.idProvincia,
+          razonSocial: this.razonsocial.nativeElement.value,
+          idTipoEmpresa: this.empresaCentro.idTipoEmpresa,
+          estadoEmpresa: 0,
+        };
+        this._service
+          .editEmpresaUsuarioRepresentante(empresa)
+          .subscribe((response) => {
+            this._router.navigate(['/usuario/perfil']);
+          });
+      } else this._router.navigate(['/usuario/perfil']);
     });
-
-
-    
-
-    
   }
 }
