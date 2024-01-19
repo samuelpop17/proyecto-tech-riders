@@ -91,4 +91,60 @@ export class CharlasprofesorComponent implements OnInit {
       }
     });
   }
+
+  cerrarCharla(idCharla: number): void {
+    Swal.fire({
+      cancelButtonText: 'No',
+      color: '#333333',
+      confirmButtonColor: '#212529',
+      confirmButtonText: 'Si, cerrar',
+      icon: 'question',
+      showCancelButton: true,
+      text: 'Esto significa que ya has cerrado todos los detalles y trámites de la charla con el Tech Rider',
+      title: '¿Quieres cerrar esta charla?',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // ESTADO CERRADA: ID 4
+        this._service.updateEstadoCharla(idCharla, 4).subscribe((response) => {
+          Swal.fire({
+            color: '#333333',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            title: 'Charla cerrada',
+          });
+          this.recargarCharlas();
+        });
+      }
+    });
+  }
+
+  completarCharla(idCharla: number): void {
+    Swal.fire({
+      cancelButtonText: 'No',
+      color: '#333333',
+      confirmButtonColor: '#212529',
+      confirmButtonText: 'Si, completar',
+      icon: 'question',
+      showCancelButton: true,
+      text: 'Esto significa que el Tech Rider ya ha realizado esta charla',
+      title: '¿Quieres completar esta charla?',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // ESTADO COMPLETADA: ID 5
+        this._service.updateEstadoCharla(idCharla, 5).subscribe((response) => {
+          Swal.fire({
+            color: '#333333',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            title: 'Charla completada',
+          });
+          this.recargarCharlas();
+        });
+      }
+    });
+  }
 }
