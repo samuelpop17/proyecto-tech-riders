@@ -18,6 +18,7 @@ import { ContactarAdminComponent } from './components/contactar-admin/contactar-
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
+import { PanelPeticionesAdminComponent } from './components/panel-peticiones-admin/panel-peticiones-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'contactadmin', component: ContactarAdminComponent },
   { path: 'charlastechriders', component: CharlasTechRidersComponent },
   { path: 'mischarlastech', component: MischarrlasTechridersComponent },
+  { path: 'peticiones', component: PanelPeticionesAdminComponent },
 ];
 
 export const appRoutingProvider: any[] = [];

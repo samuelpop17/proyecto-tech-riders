@@ -30,7 +30,8 @@ import { ContactarAdminComponent } from './components/contactar-admin/contactar-
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
-import { PanellistadosAdminComponent } from './components/panellistados-admin/panellistados-admin.component';
+import { PanelPeticionesAdminComponent } from './components/panel-peticiones-admin/panel-peticiones-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { PanellistadosAdminComponent } from './components/panellistados-admin/pa
     ProponerTecnologiaComponent,
     MischarrlasTechridersComponent,
     ValoracioncharlaComponent,
-    PanellistadosAdminComponent,
+    PanelPeticionesAdminComponent,
   ],
   imports: [
     CommonModule,
