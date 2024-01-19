@@ -36,6 +36,7 @@ export class RegisterusuarioComponent implements OnInit {
     cif: '',
     idProvincia: 0,
     idTipoEmpresa: 1,
+    estadoEmpresa: 1,
   };
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}

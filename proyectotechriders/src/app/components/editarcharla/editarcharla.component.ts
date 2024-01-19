@@ -90,8 +90,6 @@ export class EditarcharlaComponent implements OnInit {
           var principio = new Date(otraFecha.getFullYear(), 8, 1);
           var final = new Date(otraFecha.getFullYear() + 1, 7, 31);
         }
-        console.log(principio);
-        console.log(final);
         return (
           chrl.idCurso == charla.idCurso &&
           chrl.idCharla != charla.idCharla &&
