@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-6" style="border-right: 2px solid rgba(33, 37, 41, 0.5)">
       <h2 class="text-center">Tus tecnologías</h2>
-      <table *ngIf="tecnologias" class="mt-3 w-100">
+      <table class="mt-3 w-100" *ngIf="tecnologias">
         <tbody>
           <tr
             *ngFor="let tecnologia of tecnologias"
@@ -22,15 +22,15 @@
           </tr>
         </tbody>
       </table>
-      <img
-        *ngIf="!tecnologias"
-        class="d-block mx-auto w-50"
-        src="../../../assets/images/loading.gif"
-      />
     </div>
+    <img
+      *ngIf="!tecnologias"
+      class="d-block mx-auto w-50"
+      src="../../../assets/images/loading.gif"
+    />
     <div class="col-6">
       <h2 class="text-center">Otras tecnologías</h2>
-      <table *ngIf="allTecnologias" class="mt-3 w-100">
+      <table class="mt-3 w-100" *ngIf="allTecnologias">
         <tbody>
           <tr
             *ngFor="let tecnologia of allTecnologias"
@@ -57,8 +57,9 @@
       />
     </div>
   </div>
-  
-</div>
-<div class="text-center mt-4">
-  <a routerLink="/proponertecno" class="btn btn-dark">Proponer Nueva Tecnologia</a>
+  <div class="text-center mt-4">
+    <a routerLink="/proponertecno" class="btn btn-dark"
+      >Proponer Nueva Tecnologia</a
+    >
+  </div>
 </div>

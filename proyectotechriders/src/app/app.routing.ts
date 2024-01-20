@@ -8,16 +8,16 @@ import { EditarusuarioComponent } from './components/editarusuario/editarusuario
 import { ModificarcontrasenyaComponent } from './components/modificarcontrasenya/modificarcontrasenya.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
-
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
 import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
-
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
+import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
+import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,10 +40,14 @@ const routes: Routes = [
   { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
-
+  {
+    path: 'charlas/valoracion/:idcharla',
+    component: ValoracioncharlaComponent,
+  },
   { path: 'proponertecno', component: ProponerTecnologiaComponent },
-  { path: 'conatctadmin', component: ContactarAdminComponent },
-  { path: 'charlastechariders', component: CharlasTechRidersComponent },
+  { path: 'contactadmin', component: ContactarAdminComponent },
+  { path: 'charlastechriders', component: CharlasTechRidersComponent },
+  { path: 'mischarlastech', component: MischarrlasTechridersComponent },
 ];
 
 export const appRoutingProvider: any[] = [];

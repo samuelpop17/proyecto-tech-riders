@@ -21,15 +21,10 @@
         </li>
 
         <!-- RESPONSABLE EMPRESA -->
-        <div *ngIf="role == 2 && tipoEmpresaCentro && tipoEmpresaCentro == 1">
-          a
-        </div>
+        <div *ngIf="role == 4">responsable</div>
 
         <!-- DROPDOWN CHARLAS PROFESOR -->
-        <li
-          class="nav-item dropdown"
-          *ngIf="role == 2 && tipoEmpresaCentro && tipoEmpresaCentro == 2"
-        >
+        <li class="nav-item dropdown" *ngIf="role == 2">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -98,18 +93,58 @@
           </ul>
         </li>
 
-        <li class="nav-item" *ngIf="role == 3">
+        <!-- DropDown charlas TechRiders -->
+        <li class="nav-item dropdown" *ngIf="role == 3">
           <a
-            class="nav-link"
+            class="nav-link dropdown-toggle"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            [routerLink]="['/charlastechariders']"
-            *ngIf="role == 3"
           >
             Charlas
           </a>
+
+          <ul class="dropdown-menu">
+            <!-- NAVBAR PARA PARTE PÚBLICA -->
+
+            <!-- NAVBAR PARTE PRIVADA -->
+            <div>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/charlastechriders']">
+                  Charlas Disponibles
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/mischarlastech']">
+                  Mis Charlas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/mischarlastech']">
+                  Mi Calendario
+                </a>
+              </li>
+            </div>
+          </ul>
         </li>
+
+<!-- segunda opcion menu role 4 representante -->
+
+
+
+
+<li class="nav-item " *ngIf="role == 4">
+  <a
+    class="nav-link " [routerLink]="['/mischarlastech']"
+  >
+  Mis TechRiders
+  </a>
+
+  
+</li>
+
+
+
       </ul>
     </div>
   </div>

@@ -6,6 +6,8 @@ import { Usuario } from '../models/Usuario';
 import { Tecnologia } from '../models/Tecnologia';
 import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
 import { Charla } from '../models/Charla';
+import { ValoracionCharla } from '../models/ValoracionCharla';
+import { EmpresaCentro } from '../models/EmpresaCentro';
 
 @Injectable()
 export class ServicePrincipal {
@@ -68,6 +70,19 @@ export class ServicePrincipal {
     });
     return this._http.put(url + request, json, { headers: header });
   }
+
+
+  editEmpresaUsuarioRepresentante(empresa: EmpresaCentro): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/EmpresasCentros';
+    let json = JSON.stringify(empresa);
+    let header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.put(url + request, json, { headers: header });
+  }
+
 
   getUsuarios(): Observable<any> {
     let url = environment.urlApi;
@@ -160,7 +175,7 @@ export class ServicePrincipal {
     let request = 'api/EmpresasCentros';
     return this._http.get(url + request);
   }
-
+  
   createUsuario(usuario: Usuario): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Usuarios';
@@ -325,21 +340,57 @@ export class ServicePrincipal {
     return this._http.put(url + request, json, { headers: header });
   }
 
-  createPeticionAltaUser(idUsuario: number, token: string): Observable<any> {
+  createPeticionAltaUser(idUsuario: number): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/PeticionesAltaUsers';
-    let header = {
-      Authorization: 'bearer ' + token,
-    };
     return this._http.post(url + request, null, {
-      headers: header,
       params: { iduser: idUsuario },
     });
   }
+
   charlasPorVerTechRiders(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
+    console.log('hola2: ' + localStorage.getItem('token'));
+    console.log('hola3: ' + url + request);
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
+  }
+
+  estadoCharlasTechRiders(): Observable<any> {
+    let url = environment.urlApi;
+    let request =
+      'api/QueryTools/CharlasTechRider/?idtechrider=' + environment.idUsuario;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  findValoracionCharla(idCharla: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/ValoracionesCharlas/Valoraciones/' + idCharla;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+
+  createValoracionCharla(valoracion: ValoracionCharla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/ValoracionesCharlas';
+    let json = JSON.stringify(valoracion);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
+  }
+
+  updateValoracionCharla(valoracion: ValoracionCharla): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/ValoracionesCharlas';
+    let json = JSON.stringify(valoracion);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.put(url + request, json, { headers: header });
   }
 }
