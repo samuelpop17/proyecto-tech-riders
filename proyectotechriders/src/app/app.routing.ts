@@ -18,6 +18,8 @@ import { ContactarAdminComponent } from './components/contactar-admin/contactar-
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
+import { MistechridersResponsableComponent } from './components/mistechriders-responsable/mistechriders-responsable.component';
+import { CharlasMistechridersResponsableComponent } from './components/charlas-mistechriders-responsable/charlas-mistechriders-responsable.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,6 +50,8 @@ const routes: Routes = [
   { path: 'contactadmin', component: ContactarAdminComponent },
   { path: 'charlastechriders', component: CharlasTechRidersComponent },
   { path: 'mischarlastech', component: MischarrlasTechridersComponent },
+  { path: 'mischarlastechridersresponsable', component: MistechridersResponsableComponent },
+  { path: 'charlasmischarlastechridersresponsable/:idtech', component: CharlasMistechridersResponsableComponent },
 ];
 
 export const appRoutingProvider: any[] = [];

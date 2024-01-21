@@ -246,6 +246,24 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
+
+getdatosusuarioparaidempresa(): Observable<any>{
+  let url = environment.urlApi;
+    let request = 'api/Usuarios/PerfilUsuario';
+    let header = {
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.get(url + request, { headers: header });
+}
+
+
+getMisTechRidersResponsable(idempresa: number): Observable<any>{
+  let url = environment.urlApi;
+    let request = 'api/QueryTools/FindTechRidersEnEmpresa/'+idempresa;
+   
+    return this._http.get(url + request);
+}
+
   getEstadosCharlas(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/EstadosCharlas';
