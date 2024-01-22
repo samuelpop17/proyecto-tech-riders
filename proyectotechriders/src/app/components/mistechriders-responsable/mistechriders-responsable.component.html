@@ -1,20 +1,22 @@
 <div class="container mt-4">
-  <h1 class="text-center">Mis TechRiders</h1>
+  <h1 class="text-center fw-bold mb-3">Mis TechRiders</h1>
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let usuario of usarios">
-      <div class="card">
+      <div class="card shadow-card">
         <div class="card-body">
           <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
 
           <p class="card-text">Teléfono: {{ usuario.telefonoEmpresa }}</p>
           <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
           <a
+            class="btn btn-dark w-100"
             [routerLink]="[
               '/charlasmischarlastechridersresponsable/',
               usuario.idTechRider
             ]"
-            >Ver sus Charlas</a
           >
+            Ver sus Charlas
+          </a>
         </div>
       </div>
     </div>
