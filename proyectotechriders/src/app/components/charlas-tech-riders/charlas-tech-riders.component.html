@@ -4,32 +4,31 @@
 
   <div class="table-responsive">
     <table class="table mt-3">
-      <thead>
+      <thead class="border-dark">
         <tr>
-          <th scope="col">descripcionCharla</th>
-          <th scope="col">fechaCharla</th>
-          <th scope="col">turno</th>
-          <th scope="col">fechaSolicitudCharla</th>
-          <th scope="col">observacionesCharla</th>
-          <th scope="col">estadoCharla</th>
-          <th scope="col">provincia</th>
-          <th scope="col">modalidad</th>
-          <th scope="col">empresa</th>
-          <th scope="col">direccionEmpresa</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Turno</th>
+          <th scope="col">Solicitud</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Modalidad</th>
+          <th scope="col">Empresa</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let charla of charlas">
           <td>{{ charla.descripcionCharla }}</td>
-          <td>{{ charla.fechaCharla }}</td>
+          <td>{{ charla.fechaCharla | date : "medium" }}</td>
           <td>{{ charla.turno }}</td>
-          <td>{{ charla.fechaSolicitudCharla }}</td>
-          <td>{{ charla.observacionesCharla }}</td>
-          <td>{{ charla.estadoCharla }}</td>
+          <td>{{ charla.fechaSolicitudCharla | date : "medium" }}</td>
           <td>{{ charla.provincia }}</td>
           <td>{{ charla.modalidad }}</td>
           <td>{{ charla.empresa }}</td>
-          <td>{{ charla.direccionEmpresa }}</td>
+          <td>
+            <a class="btn btn-dark btn-sm me-1">Detalles</a>
+            <a class="btn btn-dark btn-sm">Asignarse</a>
+          </td>
         </tr>
         <!-- Puedes agregar más filas según tus necesidades -->
       </tbody>
