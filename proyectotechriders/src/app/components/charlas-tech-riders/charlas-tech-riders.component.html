@@ -1,4 +1,4 @@
-<div class="shadow-card p-4">
+<div class="shadow-card p-4 mb-3">
   <h1 class="fw-bold">Información de Charlas Disponibles</h1>
   <hr class="border border-dark opacity-50" />
 
@@ -9,7 +9,6 @@
           <th scope="col">Descripción</th>
           <th scope="col">Fecha</th>
           <th scope="col">Turno</th>
-          <th scope="col">Solicitud</th>
           <th scope="col">Provincia</th>
           <th scope="col">Modalidad</th>
           <th scope="col">Empresa</th>
@@ -21,12 +20,16 @@
           <td>{{ charla.descripcionCharla }}</td>
           <td>{{ charla.fechaCharla | date : "medium" }}</td>
           <td>{{ charla.turno }}</td>
-          <td>{{ charla.fechaSolicitudCharla | date : "medium" }}</td>
           <td>{{ charla.provincia }}</td>
           <td>{{ charla.modalidad }}</td>
           <td>{{ charla.empresa }}</td>
           <td>
-            <a class="btn btn-dark btn-sm me-1">Detalles</a>
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas', charla.idCharla]"
+            >
+              Detalles
+            </a>
             <a class="btn btn-dark btn-sm">Asignarse</a>
           </td>
         </tr>
