@@ -186,6 +186,29 @@ export class ServicePrincipal {
     return this._http.post(url + request, json, { headers: header });
   }
 
+  
+
+  createEmpresa(empresa: EmpresaCentro): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/EmpresasCentros';
+    let header = {
+      'Content-Type': 'application/json',
+    };
+    let json = JSON.stringify(empresa);
+    return this._http.post(url + request, json, { headers: header });
+  }
+
+
+  createPeticionAltaEmpresa(idEmpresa: number): Observable<any> {
+    let url = environment.urlApi;
+    
+    let request = '/api/PeticionesCentroEmpresa';
+    return this._http.post(url + request, null, {
+      params: { idcentroempresa: idEmpresa },
+    });
+  }
+
+
   findCursosProfesor(idProfesor: number): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/QueryTools/FindCursosProfesor/' + idProfesor;
@@ -260,6 +283,13 @@ getdatosusuarioparaidempresa(): Observable<any>{
 getMisTechRidersResponsable(idempresa: number): Observable<any>{
   let url = environment.urlApi;
     let request = 'api/QueryTools/FindTechRidersEnEmpresa/'+idempresa;
+   
+    return this._http.get(url + request);
+}
+
+getCharlasTechResponsable(idempresa: number): Observable<any>{
+  let url = environment.urlApi;
+    let request = 'api/QueryTools/FindCharlasTechriderEmpresa/'+idempresa;
    
     return this._http.get(url + request);
 }

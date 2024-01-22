@@ -31,7 +31,7 @@ import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/pr
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { MistechridersResponsableComponent } from './components/mistechriders-responsable/mistechriders-responsable.component';
-import { CharlasMistechridersResponsableComponent } from './components/charlas-mistechriders-responsable/charlas-mistechriders-responsable.component';
+import { CrearempresaResponsableComponent } from './components/crearempresa-responsable/crearempresa-responsable.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,7 @@ import { CharlasMistechridersResponsableComponent } from './components/charlas-m
     MischarrlasTechridersComponent,
     ValoracioncharlaComponent,
     MistechridersResponsableComponent,
-    CharlasMistechridersResponsableComponent,
+    CrearempresaResponsableComponent,
   ],
   imports: [
     CommonModule,
