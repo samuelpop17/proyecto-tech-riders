@@ -1,8 +1,8 @@
-<div class="shadow-card p-4" *ngIf="charla">
+<div class="shadow-card p-4 mb-3" *ngIf="charla">
   <h1 class="fw-bold">Charla {{ charla.idCharla }}</h1>
   <hr class="border border-dark opacity-50" />
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-6 mb-3 mb-md-0">
       <label class="form-label fw-bold">Descripción</label>
       <input
         type="text"
@@ -11,7 +11,7 @@
         [value]="charla.descripcionCharla"
       />
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
       <label class="form-label fw-bold">Fecha Charla</label>
       <input
         type="text"
@@ -20,7 +20,7 @@
         [value]="charla.fechaCharla | date : 'medium'"
       />
     </div>
-    <div class="col-6 mt-3">
+    <div class="col-md-6 mt-3">
       <label class="form-label fw-bold">Estado</label>
       <input
         type="text"
@@ -29,7 +29,7 @@
         [value]="charla.estadoCharla"
       />
     </div>
-    <div class="col-6 mt-3">
+    <div class="col-md-6 mt-3">
       <label class="form-label fw-bold">Provincia</label>
       <input
         type="text"
@@ -38,7 +38,7 @@
         [value]="charla.provincia"
       />
     </div>
-    <div class="col-6 mt-3">
+    <div class="col-md-6 mt-3">
       <label class="form-label fw-bold">Curso</label>
       <input
         type="text"
@@ -48,7 +48,7 @@
       />
     </div>
 
-    <div class="col-6 mt-3">
+    <div class="col-md-6 mt-3">
       <label class="form-label fw-bold">Fecha Solicitud</label>
       <input
         type="text"
@@ -57,7 +57,7 @@
         [value]="charla.fechaSolicitudCharla | date : 'medium'"
       />
     </div>
-    <div class="col-6 mt-3">
+    <div class="col-md-6 mt-3">
       <label class="form-label fw-bold">Modalidad</label>
       <input
         type="text"
@@ -66,7 +66,7 @@
         [value]="charla.modalidad"
       />
     </div>
-    <div class="col-6 mt-3">
+    <div class="col-md-6 mt-3">
       <label class="form-label fw-bold">TechRider</label>
       <input
         type="text"

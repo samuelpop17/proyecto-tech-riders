@@ -1,34 +1,34 @@
-<div class="shadow-card p-4">
+<div class="shadow-card p-4 mb-3">
   <h1 class="fw-bold">Mis Charlas</h1>
   <hr class="border border-dark opacity-50" />
 
   <div class="table-responsive">
     <table class="table mt-3">
-      <thead>
+      <thead class="border-dark">
         <tr>
-          <th scope="col">idCharla</th>
-          <th scope="col">descripcionCharla</th>
-          <th scope="col">fechaCharla</th>
-          <th scope="col">estadoCharla</th>
-          <th scope="col">provincia</th>
-          <th scope="col">nombreCurso</th>
-          <th scope="col">observacionesCharla</th>
-          <th scope="col">fechaSolicitudCharla</th>
-          <th scope="col">modalidad</th>
-          <th scope="col">email</th>
-          <th scope="col">telefono</th>
+          <th scope="col">ID</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Curso</th>
+          <th scope="col">Observaciones</th>
+          <th scope="col">Solicitud</th>
+          <th scope="col">Modalidad</th>
+          <th scope="col">Email</th>
+          <th scope="col">Tlf</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let charla of charlas">
           <td>{{ charla.idCharla }}</td>
           <td>{{ charla.descripcionCharla }}</td>
-          <td>{{ charla.fechaCharla }}</td>
+          <td>{{ charla.fechaCharla | date : "medium" }}</td>
           <td>{{ charla.estadoCharla }}</td>
           <td>{{ charla.provincia }}</td>
           <td>{{ charla.nombreCurso }}</td>
           <td>{{ charla.observacionesCharla }}</td>
-          <td>{{ charla.fechaSolicitudCharla }}</td>
+          <td>{{ charla.fechaSolicitudCharla | date : "medium" }}</td>
           <td>{{ charla.modalidad }}</td>
           <td>{{ charla.email }}</td>
           <td>{{ charla.telefono }}</td>
