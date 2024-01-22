@@ -50,8 +50,11 @@ const routes: Routes = [
   { path: 'contactadmin', component: ContactarAdminComponent },
   { path: 'charlastechriders', component: CharlasTechRidersComponent },
   { path: 'mischarlastech', component: MischarrlasTechridersComponent },
-  { path: 'mischarlastechridersresponsable', component: MistechridersResponsableComponent },
   { path: 'crearempresa', component: CrearempresaResponsableComponent },
+  {
+    path: 'mischarlastechridersresponsable',
+    component: MistechridersResponsableComponent,
+  },
 ];
 
 export const appRoutingProvider: any[] = [];

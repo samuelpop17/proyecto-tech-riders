@@ -1,40 +1,46 @@
-<div class="shadow-card p-4 mb-3">
+<div class="shadow-card p-4 mb-3" *ngIf="charlasCargadas">
   <h1 class="fw-bold">Mis Charlas</h1>
   <hr class="border border-dark opacity-50" />
 
   <div class="table-responsive">
     <table class="table mt-3">
-      <thead class="border-dark">
+      <thead>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Fecha</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Provincia</th>
-          <th scope="col">Curso</th>
-          <th scope="col">Observaciones</th>
-          <th scope="col">Solicitud</th>
-          <th scope="col">Modalidad</th>
-          <th scope="col">Email</th>
-          <th scope="col">Tlf</th>
+          <th scope="col" class="text-muted">Descripción</th>
+          <th scope="col" class="text-muted">Fecha</th>
+          <th scope="col" class="text-muted">Estado</th>
+          <th scope="col" class="text-muted">Provincia</th>
+          <th scope="col" class="text-muted">Curso</th>
+          <th scope="col" class="text-muted">Modalidad</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let charla of charlas">
-          <td>{{ charla.idCharla }}</td>
-          <td>{{ charla.descripcionCharla }}</td>
+          <td class="fw-bold">{{ charla.descripcionCharla }}</td>
           <td>{{ charla.fechaCharla | date : "medium" }}</td>
           <td>{{ charla.estadoCharla }}</td>
           <td>{{ charla.provincia }}</td>
           <td>{{ charla.nombreCurso }}</td>
-          <td>{{ charla.observacionesCharla }}</td>
-          <td>{{ charla.fechaSolicitudCharla | date : "medium" }}</td>
           <td>{{ charla.modalidad }}</td>
-          <td>{{ charla.email }}</td>
-          <td>{{ charla.telefono }}</td>
+          <td class="text-center">
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas', charla.idCharla]"
+            >
+              Detalles
+            </a>
+            <!-- Botón DESASIGNARSE para charlas estado PROCESO  -->
+            <!-- Botón PEDIR ACRED. para charlas estado FINALIZADA -->
+          </td>
         </tr>
         <!-- Puedes agregar más filas según tus necesidades -->
       </tbody>
     </table>
   </div>
 </div>
+<img
+  *ngIf="!charlasCargadas"
+  class="d-block mx-auto"
+  src="../../../assets/images/loading.gif"
+/>
