@@ -28,7 +28,12 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'
 import { FlatpickrModule } from 'angularx-flatpickr';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ListadosComponent } from './components/listados/listados.component'
+
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 registerLocaleData(localeEs, 'es');
 
@@ -51,6 +56,7 @@ registerLocaleData(localeEs, 'es');
     EditarcharlaComponent,
     CharlasComponent,
     CalendarioComponent,
+    ListadosComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing,  CommonModule,
     FormsModule,
@@ -59,7 +65,13 @@ registerLocaleData(localeEs, 'es');
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),],
+    }),
+    MatInputModule,
+    MatTableModule,
+    MatFormFieldModule,
+  
+  ],
+    
   providers: [
     appRoutingProvider,
     ServicePrincipal,

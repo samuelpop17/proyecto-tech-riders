@@ -328,4 +328,10 @@ export class ServicePrincipal {
       params: { iduser: idUsuario },
     });
   }
+
+  getAllCharlas(): Observable<any> {
+    let url= environment.urlApi;
+    let request = 'api/QueryTools/CharlasViewAll';
+    return this._http.get(url + request);
+  }
 }
