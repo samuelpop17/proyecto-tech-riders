@@ -1,11 +1,10 @@
-<div class="container mt-4">
-  <h1 class="text-center fw-bold mb-3">Mis TechRiders</h1>
+<div class="container mt-4" *ngIf="usuariosCargados">
+  <h1 class="text-center fw-bold mb-4">Mis TechRiders</h1>
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let usuario of usarios">
+    <div class="col-md-4 mb-4" *ngFor="let usuario of usuarios">
       <div class="card shadow-card">
         <div class="card-body">
           <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
-
           <p class="card-text">Teléfono: {{ usuario.telefonoEmpresa }}</p>
           <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
           <a
@@ -22,3 +21,8 @@
     </div>
   </div>
 </div>
+<img
+  *ngIf="!usuariosCargados"
+  class="d-block mx-auto"
+  src="../../../assets/images/loading.gif"
+/>
