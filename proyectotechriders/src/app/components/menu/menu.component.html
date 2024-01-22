@@ -20,9 +20,6 @@
           <a class="nav-link" [routerLink]="['/']">Inicio</a>
         </li>
 
-        <!-- RESPONSABLE EMPRESA -->
-        <div *ngIf="role == 4">responsable</div>
-
         <!-- DROPDOWN CHARLAS PROFESOR -->
         <li class="nav-item dropdown" *ngIf="role == 2">
           <a
@@ -128,23 +125,16 @@
           </ul>
         </li>
 
-<!-- segunda opcion menu role 4 representante -->
+        <!-- segunda opcion menu role 4 representante -->
 
-
-
-
-<li class="nav-item " *ngIf="role == 4">
-  <a
-    class="nav-link " [routerLink]="['/mischarlastechridersresponsable']"
-  >
-  Mis TechRiders
-  </a>
-
-  
-</li>
-
-
-
+        <li class="nav-item" *ngIf="role == 4">
+          <a
+            class="nav-link"
+            [routerLink]="['/mischarlastechridersresponsable']"
+          >
+            Mis TechRiders
+          </a>
+        </li>
       </ul>
     </div>
   </div>
