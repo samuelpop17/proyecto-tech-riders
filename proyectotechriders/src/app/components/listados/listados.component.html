@@ -23,7 +23,7 @@
               name="selectema"               
             >
                 <option value="todo">Todos</option>
-                <option *ngFor="let charla of charlasFiltro" value={{charla.descripcionCharla}}>{{charla.descripcionCharla}}</option>
+                <option *ngFor="let charla of charlasFiltroTema" value={{charla.descripcionCharla}}>{{charla.descripcionCharla}}</option>
             </select>
         </div>
         <div class="mt-2 col-2">
@@ -34,7 +34,7 @@
               name="selectTr"               
             >
                 <option value="todo">Todos</option>
-                <option *ngFor="let charla of charlasFiltro" value={{charla.techRider}}>{{charla.techRider}}</option>
+                <option *ngFor="let charla of charlasFiltroTr" value={{charla.techRider}}>{{charla.techRider}}</option>
             </select>
         </div>
         <div class="mt-2 col-2">

@@ -83,6 +83,8 @@ export class CalendarioComponent implements OnInit{
           color: { ...colors['grey'] },}
           )
       });
+
+      this.refresh.next();
     })
   }
 
