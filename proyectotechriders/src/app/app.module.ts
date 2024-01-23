@@ -23,6 +23,19 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
 import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
+
+import { CharlasComponent } from './components/charlas/charlas.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListadosComponent } from './components/listados/listados.component';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
@@ -56,6 +69,9 @@ import { CalendarioTechRidersCharlasComponent } from './components/calendario-te
     DetallescharlaComponent,
     SolicitarcharlaComponent,
     EditarcharlaComponent,
+    CharlasComponent,
+    CalendarioComponent,
+    ListadosComponent,
     CharlasTechRidersComponent,
     ContactarAdminComponent,
     ProponerTecnologiaComponent,
@@ -66,12 +82,23 @@ import { CalendarioTechRidersCharlasComponent } from './components/calendario-te
     CalendarioTechRidersCharlasComponent,
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     routing,
+    CommonModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    MatInputModule,
+    MatTableModule,
+    MatFormFieldModule,
   ],
+
   providers: [
     appRoutingProvider,
     ServicePrincipal,

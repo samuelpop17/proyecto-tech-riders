@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { routing, appRoutingProvider } from 'src/app/app.routing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  constructor( private _router: Router) {}
 
 }

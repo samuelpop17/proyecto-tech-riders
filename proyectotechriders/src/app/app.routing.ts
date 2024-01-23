@@ -13,6 +13,10 @@ import { CharlasprofesorComponent } from './components/charlasprofesor/charlaspr
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+
+import { CharlasComponent } from './components/charlas/charlas.component';
+import { ListadosComponent } from './components/listados/listados.component';
+
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
@@ -36,12 +40,13 @@ const routes: Routes = [
     component: ModificarcontrasenyaComponent,
   },
   { path: 'registrar-usuario', component: RegisterusuarioComponent },
-
   { path: 'usuario/editar-cursos', component: EditarcursosComponent },
   { path: 'charlas/mis-charlas', component: CharlasprofesorComponent },
   { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
+  { path: 'charlas', component: CharlasComponent },
+  { path: 'listados', component: ListadosComponent },
   {
     path: 'charlas/valoracion/:idcharla',
     component: ValoracioncharlaComponent,
