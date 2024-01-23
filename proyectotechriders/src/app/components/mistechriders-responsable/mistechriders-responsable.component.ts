@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
-import { techRider } from 'src/app/models/techRider';
+import { TechRider } from 'src/app/models/techRider';
 import { DetallesCharlas } from 'src/app/models/DetallesCharlas';
 @Component({
   selector: 'app-mistechriders-responsable',
@@ -9,7 +9,7 @@ import { DetallesCharlas } from 'src/app/models/DetallesCharlas';
   styleUrls: ['./mistechriders-responsable.component.css'],
 })
 export class MistechridersResponsableComponent implements OnInit {
-  public usuarios: techRider[] = [];
+  public usuarios: TechRider[] = [];
   public idempresa!: number;
   public charlas:DetallesCharlas[]=[]
   constructor(private _service: ServicePrincipal, private _router: Router) { }

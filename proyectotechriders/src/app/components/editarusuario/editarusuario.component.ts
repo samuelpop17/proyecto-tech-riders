@@ -20,6 +20,8 @@ export class EditarusuarioComponent implements OnInit {
   public usuario!: Usuario;
   public provincias!: Provincia[];
   public empresaCentro!: EmpresaCentro;
+  public empresaExists: boolean = false;
+  public empresaLoaded: boolean = false;
   public role!: number;
 
   // usuario
@@ -47,12 +49,16 @@ export class EditarusuarioComponent implements OnInit {
         this.role = parseInt(localStorage.getItem('role') ?? '0');
         this._service.getProvincias().subscribe((response) => {
           this.provincias = response;
-          this._service
-            .findEmpresaCentro(this.usuario.idEmpresaCentro)
-            .subscribe((response) => {
-              this.empresaCentro = response;
-              console.log(response);
-            });
+          if (this.role == 4 && this.usuario.idEmpresaCentro) {
+            this.empresaExists = true;
+            this._service
+              .findEmpresaCentro(this.usuario.idEmpresaCentro)
+              .subscribe((response) => {
+                this.empresaLoaded = true;
+                this.empresaCentro = response;
+                console.log(response);
+              });
+          }
         });
       });
     } else this._router.navigate(['/login']);
@@ -85,7 +91,7 @@ export class EditarusuarioComponent implements OnInit {
           idProvincia: this.empresaCentro.idProvincia,
           razonSocial: this.razonsocial.nativeElement.value,
           idTipoEmpresa: this.empresaCentro.idTipoEmpresa,
-          estadoEmpresa: 0,
+          estadoEmpresa: this.empresaCentro.estadoEmpresa,
         };
         this._service
           .editEmpresaUsuarioRepresentante(empresa)

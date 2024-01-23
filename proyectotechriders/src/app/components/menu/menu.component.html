@@ -3,8 +3,15 @@
     <span class="navbar-brand me-4">
       <img src="/assets/images/techriders.png" height="39" width="98" />
     </span>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -15,7 +22,12 @@
 
         <!-- DROPDOWN CHARLAS PROFESOR -->
         <li class="nav-item dropdown" *ngIf="role == 2">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Charlas
           </a>
 
@@ -26,7 +38,10 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/charlas/solicitar-charla']">
+              <a
+                class="dropdown-item"
+                [routerLink]="['/charlas/solicitar-charla']"
+              >
                 Solicitar charla
               </a>
             </li>
@@ -35,7 +50,12 @@
 
         <!-- DROPDOWN USUARIO -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Usuario
           </a>
 
@@ -72,7 +92,12 @@
 
         <!-- DropDown charlas TechRiders -->
         <li class="nav-item dropdown" *ngIf="role == 3">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Charlas
           </a>
 

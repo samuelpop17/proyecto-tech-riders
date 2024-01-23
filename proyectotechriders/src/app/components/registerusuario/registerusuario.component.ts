@@ -27,9 +27,20 @@ export class RegisterusuarioComponent implements OnInit {
   public provincias!: Provincia[];
   public empresasCentros!: EmpresaCentro[];
   public publicEmpresasCentros!: EmpresaCentro[];
-  private empresaPersonal: EmpresaCentro = {
+  private techRiderTituloPersonal: EmpresaCentro = {
     idEmpresaCentro: 0,
     nombre: ' - A título personal - ',
+    direccion: '',
+    telefono: '',
+    personaContacto: '',
+    cif: '',
+    idProvincia: 0,
+    idTipoEmpresa: 1,
+    estadoEmpresa: 1,
+  };
+  private representanteSinEmpresa: EmpresaCentro = {
+    idEmpresaCentro: 0,
+    nombre: ' - Sin empresa (crear después) - ',
     direccion: '',
     telefono: '',
     personaContacto: '',
@@ -55,7 +66,7 @@ export class RegisterusuarioComponent implements OnInit {
       this.publicEmpresasCentros = this.empresasCentros.filter(
         (empresaCentro) => empresaCentro.idTipoEmpresa == 1
       );
-      this.publicEmpresasCentros.push(this.empresaPersonal);
+      this.publicEmpresasCentros.unshift(this.techRiderTituloPersonal);
     });
   }
 
@@ -68,7 +79,9 @@ export class RegisterusuarioComponent implements OnInit {
       (empresaCentro) => empresaCentro.idTipoEmpresa == tipoEmpresa
     );
     if (this.selectRole.nativeElement.selectedOptions[0].value == 3)
-      this.publicEmpresasCentros.push(this.empresaPersonal);
+      this.publicEmpresasCentros.unshift(this.techRiderTituloPersonal);
+    if (this.selectRole.nativeElement.selectedOptions[0].value == 4)
+      this.publicEmpresasCentros.unshift(this.representanteSinEmpresa);
   }
 
   registerUsu(): void {

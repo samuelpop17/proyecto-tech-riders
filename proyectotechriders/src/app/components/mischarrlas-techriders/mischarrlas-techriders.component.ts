@@ -7,6 +7,8 @@ import { DetallesEstadoCharlaTech } from 'src/app/models/DetallesEstadoCharlaTec
   styleUrls: ['./mischarrlas-techriders.component.css'],
 })
 export class MischarrlasTechridersComponent implements OnInit {
+  public charlasCargadas: boolean = false;
+
   constructor(private _service: ServicePrincipal) {}
 
   charlas: DetallesEstadoCharlaTech[] = [];
@@ -14,6 +16,7 @@ export class MischarrlasTechridersComponent implements OnInit {
   ngOnInit(): void {
     this._service.estadoCharlasTechRiders().subscribe((response) => {
       this.charlas = response;
+      this.charlasCargadas = true;
       console.log('hola: ' + response);
     });
   }
