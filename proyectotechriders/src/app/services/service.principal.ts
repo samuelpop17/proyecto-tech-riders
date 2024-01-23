@@ -195,6 +195,8 @@ export class ServicePrincipal {
     return this._http.post(url + request, json, { headers: header });
   }
 
+  
+
   createPeticionAltaEmpresa(idEmpresaCentro: number): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/PeticionesCentroEmpresa';
