@@ -20,7 +20,7 @@ import { MischarrlasTechridersComponent } from './components/mischarrlas-techrid
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { MistechridersResponsableComponent } from './components/mistechriders-responsable/mistechriders-responsable.component';
 import { CrearempresaResponsableComponent } from './components/crearempresa-responsable/crearempresa-responsable.component';
-
+import { CalendarioTechRidersCharlasComponent } from './components/calendario-tech-riders-charlas/calendario-tech-riders-charlas.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -52,6 +52,7 @@ const routes: Routes = [
   { path: 'mischarlastech', component: MischarrlasTechridersComponent },
   { path: 'mischarlastechridersresponsable', component: MistechridersResponsableComponent },
   { path: 'crearempresa', component: CrearempresaResponsableComponent },
+  { path: 'calendariomitechrider', component: CalendarioTechRidersCharlasComponent },
 ];
 
 export const appRoutingProvider: any[] = [];

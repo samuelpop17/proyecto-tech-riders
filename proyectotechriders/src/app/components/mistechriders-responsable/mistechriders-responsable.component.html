@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 
 <div class="container mt-4">
     <h1 class="text-center">Mis TechRiders</h1>
     <div class="row">
-      <div class="col-md-4 mb-4" *ngFor="let usuario of usarios">
+      <div class="col-md-4 mb-4" *ngFor="let usuario of usuarios">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
@@ -12,31 +11,10 @@
             <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
             
           </div>
-=======
-<div class="container mt-4 mb-3" *ngIf="usuariosCargados">
-  <h1 class="text-center fw-bold mb-4">Mis TechRiders</h1>
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let usuario of usuarios">
-      <div class="card shadow-card">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
-          <p class="card-text">Teléfono: {{ usuario.telefonoEmpresa }}</p>
-          <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
-          <a
-            class="btn btn-dark w-100"
-            [routerLink]="[
-              '/charlasmischarlastechridersresponsable/',
-              usuario.idTechRider
-            ]"
-          >
-            Ver sus Charlas
-          </a>
->>>>>>> 48db44e46113576f0b55d12282e4551515ce73e0
         </div>
       </div>
     </div>
   </div>
-<<<<<<< HEAD
   <div class="container mt-4">
     <h1 class="text-center">Todas las Charlas</h1>
     <div class="table-responsive">
@@ -69,11 +47,3 @@
     </div>
   </div>
   
-=======
-</div>
-<img
-  *ngIf="!usuariosCargados"
-  class="d-block mx-auto"
-  src="../../../assets/images/loading.gif"
-/>
->>>>>>> 48db44e46113576f0b55d12282e4551515ce73e0
