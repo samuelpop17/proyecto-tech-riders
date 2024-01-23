@@ -48,13 +48,11 @@ body#bodyprincipal {
   font-weight: 500;
 }
 
-@media (min-width: 768px) {
-  .dropdown-menu {
-    animation-duration: 0.3s;
-    -webkit-animation-duration: 0.3s;
-    animation-fill-mode: both;
-    -webkit-animation-fill-mode: both;
-  }
+.dropdown-menu {
+  animation-duration: 0.3s;
+  -webkit-animation-duration: 0.3s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
 }
 
 @keyframes slideIn {

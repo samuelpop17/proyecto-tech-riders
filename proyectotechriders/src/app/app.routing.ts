@@ -13,8 +13,15 @@ import { CharlasprofesorComponent } from './components/charlasprofesor/charlaspr
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
+
 import { CharlasComponent } from './components/charlas/charlas.component';
 import { ListadosComponent } from './components/listados/listados.component';
+
+import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
+import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
+import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
+import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
+import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,8 +43,16 @@ const routes: Routes = [
   { path: 'charlas/solicitar-charla', component: SolicitarcharlaComponent },
   { path: 'charlas/:idcharla', component: DetallescharlaComponent },
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
-  {path: 'charlas', component: CharlasComponent},
-  {path: 'listados', component: ListadosComponent}
+  { path: 'charlas', component: CharlasComponent },
+  { path: 'listados', component: ListadosComponent },
+  {
+    path: 'charlas/valoracion/:idcharla',
+    component: ValoracioncharlaComponent,
+  },
+  { path: 'proponertecno', component: ProponerTecnologiaComponent },
+  { path: 'contactadmin', component: ContactarAdminComponent },
+  { path: 'charlastechriders', component: CharlasTechRidersComponent },
+  { path: 'mischarlastech', component: MischarrlasTechridersComponent },
 ];
 
 export const appRoutingProvider: any[] = [];

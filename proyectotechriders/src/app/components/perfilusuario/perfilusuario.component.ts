@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Provincia } from 'src/app/models/Provincia';
 import { EmpresaCentro } from 'src/app/models/EmpresaCentro';
 import { Role } from 'src/app/models/Role';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-perfilusuario',
@@ -25,6 +26,7 @@ export class PerfilusuarioComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this._service.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
+        environment.idUsuario=response.idUsuario
         this._service
           .findProvincia(this.usuario.idProvincia)
           .subscribe((response) => {
@@ -60,5 +62,13 @@ export class PerfilusuarioComponent implements OnInit {
         }
       });
     } else this._router.navigate(['/login']);
+
+
+
+
+
+
+
+    
   }
 }

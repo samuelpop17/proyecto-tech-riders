@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-6" style="border-right: 2px solid rgba(33, 37, 41, 0.5)">
       <h2 class="text-center">Tus cursos</h2>
-      <table *ngIf="cursos" class="mt-3 w-100">
+      <table class="mt-3 w-100" *ngIf="cursos">
         <tbody>
           <tr
             *ngFor="let curso of cursos"
@@ -30,7 +30,7 @@
     </div>
     <div class="col-6">
       <h2 class="text-center">Otros cursos del centro</h2>
-      <table *ngIf="allCursos" class="mt-3 w-100">
+      <table class="mt-3 w-100" *ngIf="allCursos">
         <tbody>
           <tr
             *ngFor="let curso of allCursos"
