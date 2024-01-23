@@ -74,12 +74,9 @@
               </a>
             </li>
 
-<!-- representante si no tiene empresa -->
-            <li *ngIf="role.idRole == 4 and usuario.idEmpresaCentro==null">
-              <a
-                class="dropdown-item"
-                [routerLink]="['/crearempresa']"
-              >
+            <!-- representante si no tiene empresa -->
+            <li *ngIf="role.idRole == 4 && !empresaExists">
+              <a class="dropdown-item" [routerLink]="['/crearempresa']">
                 Crear Empresa
               </a>
             </li>
@@ -98,7 +95,7 @@
           Eres un representante sin empresa.
           <a
             class="fw-bolder link-dark link-opacity-75-hover text-decoration-none"
-            [routerLink]="['/crear-empresa']"
+            [routerLink]="['/crearempresa']"
           >
             Crea una empresa
           </a>

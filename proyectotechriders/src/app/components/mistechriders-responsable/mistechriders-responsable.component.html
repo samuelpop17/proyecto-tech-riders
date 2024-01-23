@@ -1,49 +1,46 @@
-
 <div class="container mt-4">
-    <h1 class="text-center">Mis TechRiders</h1>
-    <div class="row">
-      <div class="col-md-4 mb-4" *ngFor="let usuario of usuarios">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
-            
-            <p class="card-text">Teléfono: {{ usuario.telefonoEmpresa }}</p>
-            <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
-            
-          </div>
+  <h1 class="text-center">Mis TechRiders</h1>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let usuario of usuarios">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
+
+          <p class="card-text">Teléfono: {{ usuario.telefonoEmpresa }}</p>
+          <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="container mt-4">
-    <h1 class="text-center">Todas las Charlas</h1>
-    <div class="table-responsive">
-      <table class="table table-bordered mt-4">
-        <thead>
-          <tr>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Fecha Charla</th>
-            <th scope="col">Turno</th>
-            <th scope="col">Observaciones Charla</th>
-            <th scope="col">Estado Charla</th>
-            <th scope="col">Modalidad</th>
-            <th scope="col">TechRider</th>
-            <th scope="col">Provincia</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let charla of charlas">
-            <th>{{charla.descripcionCharla}}</th> 
-            <td>{{charla.fechaCharla}}</td>
-            <td>{{charla.turno}}</td>
-            <td>{{charla.observacionesCharla}}</td>
-            <td>{{charla.estadoCharla}}</td>
-            <td>{{charla.modalidad}}</td>
-            <td>{{charla.techRider}}</td>
-            <td>{{charla.provincia}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+</div>
+<div class="container mt-4">
+  <h1 class="text-center">Todas las Charlas</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered mt-4">
+      <thead>
+        <tr>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Fecha Charla</th>
+          <th scope="col">Turno</th>
+          <th scope="col">Observaciones Charla</th>
+          <th scope="col">Estado Charla</th>
+          <th scope="col">Modalidad</th>
+          <th scope="col">TechRider</th>
+          <th scope="col">Provincia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let charla of charlas">
+          <th>{{ charla.descripcionCharla }}</th>
+          <td>{{ charla.fechaCharla }}</td>
+          <td>{{ charla.turno }}</td>
+          <td>{{ charla.observacionesCharla }}</td>
+          <td>{{ charla.estadoCharla }}</td>
+          <td>{{ charla.modalidad }}</td>
+          <td>{{ charla.techRider }}</td>
+          <td>{{ charla.provincia }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>

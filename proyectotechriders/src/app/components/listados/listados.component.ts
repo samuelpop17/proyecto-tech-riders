@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class ListadosComponent implements OnInit {
   public charlas!: any[];
   public charlasFiltro!: any[];
-  public charlasFiltroTema!: any[];//meter desde consulta
-  public charlasFiltroTr!: any[];//meter desde consulta
+  public charlasFiltroTema!: any[]; //meter desde consulta
+  public charlasFiltroTr!: any[]; //meter desde consulta
   @ViewChild('selectTr') selectTr!: ElementRef;
   @ViewChild('selectema') selectema!: ElementRef;
   public tema!: any;
@@ -26,13 +26,11 @@ export class ListadosComponent implements OnInit {
   //   { id: 2, nombre: 'Objeto 2' }
   // ];
 
-//   miArray = miArray.filter((valor, indice, self) =>
-//   indice === self.findIndex((v) => (
-//     v.id === valor.id
-//   ))
-// );
-
-
+  //   miArray = miArray.filter((valor, indice, self) =>
+  //   indice === self.findIndex((v) => (
+  //     v.id === valor.id
+  //   ))
+  // );
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -48,19 +46,17 @@ export class ListadosComponent implements OnInit {
       this.charlasFiltroTema = response;
       this.charlasFiltroTr = response;
       //console.log(this.charlasFiltro);
-      this.charlasFiltroTema = this.charlasFiltroTema.filter((valor, indice, self)=>
-      indice ===self.findIndex((v)=>(
-        v.descripcionCharla === valor.descripcionCharla
-      ))
+      this.charlasFiltroTema = this.charlasFiltroTema.filter(
+        (valor, indice, self) =>
+          indice ===
+          self.findIndex((v) => v.descripcionCharla === valor.descripcionCharla)
       );
-      this.charlasFiltroTr = this.charlasFiltroTr.filter((valor, indice, self)=>
-      indice ===self.findIndex((v)=>(
-        v.techRider === valor.techRider
-      ))
+      this.charlasFiltroTr = this.charlasFiltroTr.filter(
+        (valor, indice, self) =>
+          indice === self.findIndex((v) => v.techRider === valor.techRider)
       );
+    });
 
-      });
-      
     //console.log(this.charlasFiltro);
 
     // console.log(this.charlasFiltro);
@@ -78,7 +74,7 @@ export class ListadosComponent implements OnInit {
   //     v.descripcionCharla === valor.descripcionCharla
   //   ))
   //   );
-  
+
   // }
 
   filtrarTabla() {
