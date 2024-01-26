@@ -19,6 +19,8 @@ export class PerfilusuarioComponent implements OnInit {
   public role!: Role;
   public tecnologias!: any[];
   public cursos!: any[];
+  public empresaExists: boolean = false;
+  public empresaLoaded: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -26,16 +28,17 @@ export class PerfilusuarioComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this._service.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
-        environment.idUsuario=response.idUsuario
         this._service
           .findProvincia(this.usuario.idProvincia)
           .subscribe((response) => {
             this.provincia = response;
           });
         if (this.usuario.idEmpresaCentro) {
+          this.empresaExists = true;
           this._service
             .findEmpresaCentro(this.usuario.idEmpresaCentro)
             .subscribe((response) => {
+              this.empresaLoaded = true;
               this.empresaCentro = response;
             });
         }
@@ -43,7 +46,7 @@ export class PerfilusuarioComponent implements OnInit {
           this.role = response;
         });
 
-        if (this.usuario.idRole == 3) {
+        if (this.usuario.idRole >= 3) {
           // TechRider
           this._service
             .findTecnologiasTechRider(this.usuario.idUsuario)
@@ -53,7 +56,7 @@ export class PerfilusuarioComponent implements OnInit {
         }
 
         if (this.usuario.idRole == 2) {
-          // Profesor no responsable de empresa
+          // Profesor
           this._service
             .findCursosProfesor(this.usuario.idUsuario)
             .subscribe((response) => {
@@ -62,13 +65,5 @@ export class PerfilusuarioComponent implements OnInit {
         }
       });
     } else this._router.navigate(['/login']);
-
-
-
-
-
-
-
-    
   }
 }

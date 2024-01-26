@@ -1,0 +1,152 @@
+<div class="container">
+  <div class="text-center">
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/']" class="btn btn-dark">Calendario</a>
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listados']" class="btn btn-dark">Ver Charlas</a>
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listadostr']" class="btn btn-dark">Ver TechRiders</a>
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listadosempresas']" class="btn btn-dark"
+        >Ver Empresas</a
+      >
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listadoscentros']" class="btn btn-dark"
+        >Ver Centros</a
+      >
+    </button>
+  </div>
+
+  <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()" class="row">
+    <div class="mt-2 col-2">
+      <label class="form-label fw-bold">Tema</label>
+      <select class="form-select" #selectema name="selectema">
+        <option value="todo">Todos</option>
+        <option
+          *ngFor="let charla of charlasFiltroTema"
+          value="{{ charla.descripcionCharla }}"
+        >
+          {{ charla.descripcionCharla }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-2 col-2">
+      <label class="form-label fw-bold">TechRider</label>
+      <select class="form-select" #selectTr name="selectTr">
+        <option value="todo">Todos</option>
+        <option
+          *ngFor="let charla of charlasFiltroTr"
+          value="{{ charla.techRider }}"
+        >
+          {{ charla.techRider }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-2 col-2">
+      <button class="btn btn-dark rounded w-100 mt-3 py-2">
+        Aplicar filtros
+      </button>
+    </div>
+  </form>
+  <div id="div_tabla_general">
+    <table id="tabla_general" class="table table-responsive mt-3">
+      <thead class="border-dark">
+        <tr>
+          <th>Descripcion</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Provincia</th>
+          <th>Nombre Curso</th>
+          <th>Fecha Solicitud</th>
+          <th>Modalidad</th>
+          <th>Teach Rider</th>
+          <th>Email</th>
+          <th>Telefono</th>
+          <th *ngIf="role == 1">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let charla of charlas">
+          <td>{{ charla.descripcionCharla }}</td>
+          <td>{{ charla.fechaCharla }}</td>
+          <td>{{ charla.estadoCharla }}</td>
+          <td>{{ charla.provincia }}</td>
+          <td>{{ charla.nombreCurso }}</td>
+          <td>{{ charla.fechaSolicitudCharla }}</td>
+          <td>{{ charla.modalidad }}</td>
+          <td>{{ charla.techRider }}</td>
+          <td>{{ charla.email }}</td>
+          <td>{{ charla.telefono }}</td>
+
+          <td *ngIf="role == 1">
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas', charla.idCharla]"
+            >
+              Detalles
+            </a>
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas/editar', charla.idCharla]"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-2 col-2">
+    <label class="form-label fw-bold">TechRider</label>
+    <select class="form-select" #selectTr name="selectTr">
+      <option value="todo">Todos</option>
+      <option
+        *ngFor="let charla of charlasFiltroTr"
+        value="{{ charla.techRider }}"
+      >
+        {{ charla.techRider }}
+      </option>
+    </select>
+  </div>
+  <div class="mt-2 col-2">
+    <button class="btn btn-dark rounded w-100 mt-3 py-2">
+      Aplicar filtros
+    </button>
+  </div>
+  <div id="div_tabla_general">
+    <table id="tabla_general" class="table table-responsive mt-3">
+      <thead class="border-dark">
+        <tr>
+          <th>Descripcion</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Provincia</th>
+          <th>Nombre Curso</th>
+          <th>Fecha Solicitud</th>
+          <th>Modalidad</th>
+          <th>Teach Rider</th>
+          <th>Email</th>
+          <th>Telefono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let charla of charlas">
+          <td>{{ charla.descripcionCharla }}</td>
+          <td>{{ charla.fechaCharla }}</td>
+          <td>{{ charla.estadoCharla }}</td>
+          <td>{{ charla.provincia }}</td>
+          <td>{{ charla.nombreCurso }}</td>
+          <td>{{ charla.fechaSolicitudCharla }}</td>
+          <td>{{ charla.modalidad }}</td>
+          <td>{{ charla.techRider }}</td>
+          <td>{{ charla.email }}</td>
+          <td>{{ charla.telefono }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

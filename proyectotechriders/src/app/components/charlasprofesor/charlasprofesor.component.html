@@ -1,4 +1,4 @@
-<div class="shadow-card p-4">
+<div class="shadow-card p-4 mb-3">
   <h1 class="fw-bold">Mis charlas</h1>
   <hr class="border border-dark opacity-50" />
   <div class="row" *ngIf="estados">
@@ -45,20 +45,20 @@
   />
 
   <div class="table-responsive" *ngIf="charlasCargadas">
-    <table class="table mt-3">
-      <thead class="border-dark">
+    <table class="table mt-4">
+      <thead>
         <tr>
-          <th>Descripción</th>
-          <th>Curso</th>
-          <th>Fecha</th>
-          <th>Estado</th>
-          <th>TechRider</th>
+          <th class="text-muted">Descripción</th>
+          <th class="text-muted">Curso</th>
+          <th class="text-muted">Fecha</th>
+          <th class="text-muted">Estado</th>
+          <th class="text-muted">TechRider</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let charla of charlasFiltradas">
-          <td>{{ charla.descripcionCharla }}</td>
+          <td class="fw-bold">{{ charla.descripcionCharla }}</td>
           <td>{{ charla.nombreCurso }}</td>
           <td>{{ charla.fechaCharla | date : "medium" }}</td>
           <td>{{ charla.estadoCharla }}</td>

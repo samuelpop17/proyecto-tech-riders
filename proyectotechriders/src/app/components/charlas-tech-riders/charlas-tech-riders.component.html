@@ -1,38 +1,50 @@
-<div class="shadow-card p-4">
-  <h1 class="fw-bold">Información de Charlas Disponibles</h1>
+<div class="shadow-card p-4 mb-3" *ngIf="charlasCargadas">
+  <h1 class="fw-bold">Charlas Disponibles</h1>
   <hr class="border border-dark opacity-50" />
 
   <div class="table-responsive">
     <table class="table mt-3">
       <thead>
         <tr>
-          <th scope="col">descripcionCharla</th>
-          <th scope="col">fechaCharla</th>
-          <th scope="col">turno</th>
-          <th scope="col">fechaSolicitudCharla</th>
-          <th scope="col">observacionesCharla</th>
-          <th scope="col">estadoCharla</th>
-          <th scope="col">provincia</th>
-          <th scope="col">modalidad</th>
-          <th scope="col">empresa</th>
-          <th scope="col">direccionEmpresa</th>
+          <th scope="col" class="text-muted">Descripción</th>
+          <th scope="col" class="text-muted">Fecha</th>
+          <th scope="col" class="text-muted">Turno</th>
+          <th scope="col" class="text-muted">Provincia</th>
+          <th scope="col" class="text-muted">Modalidad</th>
+          <th scope="col" class="text-muted">Empresa</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let charla of charlas">
-          <td>{{ charla.descripcionCharla }}</td>
-          <td>{{ charla.fechaCharla }}</td>
+          <td class="fw-bold">{{ charla.descripcionCharla }}</td>
+          <td>{{ charla.fechaCharla | date : "medium" }}</td>
           <td>{{ charla.turno }}</td>
-          <td>{{ charla.fechaSolicitudCharla }}</td>
-          <td>{{ charla.observacionesCharla }}</td>
-          <td>{{ charla.estadoCharla }}</td>
           <td>{{ charla.provincia }}</td>
           <td>{{ charla.modalidad }}</td>
           <td>{{ charla.empresa }}</td>
-          <td>{{ charla.direccionEmpresa }}</td>
+          <td class="text-center">
+            <a
+              class="btn btn-dark btn-sm me-1"
+              [routerLink]="['/charlas', charla.idCharla]"
+            >
+              Detalles
+            </a>
+            <!-- Método asignarse, asigna Tech Rider a charla y cambia estado de charla a PROCESO (id 3) -->
+            <a
+              class="btn btn-dark btn-sm"
+              (click)="asignarCharla(charla.idCharla)"
+              >Asignarse</a
+            >
+          </td>
         </tr>
         <!-- Puedes agregar más filas según tus necesidades -->
       </tbody>
     </table>
   </div>
 </div>
+<img
+  *ngIf="!charlasCargadas"
+  class="d-block mx-auto"
+  src="../../../assets/images/loading.gif"
+/>

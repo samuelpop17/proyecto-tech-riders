@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
         if (response.estado == 1) {
           localStorage.setItem('idUsuario', response.idUsuario);
           localStorage.setItem('role', response.idRole);
-          this._router.navigate(['/usuario/perfil']);
+          if (response.idRole == 1) {
+            this._router.navigate(['/usuario/perfil']); //cambiar a admin panel
+          } else this._router.navigate(['/usuario/perfil']);
         } else {
           localStorage.removeItem('token');
           Swal.fire({

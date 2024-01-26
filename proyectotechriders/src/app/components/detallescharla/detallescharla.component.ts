@@ -26,13 +26,12 @@ export class DetallescharlaComponent implements OnInit {
           this.charla = response;
         });
         this._service.getTecnologiasCharla(idcharla).subscribe((response) => {
+          this.tecnologiasCargadas = true;
           response.forEach((tecnologia: TecnologiaCharla) => {
-            this.tecnologiasCargadas = false;
             this._service
               .findTecnologia(tecnologia.idTecnologia)
               .subscribe((response) => {
                 this.tecnologias.push(response.nombreTecnologia);
-                this.tecnologiasCargadas = true;
               });
           });
         });

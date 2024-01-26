@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="text-center">
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/']" class="btn btn-dark">Calendario</a>
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listados']" class="btn btn-dark">Ver Charlas</a>
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listadostr']" class="btn btn-dark">Ver TechRiders</a>
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listadosempresas']" class="btn btn-dark"
+        >Ver Empresas</a
+      >
+    </button>
+    <button class="btn btn-dark" style="margin: 10px">
+      <a [routerLink]="['/listadoscentros']" class="btn btn-dark"
+        >Ver Centros</a
+      >
+    </button>
+  </div>
+
+  <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()" class="row">
+    <div class="mt-2 col-2">
+      <label class="form-label fw-bold">Empresa</label>
+      <select class="form-select" #selectempresa name="selectempresa">
+        <option value="todo">Todas</option>
+        <option
+          *ngFor="let charla of charlasFiltroEmpresa"
+          value="{{ charla.empresa }}"
+        >
+          {{ charla.empresa }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-2 col-2">
+      <label class="form-label fw-bold">TechRider</label>
+      <select class="form-select" #selectTr name="selectTr">
+        <option value="todo">Todos</option>
+        <option
+          *ngFor="let charla of charlasFiltroTr"
+          value="{{ charla.techRider }}"
+        >
+          {{ charla.techRider }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-2 col-2">
+      <button class="btn btn-dark rounded w-100 mt-3 py-2">
+        Aplicar filtros
+      </button>
+    </div>
+  </form>
+  <div id="div_tabla_general">
+    <table id="tabla_general" class="table table-responsive mt-3">
+      <thead class="border-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Telefono</th>
+          <th>LinkedIn</th>
+          <th>Provincia</th>
+          <th>Empresas</th>
+          <th>Direccion</th>
+          <th>Telefono empresa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tr of techriders">
+          <td>{{ tr.techRider }}</td>
+          <td>{{ tr.email }}</td>
+          <td>{{ tr.telefonoTechRider }}</td>
+          <td>{{ tr.linkedIn }}</td>
+          <td>{{ tr.provinciaTechRider }}</td>
+          <td>{{ tr.empresa }}</td>
+          <td>{{ tr.direccion }}</td>
+          <td>{{ tr.telefonoEmpresa }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
