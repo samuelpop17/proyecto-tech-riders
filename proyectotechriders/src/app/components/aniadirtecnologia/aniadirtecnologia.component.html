@@ -1,1 +1,23 @@
-<p>aniadirtecnologia works!</p>
+
+<div id="div_tabla_general">
+        
+    <table id="tabla_general" class="table table-responsive mt-3">
+        <thead class="border-dark">
+            <tr>
+                <th>Tecnologia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pet of peticionesTecnologias" >
+                <td>{{pet.nombreTecnologia}}</td>
+                <td>
+                    <button  class="btn btn-dark btn-sm me-1" >Aceptar</button>
+                    <button  class="btn btn-dark btn-sm me-1" >Denegar</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+

@@ -424,5 +424,11 @@ export class ServicePrincipal {
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.delete(url + request, { headers: header });
   }
+  getPeticionesTecnologia(): Observable<any>{
+    let url = environment.urlApi;
+    let request= "/api/PeticionesTecnologias";
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
   
 }
