@@ -1,68 +1,164 @@
 <div class="shadow-card p-4 mb-3" *ngIf="charla">
-  <h1 class="fw-bold">Editar charla</h1>
-  <hr class="border border-dark opacity-50" />
-  <form #editarCharlaForm="ngForm" (ngSubmit)="editarCharla()" class="row">
-    <div class="mt-1 col-md-6 mb-3 mb-md-0">
-      <label class="form-label fw-bold">Descripción</label>
-      <input
-        class="form-control"
-        type="text"
-        #controldescripcion
-        name="controldescripcion"
-        [value]="charla.descripcion"
-        placeholder="Escribe la descripción de la charla"
-      />
-    </div>
-    <div class="mt-1 col-md-6">
-      <label class="form-label fw-bold">Fecha Charla</label>
-      <input
-        class="form-control"
-        type="datetime-local"
-        #controlfecha
-        name="controlfecha"
-        [value]="charla.fechaCharla"
-      />
-    </div>
-    <div class="mt-3 col-md-6">
-      <label class="form-label fw-bold">Modalidad</label>
-      <select
-        class="form-select"
-        #selectmodalidad
-        name="selectmodalidad"
-        [value]="charla.modalidad"
-      >
-        <option value="null">SIN DEFINIR</option>
-        <option value="ONLINE">ONLINE</option>
-        <option value="PRESENCIAL">PRESENCIAL</option>
-      </select>
-    </div>
-    <div class="mt-3 col-md-6">
-      <label class="form-label fw-bold">Turno</label>
-      <select
-        class="form-select"
-        #selectturno
-        name="selectturno"
-        [value]="charla.turno"
-      >
-        <option value="MAÑANA">MAÑANA</option>
-        <option value="TARDE">TARDE</option>
-      </select>
-    </div>
-    <div class="mt-3 col-12">
-      <label class="form-label fw-bold">Observaciones</label>
-      <textarea
-        class="form-control"
-        #controlobservaciones
-        name="controlobservaciones"
-        [value]="charla.observaciones"
-      ></textarea>
-    </div>
-    <div class="col-12">
-      <button class="btn btn-dark rounded w-100 mt-3 py-2">
-        Editar charla
-      </button>
-    </div>
-  </form>
+  <div *ngIf="role == 1">
+    <h1 class="fw-bold">Editar charla</h1>
+    <hr class="border border-dark opacity-50" />
+    <form
+      #editarCharlaForm="ngForm"
+      (ngSubmit)="editarCharlaAdmin()"
+      class="row"
+    >
+      <div class="mt-1 col-md-6 mb-3 mb-md-0">
+        <label class="form-label fw-bold">TechRider</label>
+        <select class="form-select" #controlTechRider name="controlTechRider">
+          <option
+            *ngFor="let techrider of usuarios"
+            [value]="techrider.idUsuario"
+            [selected]="techrider.idUsuario == charla.idTechRider"
+          >
+            {{ techrider.nombre }} {{ techrider.apellidos }}
+            {{ techrider.idUsuario }}
+          </option>
+        </select>
+      </div>
+      <div class="mt-1 col-md-6">
+        <label class="form-label fw-bold">Estado</label>
+        <select class="form-select" #controlEstado name="controlEstado">
+          <option
+            *ngFor="let estado of estados"
+            [value]="estado.idEstadosCharla"
+            [selected]="estado.idEstadosCharla == charla.idEstadoCharla"
+          >
+            {{ estado.tipo }}
+          </option>
+        </select>
+      </div>
+      <div class="mt-1 col-md-6">
+        <label class="form-label fw-bold">Descripción</label>
+        <input
+          class="form-control"
+          type="text"
+          #controldescripcion
+          name="controldescripcion"
+          [value]="charla.descripcion"
+        />
+      </div>
+      <div class="mt-1 col-md-6">
+        <label class="form-label fw-bold">Fecha Charla</label>
+        <input
+          class="form-control"
+          type="datetime-local"
+          #controlfecha
+          name="controlfecha"
+          [value]="charla.fechaCharla"
+        />
+      </div>
+      <div class="mt-3 col-md-6">
+        <label class="form-label fw-bold">Modalidad</label>
+        <select
+          class="form-select"
+          #selectmodalidad
+          name="selectmodalidad"
+          [value]="charla.modalidad"
+        >
+          <option value="null">SIN DEFINIR</option>
+          <option value="ONLINE">ONLINE</option>
+          <option value="PRESENCIAL">PRESENCIAL</option>
+        </select>
+      </div>
+      <div class="mt-3 col-md-6">
+        <label class="form-label fw-bold">Turno</label>
+        <select
+          class="form-select"
+          #selectturno
+          name="selectturno"
+          [value]="charla.turno"
+        >
+          <option value="MAÑANA">MAÑANA</option>
+          <option value="TARDE">TARDE</option>
+        </select>
+      </div>
+
+      <div class="mt-3 col-12">
+        <label class="form-label fw-bold">Observaciones</label>
+        <textarea
+          class="form-control"
+          #controlobservaciones
+          name="controlobservaciones"
+          [value]="charla.observaciones"
+        ></textarea>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-dark rounded w-100 mt-3 py-2">
+          Editar charla
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="role != 1">
+    <h1 class="fw-bold">Editar charla</h1>
+    <hr class="border border-dark opacity-50" />
+    <form #editarCharlaForm="ngForm" (ngSubmit)="editarCharla()" class="row">
+      <div class="mt-1 col-md-6 mb-3 mb-md-0">
+        <label class="form-label fw-bold">Descripción</label>
+        <input
+          class="form-control"
+          type="text"
+          #controldescripcion
+          name="controldescripcion"
+          [value]="charla.descripcion"
+        />
+      </div>
+      <div class="mt-1 col-md-6">
+        <label class="form-label fw-bold">Fecha Charla</label>
+        <input
+          class="form-control"
+          type="datetime-local"
+          #controlfecha
+          name="controlfecha"
+          [value]="charla.fechaCharla"
+        />
+      </div>
+      <div class="mt-3 col-md-6">
+        <label class="form-label fw-bold">Modalidad</label>
+        <select
+          class="form-select"
+          #selectmodalidad
+          name="selectmodalidad"
+          [value]="charla.modalidad"
+        >
+          <option value="null">SIN DEFINIR</option>
+          <option value="ONLINE">ONLINE</option>
+          <option value="PRESENCIAL">PRESENCIAL</option>
+        </select>
+      </div>
+      <div class="mt-3 col-md-6">
+        <label class="form-label fw-bold">Turno</label>
+        <select
+          class="form-select"
+          #selectturno
+          name="selectturno"
+          [value]="charla.turno"
+        >
+          <option value="MAÑANA">MAÑANA</option>
+          <option value="TARDE">TARDE</option>
+        </select>
+      </div>
+      <div class="mt-3 col-12">
+        <label class="form-label fw-bold">Observaciones</label>
+        <textarea
+          class="form-control"
+          #controlobservaciones
+          name="controlobservaciones"
+          [value]="charla.observaciones"
+        ></textarea>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-dark rounded w-100 mt-3 py-2">
+          Editar charla
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 <img
   *ngIf="!charla"

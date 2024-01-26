@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="text-center">
+        <button class="btn btn-dark" style="margin: 10px;">
+            <a [routerLink]="['/']" class="btn btn-dark">Calendario</a>
+        </button>
+        <button class="btn btn-dark" style="margin: 10px;">
+            <a [routerLink]="['/listados']" class="btn btn-dark">Ver Charlas</a>
+        </button>
+        <button class="btn btn-dark" style="margin: 10px;">
+            <a [routerLink]="['/listadostr']" class="btn btn-dark">Ver TechRiders</a>
+        </button>
+        <button class="btn btn-dark" style="margin: 10px;">
+            <a [routerLink]="['/listadosempresas']" class="btn btn-dark">Ver Empresas</a>
+        </button>
+        <button class="btn btn-dark" style="margin: 10px;">
+            <a [routerLink]="['/listadoscentros']" class="btn btn-dark">Ver Centros</a>
+        </button>
+    </div>
+
+    <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()"class="row">
+        <div class="mt-2 col-2">
+            <label class="form-label fw-bold">Centros</label>
+            <select
+              class="form-select"
+              #selectempresa
+              name="selectempresa"               
+            >
+                <option value="todo">Todas</option>
+                <option *ngFor="let charla of charlasFiltroEmpresa" value={{charla.nombre}}>{{charla.nombre}}</option>
+            </select>
+        </div>
+        <div class="mt-2 col-2">
+            <label class="form-label fw-bold">Provincia</label>
+            <select
+              class="form-select"
+              #selectprovincia
+              name="selectprovincia"               
+            >
+                <option value="0">Todos</option>
+                <option *ngFor="let prov of provincias" value={{prov.idProvincia}}>{{prov.nombreProvincia}}</option>
+            </select>
+        </div>
+        <div class="mt-2 col-2">
+        <button class="btn btn-dark rounded w-100 mt-3 py-2">
+            Aplicar filtros
+        </button>
+        </div>
+    </form>
+    <div id="div_tabla_general">
+        
+        <table id="tabla_general" class="table table-responsive mt-3">
+            <thead class="border-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Persona de Contacto</th>
+                    <th>CIF</th>
+                    <th>Provincia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cen of centrosReset" >
+                    <td>{{cen.nombre}}</td>
+                    <td>{{cen.direccion}}</td>
+                    <td>{{cen.telefono}}</td>
+                    <td>{{cen.personaContacto}}</td>
+                    <td>{{cen.cif}}</td>
+                    <td>{{cen.provincia}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

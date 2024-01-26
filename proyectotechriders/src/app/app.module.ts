@@ -46,7 +46,14 @@ import { ValoracioncharlaComponent } from './components/valoracioncharla/valorac
 import { MistechridersResponsableComponent } from './components/mistechriders-responsable/mistechriders-responsable.component';
 import { CrearempresaResponsableComponent } from './components/crearempresa-responsable/crearempresa-responsable.component';
 import { CalendarioTechRidersCharlasComponent } from './components/calendario-tech-riders-charlas/calendario-tech-riders-charlas.component';
-
+import { ListadotrComponent } from './components/listadotr/listadotr.component';
+import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
+import { ListadosempresaComponent } from './components/listadosempresa/listadosempresa.component';
+import { PanelPeticionesAdminComponent } from './components/panel-peticiones-admin/panel-peticiones-admin.component';
+import { AltausuarioComponent } from './components/altausuario/altausuario.component';
+import { AcreditarcharlaComponent } from './components/acreditarcharla/acreditarcharla.component';
+import { AniadirtecnologiaComponent } from './components/aniadirtecnologia/aniadirtecnologia.component';
+import { AltaempresaComponent } from './components/altaempresa/altaempresa.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +83,14 @@ import { CalendarioTechRidersCharlasComponent } from './components/calendario-te
     MistechridersResponsableComponent,
     CrearempresaResponsableComponent,
     CalendarioTechRidersCharlasComponent,
-   
+    ListadotrComponent,
+    ListadocentrosComponent,
+    ListadosempresaComponent,
+    PanelPeticionesAdminComponent,
+    AltausuarioComponent,
+    AcreditarcharlaComponent,
+    AniadirtecnologiaComponent,
+    AltaempresaComponent,
   ],
   imports: [
     BrowserModule,
