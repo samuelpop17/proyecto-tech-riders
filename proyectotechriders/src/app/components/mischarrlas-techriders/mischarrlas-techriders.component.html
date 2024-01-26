@@ -31,7 +31,19 @@
               Detalles
             </a>
             <!-- Botón DESASIGNARSE para charlas estado PROCESO  -->
+            <a
+              class="btn btn-dark btn-sm me-1"
+              (click)="anularCharla(charla.idCharla)"
+            >
+              Desasignar
+            </a>
             <!-- Botón PEDIR ACRED. para charlas estado FINALIZADA -->
+            <a
+              class="btn btn-dark btn-sm me-1"
+              (click)=" acreditarCharla(charla.idCharla)"
+            >
+              Acreditar
+            </a>
           </td>
         </tr>
         <!-- Puedes agregar más filas según tus necesidades -->

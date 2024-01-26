@@ -47,6 +47,7 @@ import { MistechridersResponsableComponent } from './components/mistechriders-re
 import { CrearempresaResponsableComponent } from './components/crearempresa-responsable/crearempresa-responsable.component';
 import { CalendarioTechRidersCharlasComponent } from './components/calendario-tech-riders-charlas/calendario-tech-riders-charlas.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +76,7 @@ import { CalendarioTechRidersCharlasComponent } from './components/calendario-te
     MistechridersResponsableComponent,
     CrearempresaResponsableComponent,
     CalendarioTechRidersCharlasComponent,
+   
   ],
   imports: [
     BrowserModule,

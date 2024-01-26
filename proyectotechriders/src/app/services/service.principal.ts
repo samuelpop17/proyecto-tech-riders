@@ -91,6 +91,34 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
+
+
+  asignarseUnaCharlaTechRider(idtech:number,idcharla:number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas/AsociarTechriderCharla/'+idtech+"/"+idcharla;
+    
+    let header = new HttpHeaders({
+      
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.put(url + request,null, { headers: header });
+  }
+
+
+  modificarEstadodeUnaCharlaTechRider(idcharla:number, idestado:number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Charlas/UpdateEstadoCharla/'+idcharla+"/"+idestado;
+    
+    let header = new HttpHeaders({
+      
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    });
+    return this._http.put(url + request,null, { headers: header });
+  }
+
+
+
+
   findUsuario(id: number): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Usuarios/' + id;
@@ -394,8 +422,7 @@ export class ServicePrincipal {
   charlasPorVerTechRiders(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
-    console.log('hola2: ' + localStorage.getItem('token'));
-    console.log('hola3: ' + url + request);
+    
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
@@ -403,8 +430,7 @@ export class ServicePrincipal {
   estadoCharlasTechRiders(): Observable<any> {
     let url = environment.urlApi;
     let request =
-      'api/QueryTools/CharlasTechRider/?idtechrider=' +
-      localStorage.getItem('idUsuario');
+      'api/QueryTools/CharlasTechRider/' + localStorage.getItem('idUsuario');
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
