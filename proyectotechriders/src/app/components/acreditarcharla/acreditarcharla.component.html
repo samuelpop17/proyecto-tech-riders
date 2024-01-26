@@ -1,32 +1,37 @@
-
 <div id="div_tabla_general">
-        
-    <table id="tabla_general" class="table table-responsive mt-3">
-        <thead class="border-dark">
-            <tr>
-                <th>Descripción</th>
-                <th>Fecha Charla</th>
-                <th>Fecha Solicitud</th>
-                <th>Modalidad</th>
-                <th>Turno</th>
-                <th>Acciones</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let charla of charlas" >
-                <td>{{charla.descripcion}}</td>
-                <td>{{charla.fechaCharla}}</td>
-                <td>{{charla.fechaSolicitud}}</td>
-                <td>{{charla.modalidad}}</td>
-                <td>{{charla.turno}}</td>
-                <td>
-                    <button  class="btn btn-dark btn-sm me-1" (click)="cambiarEstado(charla.idCharla, charla.idPeticionAltaUsers)">Aceptar</button>
-                    <button  class="btn btn-dark btn-sm me-1" (click)="EliminarAcreditacion(charla.idPeticionAltaUsers)">Denegar</button>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
+  <table id="tabla_general" class="table table-responsive mt-3">
+    <thead class="border-dark">
+      <tr>
+        <th>Descripción</th>
+        <th>Fecha Charla</th>
+        <th>Fecha Solicitud</th>
+        <th>Modalidad</th>
+        <th>Turno</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let charla of charlas">
+        <td>{{ charla.descripcion }}</td>
+        <td>{{ charla.fechaCharla }}</td>
+        <td>{{ charla.fechaSolicitud }}</td>
+        <td>{{ charla.modalidad }}</td>
+        <td>{{ charla.turno }}</td>
+        <td>
+          <button
+            class="btn btn-dark btn-sm me-1"
+            (click)="cambiarEstado(charla.idCharla, charla.idPeticionAltaUsers)"
+          >
+            Aceptar
+          </button>
+          <button
+            class="btn btn-dark btn-sm me-1"
+            (click)="EliminarAcreditacion(charla.idPeticionAltaUsers)"
+          >
+            Denegar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-

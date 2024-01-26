@@ -32,13 +32,17 @@ export class CharlasTechRidersComponent implements OnInit {
       const idUsuarioNum = +idusuario;
 
       // Llamar al servicio para asignar charla
-      this._service.asignarseUnaCharlaTechRider(idUsuarioNum, idcharla).subscribe((response) => {
-        // Llamar al servicio para modificar el estado de la charla
-        this._service.modificarEstadodeUnaCharlaTechRider(idcharla,3).subscribe(() => {
-          // Redirigir a la página mischarlastech
-          this._router.navigate(['/mischarlastech']);
+      this._service
+        .asignarseUnaCharlaTechRider(idUsuarioNum, idcharla)
+        .subscribe((response) => {
+          // Llamar al servicio para modificar el estado de la charla
+          this._service
+            .modificarEstadodeUnaCharlaTechRider(idcharla, 3)
+            .subscribe(() => {
+              // Redirigir a la página mischarlastech
+              this._router.navigate(['/mischarlastech']);
+            });
         });
-      });
     } else {
       console.error('Error: idUsuario no encontrado en el localStorage');
       // Aquí puedes manejar el error como consideres apropiado

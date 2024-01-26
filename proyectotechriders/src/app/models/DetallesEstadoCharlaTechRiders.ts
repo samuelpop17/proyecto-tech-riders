@@ -15,6 +15,10 @@ export class DetallesEstadoCharlaTech {
     public idTechRider: number,
     public techRider: string,
     public email: string,
-    public telefono: string
+    public telefono: string,
+    public idRole: number,
+    public tipoRole: string,
+    public valoracion: number,
+    public comentarioValoracion: string
   ) {}
 }

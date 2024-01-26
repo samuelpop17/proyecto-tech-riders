@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class MischarrlasTechridersComponent implements OnInit {
   public charlasCargadas: boolean = false;
 
-  constructor(private _service: ServicePrincipal , private _router: Router) {}
+  constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   charlas: DetallesEstadoCharlaTech[] = [];
 
@@ -22,25 +22,27 @@ export class MischarrlasTechridersComponent implements OnInit {
     });
   }
 
-  anularCharla(idcharla:number){
-    this._service.asignarseUnaCharlaTechRider(0, idcharla).subscribe((response) => {
-        
-
-      this._router.navigate(['/usuario/perfil'], { skipLocationChange: true }).then(() => {
-        
-        this._router.navigate(['/mischarlastech']);
+  anularCharla(idcharla: number) {
+    this._service
+      .asignarseUnaCharlaTechRider(0, idcharla)
+      .subscribe((response) => {
+        this._router
+          .navigate(['/usuario/perfil'], { skipLocationChange: true })
+          .then(() => {
+            this._router.navigate(['/mischarlastech']);
+          });
       });
-        
-      
-    });
   }
 
-  acreditarCharla(idcharla:number){
-    this._service.modificarEstadodeUnaCharlaTechRider(idcharla,6).subscribe((response)=>{
-      this._router.navigate(['/usuario/perfil'], { skipLocationChange: true }).then(() => {
-        
-        this._router.navigate(['/mischarlastech']);
+  acreditarCharla(idcharla: number) {
+    this._service
+      .modificarEstadodeUnaCharlaTechRider(idcharla, 6)
+      .subscribe((response) => {
+        this._router
+          .navigate(['/usuario/perfil'], { skipLocationChange: true })
+          .then(() => {
+            this._router.navigate(['/mischarlastech']);
+          });
       });
-    })
   }
 }

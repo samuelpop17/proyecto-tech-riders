@@ -1,32 +1,42 @@
-
 <div id="div_tabla_general">
-        
-    <table id="tabla_general" class="table table-responsive mt-3">
-        <thead class="border-dark">
-            <tr>
-                <th>Nombre</th>
-                <th>CIF</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Contacto</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let pet of altaEmpresa" >
-                <td>{{pet.nombre}}</td>
-                <td>{{pet.cif}}</td>
-                <td>{{pet.direccion}}</td>
-                <td>{{pet.telefono}}</td>
-                <td>{{pet.personaContacto}}</td>
-                <td>
-                    <button  class="btn btn-dark btn-sm me-1" (click)="cambiarEstadoEmpresa(pet.idCentroEmpresa, pet.idPeticionCentroEmpresa)" >Aceptar</button>
-                    <button  class="btn btn-dark btn-sm me-1" (click)= "EliminarPeticionEmpresa(  pet.idPeticionCentroEmpresa)" >Denegar</button>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
+  <table id="tabla_general" class="table table-responsive mt-3">
+    <thead class="border-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>CIF</th>
+        <th>Direccion</th>
+        <th>Telefono</th>
+        <th>Contacto</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pet of altaEmpresa">
+        <td>{{ pet.nombre }}</td>
+        <td>{{ pet.cif }}</td>
+        <td>{{ pet.direccion }}</td>
+        <td>{{ pet.telefono }}</td>
+        <td>{{ pet.personaContacto }}</td>
+        <td>
+          <button
+            class="btn btn-dark btn-sm me-1"
+            (click)="
+              cambiarEstadoEmpresa(
+                pet.idCentroEmpresa,
+                pet.idPeticionCentroEmpresa
+              )
+            "
+          >
+            Aceptar
+          </button>
+          <button
+            class="btn btn-dark btn-sm me-1"
+            (click)="EliminarPeticionEmpresa(pet.idPeticionCentroEmpresa)"
+          >
+            Denegar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-

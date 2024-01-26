@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
-import { Tecnologia } from '../models/Tecnologia';
-import { TecnologiaTechRiders } from '../models/TecnologiaTechRiders';
 import { Charla } from '../models/Charla';
 import { ValoracionCharla } from '../models/ValoracionCharla';
 import { EmpresaCentro } from '../models/EmpresaCentro';
@@ -91,33 +89,32 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
-
-
-  asignarseUnaCharlaTechRider(idtech:number,idcharla:number): Observable<any> {
+  asignarseUnaCharlaTechRider(
+    idtech: number,
+    idcharla: number
+  ): Observable<any> {
     let url = environment.urlApi;
-    let request = 'api/Charlas/AsociarTechriderCharla/'+idtech+"/"+idcharla;
-    
+    let request =
+      'api/Charlas/AsociarTechriderCharla/' + idtech + '/' + idcharla;
+
     let header = new HttpHeaders({
-      
       Authorization: 'bearer ' + localStorage.getItem('token'),
     });
-    return this._http.put(url + request,null, { headers: header });
+    return this._http.put(url + request, null, { headers: header });
   }
 
-
-  modificarEstadodeUnaCharlaTechRider(idcharla:number, idestado:number): Observable<any> {
+  modificarEstadodeUnaCharlaTechRider(
+    idcharla: number,
+    idestado: number
+  ): Observable<any> {
     let url = environment.urlApi;
-    let request = 'api/Charlas/UpdateEstadoCharla/'+idcharla+"/"+idestado;
-    
+    let request = 'api/Charlas/UpdateEstadoCharla/' + idcharla + '/' + idestado;
+
     let header = new HttpHeaders({
-      
       Authorization: 'bearer ' + localStorage.getItem('token'),
     });
-    return this._http.put(url + request,null, { headers: header });
+    return this._http.put(url + request, null, { headers: header });
   }
-
-
-
 
   findUsuario(id: number): Observable<any> {
     let url = environment.urlApi;
@@ -222,8 +219,6 @@ export class ServicePrincipal {
     };
     return this._http.post(url + request, json, { headers: header });
   }
-
-  
 
   createPeticionAltaEmpresa(idEmpresaCentro: number): Observable<any> {
     let url = environment.urlApi;
@@ -422,7 +417,7 @@ export class ServicePrincipal {
   charlasPorVerTechRiders(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/QueryTools/FindCharlasPendientesTecnologiasTechrider';
-    
+
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
@@ -464,12 +459,12 @@ export class ServicePrincipal {
     return this._http.put(url + request, json, { headers: header });
   }
 
-  getTechRiders (): Observable<any>{
+  getTechRiders(): Observable<any> {
     let url = environment.urlApi;
-    let request="api/querytools/todostechridersactivos";
+    let request = 'api/querytools/todostechridersactivos';
     return this._http.get(url + request);
-
   }
+
   getPeticionesAltaUser(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/PeticionesAltaUsers';
@@ -480,39 +475,41 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
-  getAcreditacionesCharlas(): Observable<any>{
+  getAcreditacionesCharlas(): Observable<any> {
     let url = environment.urlApi;
-    let request= "api/SolicitudAcreditacionesCharlas";
+    let request = 'api/SolicitudAcreditacionesCharlas';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
 
-  cambiarEstadoCharlaAcreditar(idCharla:number): Observable<any>{
+  cambiarEstadoCharlaAcreditar(idCharla: number): Observable<any> {
     let url = environment.urlApi;
-    let request = "api/charlas/updateestadocharla/"+idCharla+"/6";
+    let request = 'api/charlas/updateestadocharla/' + idCharla + '/6';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
-    return this._http.put(url + request,null, { headers: header });
+    return this._http.put(url + request, null, { headers: header });
   }
-  cambiarEstadoCharlaEliminar(idPeticionCharla:number): Observable<any>{
+
+  cambiarEstadoCharlaEliminar(idPeticionCharla: number): Observable<any> {
     let url = environment.urlApi;
-    let request = "api/solicitudacreditacionescharlas/"+idPeticionCharla;
+    let request = 'api/solicitudacreditacionescharlas/' + idPeticionCharla;
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.delete(url + request, { headers: header });
   }
-  getPeticionesTecnologia(): Observable<any>{
+
+  getPeticionesTecnologia(): Observable<any> {
     let url = environment.urlApi;
-    let request= "/api/PeticionesTecnologias";
+    let request = '/api/PeticionesTecnologias';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
 
-  insertTecnologia(nombre: string){
+  insertTecnologia(nombre: string) {
     let url = environment.urlApi;
-    let request = "api/tecnologias";
+    let request = 'api/tecnologias';
     let json = JSON.stringify({
       idTecnologia: 0,
       nombreTecnologia: nombre,
-      idTipoTecnologia : 1
+      idTipoTecnologia: 1,
     });
     let header = {
       'Content-Type': 'application/json',
@@ -520,58 +517,63 @@ export class ServicePrincipal {
     };
     return this._http.post(url + request, json, { headers: header });
   }
-  deleteTeconologia(idPeticionTecnologia: number){
+  deleteTeconologia(idPeticionTecnologia: number) {
     let url = environment.urlApi;
-    let request = "api/peticionestecnologias/"+idPeticionTecnologia;
+    let request = 'api/peticionestecnologias/' + idPeticionTecnologia;
     let header = {
       'Content-Type': 'application/json',
       Authorization: 'bearer ' + localStorage.getItem('token'),
     };
     return this._http.delete(url + request, { headers: header });
-
   }
 
-  getPeticionesCentroEmpresa():Observable<any>{
+  getPeticionesCentroEmpresa(): Observable<any> {
     let url = environment.urlApi;
-    let request= "/api/PeticionesCentroEmpresa";
+    let request = '/api/PeticionesCentroEmpresa';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
-  CambiarEstadoEmpresa(idEmpresa:number):Observable<any>{
+
+  CambiarEstadoEmpresa(idEmpresa: number): Observable<any> {
     let url = environment.urlApi;
-    let request = "api/empresascentros/updateestadoempresacentro/"+idEmpresa+"/1";
+    let request =
+      'api/empresascentros/updateestadoempresacentro/' + idEmpresa + '/1';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
-    return this._http.put(url + request,null, { headers: header });
+    return this._http.put(url + request, null, { headers: header });
   }
-  deletePeticionEmpresa(idPeticion:number):Observable<any>{
+
+  deletePeticionEmpresa(idPeticion: number): Observable<any> {
     let url = environment.urlApi;
-    let request = "api/peticionescentroempresa";
+    let request = 'api/peticionescentroempresa';
     let header = {
       'Content-Type': 'application/json',
       Authorization: 'bearer ' + localStorage.getItem('token'),
     };
     console.log(idPeticion);
-    return this._http.delete(url + request, { headers: header, params: {idPeticion: idPeticion}});
-
+    return this._http.delete(url + request, {
+      headers: header,
+      params: { idPeticion: idPeticion },
+    });
   }
-  cambiarEstadoUsuario(idUsuario:number): Observable<any>{
+
+  cambiarEstadoUsuario(idUsuario: number): Observable<any> {
     let url = environment.urlApi;
-    let request = "api/usuarios/updateestadousuario/"+idUsuario+"/1";
+    let request = 'api/usuarios/updateestadousuario/' + idUsuario + '/1';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
-    return this._http.put(url + request,null, { headers: header });
+    return this._http.put(url + request, null, { headers: header });
   }
 
-  EliminarPeticionUSuario(idPeticion:number){
+  EliminarPeticionUSuario(idPeticion: number) {
     let url = environment.urlApi;
-    let request = "api/peticionesaltausers";
+    let request = 'api/peticionesaltausers';
     let header = {
       'Content-Type': 'application/json',
       Authorization: 'bearer ' + localStorage.getItem('token'),
     };
     console.log(idPeticion);
-    return this._http.delete(url + request, { headers: header, params: {idPeticion: idPeticion}});
+    return this._http.delete(url + request, {
+      headers: header,
+      params: { idPeticion: idPeticion },
+    });
   }
-
-  
-  
 }

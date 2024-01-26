@@ -19,9 +19,6 @@ export class ListadosComponent implements OnInit {
   public filter_array!: any;
   public role!: number | null;
 
-  
-  
-
   // let miArray = [
   //   { id: 1, nombre: 'Objeto 1' },
   //   { id: 2, nombre: 'Objeto 2' },

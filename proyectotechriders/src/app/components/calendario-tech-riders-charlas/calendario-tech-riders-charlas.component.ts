@@ -41,7 +41,7 @@ const colors: Record<string, EventColor> = {
     `,
   ],
   templateUrl: './calendario-tech-riders-charlas.component.html',
-  styleUrls: ['./calendario-tech-riders-charlas.component.css']
+  styleUrls: ['./calendario-tech-riders-charlas.component.css'],
 })
 export class CalendarioTechRidersCharlasComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;

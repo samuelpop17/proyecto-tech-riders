@@ -15,14 +15,14 @@ export class EditarcharlaComponent implements OnInit {
   public charla!: Charla;
   public role!: number;
   public usuarios!: Usuario[];
-  public estados !: EstadoCharla[];
+  public estados!: EstadoCharla[];
 
   @ViewChild('controldescripcion') controlDescripcion!: ElementRef;
   @ViewChild('controlfecha') controlFecha!: ElementRef;
   @ViewChild('selectturno') selectTurno!: ElementRef;
   @ViewChild('selectmodalidad') selectModalidad!: ElementRef;
   @ViewChild('controlobservaciones') controlObservaciones!: ElementRef;
-  @ViewChild('controlTechRider') controlTechRider!:ElementRef;
+  @ViewChild('controlTechRider') controlTechRider!: ElementRef;
   @ViewChild('controlEstado') controlEstado!: ElementRef;
 
   constructor(
@@ -41,18 +41,18 @@ export class EditarcharlaComponent implements OnInit {
             this.charla = response;
           });
           if (this.role == 1) {
-            this._service.getUsuarios().subscribe((response)=>{
-
+            this._service.getUsuarios().subscribe((response) => {
               this.usuarios = response;
-              this.usuarios = this.usuarios.filter((usuario) => usuario.idRole == 3);
+              this.usuarios = this.usuarios.filter(
+                (usuario) => usuario.idRole == 3
+              );
               //console.log(this.charla.idTechRider)
-            })
+            });
 
-            this._service.getEstadosCharlas().subscribe((response)=>{
+            this._service.getEstadosCharlas().subscribe((response) => {
               this.estados = response;
-            })
+            });
           }
-          
         }
       });
     } else this._router.navigate(['/login']);
