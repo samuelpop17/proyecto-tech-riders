@@ -23,6 +23,59 @@
         <!-- RESPONSABLE EMPRESA -->
         <div *ngIf="role == 4">responsable</div>
 
+        <!-- ADMIN -->
+        <div *ngIf="role == 1">
+
+        </div>
+        
+        
+          <li class="nav-item dropdown" *ngIf="role == 1">
+            <a
+              class="nav-link dropdown-toggle"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Listados
+            </a>
+  
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/charlas/mis-charlas']">
+                  TechRider
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/charlas/solicitar-charla']"
+                >
+                 Centros
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/charlas/solicitar-charla']"
+                >
+                 Empresas
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/charlas/solicitar-charla']"
+                >
+                 Charlas
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" *ngIf="role == 1">
+            <a class="nav-link" [routerLink]="['/peticiones']">Peticiones</a>
+          </li>
+
+
         <!-- DROPDOWN CHARLAS PROFESOR -->
         <li class="nav-item dropdown" *ngIf="role == 2">
           <a

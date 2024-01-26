@@ -46,6 +46,8 @@ import { ValoracioncharlaComponent } from './components/valoracioncharla/valorac
 import { ListadotrComponent } from './components/listadotr/listadotr.component';
 import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
 import { ListadosempresaComponent } from './components/listadosempresa/listadosempresa.component';
+import { PanelPeticionesAdminComponent } from './components/panel-peticiones-admin/panel-peticiones-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { ListadosempresaComponent } from './components/listadosempresa/listadose
     ListadotrComponent,
     ListadocentrosComponent,
     ListadosempresaComponent,
+    PanelPeticionesAdminComponent,
   ],
   imports: [
     BrowserModule,
