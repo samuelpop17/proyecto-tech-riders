@@ -391,4 +391,11 @@ export class ServicePrincipal {
     };
     return this._http.put(url + request, json, { headers: header });
   }
+
+  getTechRiders (): Observable<any>{
+    let url = environment.urlApi;
+    let request="api/querytools/todostechridersactivos";
+    return this._http.get(url + request);
+
+  }
 }

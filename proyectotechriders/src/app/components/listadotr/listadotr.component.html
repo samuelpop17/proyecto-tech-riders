@@ -14,16 +14,16 @@
         </button>
     </div>
 
-    <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()" class="row">
+    <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()"class="row">
         <div class="mt-2 col-2">
-            <label class="form-label fw-bold">Tema</label>
+            <label class="form-label fw-bold">Empresa</label>
             <select
               class="form-select"
-              #selectema
-              name="selectema"               
+              #selectempresa
+              name="selectempresa"               
             >
-                <option value="todo">Todos</option>
-                <option *ngFor="let charla of charlasFiltroTema" value={{charla.descripcionCharla}}>{{charla.descripcionCharla}}</option>
+                <option value="todo">Todas</option>
+                <option *ngFor="let charla of charlasFiltroEmpresa" value={{charla.empresa}}>{{charla.empresa}}</option>
             </select>
         </div>
         <div class="mt-2 col-2">
@@ -48,30 +48,26 @@
         <table id="tabla_general" class="table table-responsive mt-3">
             <thead class="border-dark">
                 <tr>
-                    <th>Descripcion</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                    <th>Provincia</th>
-                    <th>Nombre Curso</th>
-                    <th>Fecha Solicitud</th>
-                    <th>Modalidad</th>
-                    <th>Teach Rider</th>
+                    <th>Nombre</th>
                     <th>Email</th>
                     <th>Telefono</th>
+                    <th>LinkedIn</th>
+                    <th>Provincia</th>
+                    <th>Empresas</th>
+                    <th>Direccion</th>
+                    <th>Telefono empresa</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let charla of charlas" >
-                    <td>{{charla.descripcionCharla}}</td>
-                    <td>{{charla.fechaCharla}}</td>
-                    <td>{{charla.estadoCharla}}</td>
-                    <td>{{charla.provincia}}</td>
-                    <td>{{charla.nombreCurso}}</td>
-                    <td>{{charla.fechaSolicitudCharla}}</td>
-                    <td>{{charla.modalidad}}</td>
-                    <td>{{charla.techRider}}</td>
-                    <td>{{charla.email}}</td>
-                    <td>{{charla.telefono}}</td>
+                <tr *ngFor="let tr of techriders" >
+                    <td>{{tr.techRider}}</td>
+                    <td>{{tr.email}}</td>
+                    <td>{{tr.telefonoTechRider}}</td>
+                    <td>{{tr.linkedIn}}</td>
+                    <td>{{tr.provinciaTechRider}}</td>
+                    <td>{{tr.empresa}}</td>
+                    <td>{{tr.direccion}}</td>
+                    <td>{{tr.telefonoEmpresa}}</td>
                 </tr>
 
             </tbody>

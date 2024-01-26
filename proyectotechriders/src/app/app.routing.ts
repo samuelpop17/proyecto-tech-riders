@@ -22,6 +22,8 @@ import { ContactarAdminComponent } from './components/contactar-admin/contactar-
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
+import { ListadotrComponent } from './components/listadotr/listadotr.component';
+import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,6 +47,8 @@ const routes: Routes = [
   { path: 'charlas/editar/:idcharla', component: EditarcharlaComponent },
   { path: 'charlas', component: CharlasComponent },
   { path: 'listados', component: ListadosComponent },
+  { path: 'listadostr', component: ListadotrComponent },
+  { path: 'listadoscentros', component: ListadocentrosComponent },
   {
     path: 'charlas/valoracion/:idcharla',
     component: ValoracioncharlaComponent,

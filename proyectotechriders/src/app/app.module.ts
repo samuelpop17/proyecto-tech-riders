@@ -43,6 +43,8 @@ import { ContactarAdminComponent } from './components/contactar-admin/contactar-
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { MischarrlasTechridersComponent } from './components/mischarrlas-techriders/mischarrlas-techriders.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
+import { ListadotrComponent } from './components/listadotr/listadotr.component';
+import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { ValoracioncharlaComponent } from './components/valoracioncharla/valorac
     ProponerTecnologiaComponent,
     MischarrlasTechridersComponent,
     ValoracioncharlaComponent,
+    ListadotrComponent,
+    ListadocentrosComponent,
   ],
   imports: [
     BrowserModule,
