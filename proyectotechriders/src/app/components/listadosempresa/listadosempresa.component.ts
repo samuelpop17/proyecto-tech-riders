@@ -1,14 +1,12 @@
 import { Component,OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
-
 @Component({
-  selector: 'app-listadocentros',
-  templateUrl: './listadocentros.component.html',
-  styleUrls: ['./listadocentros.component.css']
+  selector: 'app-listadosempresa',
+  templateUrl: './listadosempresa.component.html',
+  styleUrls: ['./listadosempresa.component.css']
 })
-export class ListadocentrosComponent implements OnInit {
-
+export class ListadosempresaComponent implements OnInit{
   public centros!: any[];
   public centrosReset: any[] = [];
   public proFiltro!: any[];
@@ -45,7 +43,7 @@ export class ListadocentrosComponent implements OnInit {
           centro.provincia = response.nombreProvincia
         })
 
-        if(centro.idTipoEmpresa==2){
+        if(centro.idTipoEmpresa==1){
           this.centrosReset.push(centro);
         }
         console.log(this.centrosReset)

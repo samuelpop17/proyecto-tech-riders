@@ -45,6 +45,7 @@ import { MischarrlasTechridersComponent } from './components/mischarrlas-techrid
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { ListadotrComponent } from './components/listadotr/listadotr.component';
 import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
+import { ListadosempresaComponent } from './components/listadosempresa/listadosempresa.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ListadocentrosComponent } from './components/listadocentros/listadocent
     ValoracioncharlaComponent,
     ListadotrComponent,
     ListadocentrosComponent,
+    ListadosempresaComponent,
   ],
   imports: [
     BrowserModule,

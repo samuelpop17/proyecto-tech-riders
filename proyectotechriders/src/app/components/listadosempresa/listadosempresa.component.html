@@ -26,18 +26,18 @@
               name="selectempresa"               
             >
                 <option value="todo">Todas</option>
-                <option *ngFor="let charla of charlasFiltroEmpresa" value={{charla.empresa}}>{{charla.empresa}}</option>
+                <option *ngFor="let charla of charlasFiltroEmpresa" value={{charla.nombre}}>{{charla.nombre}}</option>
             </select>
         </div>
         <div class="mt-2 col-2">
-            <label class="form-label fw-bold">TechRider</label>
+            <label class="form-label fw-bold">Provincia</label>
             <select
               class="form-select"
-              #selectTr
-              name="selectTr"               
+              #selectprovincia
+              name="selectprovincia"               
             >
-                <option value="todo">Todos</option>
-                <option *ngFor="let charla of charlasFiltroTr" value={{charla.techRider}}>{{charla.techRider}}</option>
+                <option value="0">Todos</option>
+                <option *ngFor="let prov of provincias" value={{prov.idProvincia}}>{{prov.nombreProvincia}}</option>
             </select>
         </div>
         <div class="mt-2 col-2">
@@ -52,25 +52,22 @@
             <thead class="border-dark">
                 <tr>
                     <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>LinkedIn</th>
-                    <th>Provincia</th>
-                    <th>Empresas</th>
                     <th>Direccion</th>
-                    <th>Telefono empresa</th>
+                    <th>Telefono</th>
+                    <th>Persona de Contacto</th>
+                    <th>CIF</th>
+                    <th>Provincia</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let tr of techriders" >
-                    <td>{{tr.techRider}}</td>
-                    <td>{{tr.email}}</td>
-                    <td>{{tr.telefonoTechRider}}</td>
-                    <td>{{tr.linkedIn}}</td>
-                    <td>{{tr.provinciaTechRider}}</td>
-                    <td>{{tr.empresa}}</td>
-                    <td>{{tr.direccion}}</td>
-                    <td>{{tr.telefonoEmpresa}}</td>
+                <tr *ngFor="let cen of centrosReset" >
+                    <td>{{cen.nombre}}</td>
+                    <td>{{cen.direccion}}</td>
+                    <td>{{cen.telefono}}</td>
+                    <td>{{cen.personaContacto}}</td>
+                    <td>{{cen.cif}}</td>
+                    <td>{{cen.provincia}}</td>
                 </tr>
 
             </tbody>

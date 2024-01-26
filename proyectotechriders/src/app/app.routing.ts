@@ -24,6 +24,7 @@ import { MischarrlasTechridersComponent } from './components/mischarrlas-techrid
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { ListadotrComponent } from './components/listadotr/listadotr.component';
 import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
+import { ListadosempresaComponent } from './components/listadosempresa/listadosempresa.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'listados', component: ListadosComponent },
   { path: 'listadostr', component: ListadotrComponent },
   { path: 'listadoscentros', component: ListadocentrosComponent },
+  { path: 'listadosempresas', component: ListadosempresaComponent },
   {
     path: 'charlas/valoracion/:idcharla',
     component: ValoracioncharlaComponent,
