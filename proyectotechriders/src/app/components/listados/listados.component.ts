@@ -17,6 +17,10 @@ export class ListadosComponent implements OnInit {
   public tema!: any;
   public tr!: any;
   public filter_array!: any;
+  public role!: number | null;
+
+  
+  
 
   // let miArray = [
   //   { id: 1, nombre: 'Objeto 1' },
@@ -38,8 +42,8 @@ export class ListadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listaGeneral();
-    //this.filter();
-    //this.filtarTemas();
+    if (this.role != localStorage.getItem('role'))
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
   }
   listaGeneral(): void {
     this._service.getCharlasView().subscribe((response: any) => {

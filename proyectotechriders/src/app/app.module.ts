@@ -47,6 +47,10 @@ import { ListadotrComponent } from './components/listadotr/listadotr.component';
 import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
 import { ListadosempresaComponent } from './components/listadosempresa/listadosempresa.component';
 import { PanelPeticionesAdminComponent } from './components/panel-peticiones-admin/panel-peticiones-admin.component';
+import { AltausuarioComponent } from './components/altausuario/altausuario.component';
+import { AcreditarcharlaComponent } from './components/acreditarcharla/acreditarcharla.component';
+import { AniadirtecnologiaComponent } from './components/aniadirtecnologia/aniadirtecnologia.component';
+import { AltaempresaComponent } from './components/altaempresa/altaempresa.component';
 
 
 @NgModule({
@@ -78,6 +82,10 @@ import { PanelPeticionesAdminComponent } from './components/panel-peticiones-adm
     ListadocentrosComponent,
     ListadosempresaComponent,
     PanelPeticionesAdminComponent,
+    AltausuarioComponent,
+    AcreditarcharlaComponent,
+    AniadirtecnologiaComponent,
+    AltaempresaComponent,
   ],
   imports: [
     BrowserModule,

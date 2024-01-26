@@ -27,6 +27,10 @@ import { ListadotrComponent } from './components/listadotr/listadotr.component';
 import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
 import { ListadosempresaComponent } from './components/listadosempresa/listadosempresa.component';
 import { PanelPeticionesAdminComponent } from './components/panel-peticiones-admin/panel-peticiones-admin.component';
+import { AltausuarioComponent } from './components/altausuario/altausuario.component';
+import { AcreditarcharlaComponent } from './components/acreditarcharla/acreditarcharla.component';
+import { AniadirtecnologiaComponent } from './components/aniadirtecnologia/aniadirtecnologia.component';
+import { AltaempresaComponent } from './components/altaempresa/altaempresa.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,6 +57,11 @@ const routes: Routes = [
   { path: 'listadostr', component: ListadotrComponent },
   { path: 'listadoscentros', component: ListadocentrosComponent },
   { path: 'listadosempresas', component: ListadosempresaComponent },
+  {path: 'altausuario', component: AltausuarioComponent},
+  {path: 'acreditarcharla', component: AcreditarcharlaComponent},
+  {path: 'aniadirtecnologia', component: AniadirtecnologiaComponent},
+  {path: 'altaempresa', component: AltaempresaComponent},
+
   {
     path: 'charlas/valoracion/:idcharla',
     component: ValoracioncharlaComponent,

@@ -61,6 +61,7 @@
                     <th>Teach Rider</th>
                     <th>Email</th>
                     <th>Telefono</th>
+                    <th *ngIf="role == 1">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,6 +76,21 @@
                     <td>{{charla.techRider}}</td>
                     <td>{{charla.email}}</td>
                     <td>{{charla.telefono}}</td>
+    
+                    <td *ngIf="role==1">
+                        <a
+                            class="btn btn-dark btn-sm me-1"
+                            [routerLink]="['/charlas', charla.idCharla]"
+                            >
+                            Detalles
+                        </a>
+                        <a
+                            class="btn btn-dark btn-sm me-1"
+                            [routerLink]="['/charlas/editar', charla.idCharla]"
+                            >
+                            Editar
+                        </a>
+                    </td>
                 </tr>
 
             </tbody>

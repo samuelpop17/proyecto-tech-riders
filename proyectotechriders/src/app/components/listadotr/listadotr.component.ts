@@ -16,6 +16,7 @@ export class ListadotrComponent implements OnInit{
   public empresa!: any;
   public tr!: any;
   public filter_array!: any;
+  public role!: number | null;
 
 
 
@@ -24,8 +25,8 @@ export class ListadotrComponent implements OnInit{
 
   ngOnInit(): void {
     this.listaGeneral();
-    //this.filter();
-    //this.filtarTemas();
+    if (this.role != localStorage.getItem('role'))
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
   }
   listaGeneral(): void {
     this._service.getTechRiders().subscribe((response: any) => {
