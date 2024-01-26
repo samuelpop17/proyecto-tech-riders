@@ -1,1 +1,27 @@
-<p>altausuario works!</p>
+
+<div id="div_tabla_general">
+        
+    <table id="tabla_general" class="table table-responsive mt-3">
+        <thead class="border-dark">
+            <tr>
+                <th>Usuario</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pet of altaUsuarios" >
+                <td>{{pet.nombre}}</td>
+                <td>{{pet.apellidos}}</td>
+                <td>{{pet.email}}</td>
+                <td>
+                    <button  class="btn btn-dark btn-sm me-1" (click)="cambiarEstadoUsuario(pet.idUser, pet.idPeticionAltaUsers)" >Aceptar</button>
+                    <button  class="btn btn-dark btn-sm me-1" (click)= "EliminarPeticionUSuario(  pet.idPeticionAltaUsers)" >Denegar</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+

@@ -30,7 +30,23 @@ export class AniadirtecnologiaComponent implements OnInit{
   cargarDatos(){
     this._service.getPeticionesTecnologia().subscribe((response) => {
       this.peticionesTecnologias = response;
-      console.log(this.peticionesTecnologias);
+      //console.log(this.peticionesTecnologias);
+    })
+  }
+
+  insertTeconologia(nombre:string, idPeticionTecnologia:number){
+    this._service.insertTecnologia(nombre).subscribe((response) => {
+      console.log(response);
+      console.log(nombre);
+      this.cargarDatos();
+      this.EliminarAcreditacion(idPeticionTecnologia);
+    })
+
+  }
+  EliminarAcreditacion(idPeticionTecnologia:number) {
+    this._service.deleteTeconologia(idPeticionTecnologia).subscribe((response)=>{
+      this.cargarDatos();
+      console.log(response)
     })
   }
 
