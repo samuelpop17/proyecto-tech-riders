@@ -12,8 +12,8 @@
             <tr *ngFor="let pet of peticionesTecnologias" >
                 <td>{{pet.nombreTecnologia}}</td>
                 <td>
-                    <button  class="btn btn-dark btn-sm me-1" >Aceptar</button>
-                    <button  class="btn btn-dark btn-sm me-1" >Denegar</button>
+                    <button  class="btn btn-dark btn-sm me-1" (click)="insertTeconologia(pet.nombreTecnologia, pet.idPeticionTecnologia)" >Aceptar</button>
+                    <button  class="btn btn-dark btn-sm me-1" (click)= "EliminarAcreditacion( pet.idPeticionTecnologia)" >Denegar</button>
                 </td>
             </tr>
 

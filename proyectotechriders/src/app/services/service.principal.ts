@@ -401,7 +401,10 @@ export class ServicePrincipal {
   getPeticionesAltaUser(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/PeticionesAltaUsers';
-    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
     return this._http.get(url + request, { headers: header });
   }
 
@@ -430,5 +433,73 @@ export class ServicePrincipal {
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }
+
+  insertTecnologia(nombre: string){
+    let url = environment.urlApi;
+    let request = "api/tecnologias";
+    let json = JSON.stringify({
+      idTecnologia: 0,
+      nombreTecnologia: nombre,
+      idTipoTecnologia : 1
+    });
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
+  }
+  deleteTeconologia(idPeticionTecnologia: number){
+    let url = environment.urlApi;
+    let request = "api/peticionestecnologias/"+idPeticionTecnologia;
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.delete(url + request, { headers: header });
+
+  }
+
+  getPeticionesCentroEmpresa():Observable<any>{
+    let url = environment.urlApi;
+    let request= "/api/PeticionesCentroEmpresa";
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
+  CambiarEstadoEmpresa(idEmpresa:number):Observable<any>{
+    let url = environment.urlApi;
+    let request = "api/empresascentros/updateestadoempresacentro/"+idEmpresa+"/1";
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.put(url + request,null, { headers: header });
+  }
+  deletePeticionEmpresa(idPeticion:number):Observable<any>{
+    let url = environment.urlApi;
+    let request = "api/peticionescentroempresa";
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    console.log(idPeticion);
+    return this._http.delete(url + request, { headers: header, params: {idPeticion: idPeticion}});
+
+  }
+  cambiarEstadoUsuario(idUsuario:number): Observable<any>{
+    let url = environment.urlApi;
+    let request = "api/usuarios/updateestadousuario/"+idUsuario+"/1";
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.put(url + request,null, { headers: header });
+  }
+
+  EliminarPeticionUSuario(idPeticion:number){
+    let url = environment.urlApi;
+    let request = "api/peticionesaltausers";
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    console.log(idPeticion);
+    return this._http.delete(url + request, { headers: header, params: {idPeticion: idPeticion}});
+  }
+
+  
   
 }
