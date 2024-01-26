@@ -21,8 +21,6 @@
         </li>
 
         <!-- ADMIN -->
-        <div *ngIf="role == 1"></div>
-
         <li class="nav-item dropdown" *ngIf="role == 1">
           <a
             class="nav-link dropdown-toggle"
@@ -103,12 +101,12 @@
             <div>
               <li>
                 <a class="dropdown-item" [routerLink]="['/charlastechriders']">
-                  Charlas Disponibles
+                  Charlas disponibles
                 </a>
               </li>
               <li>
                 <a class="dropdown-item" [routerLink]="['/mischarlastech']">
-                  Mis Charlas
+                  Mis charlas
                 </a>
               </li>
               <li>
@@ -116,7 +114,7 @@
                   class="dropdown-item"
                   [routerLink]="['/calendariomitechrider']"
                 >
-                  Mi Calendario
+                  Mi calendario
                 </a>
               </li>
             </div>

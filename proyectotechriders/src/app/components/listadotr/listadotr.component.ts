@@ -67,7 +67,6 @@ export class ListadotrComponent implements OnInit {
         (x: { techRider: any }) => x.techRider === this.tr
       );
     }
-    //console.log(this.filter_array);
     this.techriders = this.filter_array;
   }
 }

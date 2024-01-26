@@ -19,20 +19,6 @@ export class ListadosComponent implements OnInit {
   public filter_array!: any;
   public role!: number | null;
 
-  // let miArray = [
-  //   { id: 1, nombre: 'Objeto 1' },
-  //   { id: 2, nombre: 'Objeto 2' },
-  //   { id: 1, nombre: 'Objeto 1' },
-  //   { id: 3, nombre: 'Objeto 3' },
-  //   { id: 2, nombre: 'Objeto 2' }
-  // ];
-
-  //   miArray = miArray.filter((valor, indice, self) =>
-  //   indice === self.findIndex((v) => (
-  //     v.id === valor.id
-  //   ))
-  // );
-
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
@@ -46,7 +32,6 @@ export class ListadosComponent implements OnInit {
       this.charlasFiltro = response;
       this.charlasFiltroTema = response;
       this.charlasFiltroTr = response;
-      //console.log(this.charlasFiltro);
       this.charlasFiltroTema = this.charlasFiltroTema.filter(
         (valor, indice, self) =>
           indice ===
@@ -57,26 +42,7 @@ export class ListadosComponent implements OnInit {
           indice === self.findIndex((v) => v.techRider === valor.techRider)
       );
     });
-
-    //console.log(this.charlasFiltro);
-
-    // console.log(this.charlasFiltro);
-    // this.charlasFiltro = this.charlasFiltro.filter((valor, indice, self)=>
-    // indice ===self.findIndex((v)=>(
-    //   v.descripcionCharla === valor.descripcionCharla
-    // ))
-    // );
   }
-  // filtarTemas(){
-
-  //   console.log(this.charlasFiltro);
-  //   this.charlasFiltro = this.charlasFiltro.filter((valor, indice, self)=>
-  //   indice ===self.findIndex((v)=>(
-  //     v.descripcionCharla === valor.descripcionCharla
-  //   ))
-  //   );
-
-  // }
 
   filtrarTabla() {
     this.charlas = this.charlasFiltro;
@@ -101,7 +67,6 @@ export class ListadosComponent implements OnInit {
         (x: { techRider: any }) => x.techRider === this.tr
       );
     }
-    //console.log(this.filter_array);
     this.charlas = this.filter_array;
   }
 }

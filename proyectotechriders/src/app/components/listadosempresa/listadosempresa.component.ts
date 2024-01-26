@@ -23,49 +23,43 @@ export class ListadosempresaComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.listaGeneral();
     if (this.role != localStorage.getItem('role'))
       this.role = parseInt(localStorage.getItem('role') ?? '0');
+    this.listaGeneral();
   }
+
   listaGeneral(): void {
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
-    });
-    this._service.getEmpresasCentros().subscribe((response: any) => {
-      this.centros = response;
+      this._service.getEmpresasCentros().subscribe((response: any) => {
+        this.centros = response;
 
-      this.centros.forEach((centro) => {
-        console.log(centro.idTipoEmpresa);
-        this._service
-          .findProvincia(centro.idProvincia)
-          .subscribe((response) => {
-            centro.provincia = response.nombreProvincia;
-          });
+        this.centros.forEach((centro) => {
+          centro.provincia =
+            this.provincias[centro.idProvincia - 1].nombreProvincia;
+          if (centro.idTipoEmpresa == 1) this.centrosReset.push(centro);
+        });
 
-        if (centro.idTipoEmpresa == 1) {
-          this.centrosReset.push(centro);
-        }
-        console.log(this.centrosReset);
+        this.proFiltro = this.centrosReset;
+        this.charlasFiltroEmpresa = this.centrosReset;
+        this.charlasFiltroPro = this.centrosReset;
+        this.charlasFiltroEmpresa = this.charlasFiltroEmpresa.filter(
+          (valor, indice, self) =>
+            indice === self.findIndex((v) => v.nombre === valor.nombre)
+        );
+        this.charlasFiltroPro = this.charlasFiltroPro.filter(
+          (valor, indice, self) =>
+            indice ===
+            self.findIndex((v) => v.idProvincia === valor.idProvincia)
+        );
       });
-
-      this.proFiltro = this.centrosReset;
-      this.charlasFiltroEmpresa = this.centrosReset;
-      this.charlasFiltroPro = this.centrosReset;
-      this.charlasFiltroEmpresa = this.charlasFiltroEmpresa.filter(
-        (valor, indice, self) =>
-          indice === self.findIndex((v) => v.nombre === valor.nombre)
-      );
-      this.charlasFiltroPro = this.charlasFiltroPro.filter(
-        (valor, indice, self) =>
-          indice === self.findIndex((v) => v.idProvincia === valor.idProvincia)
-      );
     });
   }
 
   filtrarTabla() {
-    this.centros = this.proFiltro;
+    this.centrosReset = this.proFiltro;
     let i = 0;
-    this.empresa = this.selectempresa.nativeElement.value;
+    this.empresa = this.selectempresa.nativeElement.selectedOptions[0].value;
     this.provincia = parseInt(
       this.selectprovincia.nativeElement.selectedOptions[0].value
     );
@@ -92,7 +86,6 @@ export class ListadosempresaComponent implements OnInit {
         (x: { idProvincia: any }) => x.idProvincia === this.provincia
       );
     }
-    //console.log(this.filter_array);
     this.centrosReset = this.filter_array;
   }
 }

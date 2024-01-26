@@ -10,19 +10,19 @@
       <a [routerLink]="['/listadostr']" class="btn btn-dark">Ver TechRiders</a>
     </button>
     <button class="btn btn-dark" style="margin: 10px">
-      <a [routerLink]="['/listadosempresas']" class="btn btn-dark"
-        >Ver Empresas</a
-      >
+      <a [routerLink]="['/listadosempresas']" class="btn btn-dark">
+        Ver Empresas
+      </a>
     </button>
     <button class="btn btn-dark" style="margin: 10px">
-      <a [routerLink]="['/listadoscentros']" class="btn btn-dark"
-        >Ver Centros</a
-      >
+      <a [routerLink]="['/listadoscentros']" class="btn btn-dark">
+        Ver Centros
+      </a>
     </button>
   </div>
 
   <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()" class="row">
-    <div class="mt-2 col-2">
+    <div class="mt-2 col-md-4">
       <label class="form-label fw-bold">Empresa</label>
       <select class="form-select" #selectempresa name="selectempresa">
         <option value="todo">Todas</option>
@@ -34,7 +34,7 @@
         </option>
       </select>
     </div>
-    <div class="mt-2 col-2">
+    <div class="mt-2 col-md-4">
       <label class="form-label fw-bold">Provincia</label>
       <select class="form-select" #selectprovincia name="selectprovincia">
         <option value="0">Todos</option>
@@ -43,21 +43,18 @@
         </option>
       </select>
     </div>
-    <div class="mt-2 col-2">
-      <button class="btn btn-dark rounded w-100 mt-3 py-2">
-        Aplicar filtros
-      </button>
+    <div class="mt-2 col-md-4 align-bottom d-flex">
+      <button class="btn btn-dark rounded w-100 mt-4">Aplicar filtros</button>
     </div>
   </form>
-  <div id="div_tabla_general">
-    <table id="tabla_general" class="table table-responsive mt-3">
+  <div>
+    <table class="table table-responsive mt-3">
       <thead class="border-dark">
         <tr>
           <th>Nombre</th>
           <th>Direccion</th>
           <th>Telefono</th>
           <th>Persona de Contacto</th>
-          <th>CIF</th>
           <th>Provincia</th>
         </tr>
       </thead>
@@ -67,7 +64,6 @@
           <td>{{ cen.direccion }}</td>
           <td>{{ cen.telefono }}</td>
           <td>{{ cen.personaContacto }}</td>
-          <td>{{ cen.cif }}</td>
           <td>{{ cen.provincia }}</td>
         </tr>
       </tbody>
