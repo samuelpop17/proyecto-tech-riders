@@ -26,7 +26,7 @@ export class ListadosempresaComponent implements OnInit {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
-      this._service.getEmpresasActivas().subscribe((response: any) => {
+      this._service.getEmpresasCentrosActivas().subscribe((response: any) => {
         this.empresas = response;
 
         this.empresas.forEach((centro) => {

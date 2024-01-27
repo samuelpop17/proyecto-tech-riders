@@ -42,7 +42,7 @@ export class RegisterusuarioComponent implements OnInit {
       { idRole: 4, tipoRole: 'REPRESENTANTE' },
     ];
     this.roleElegido = 3;
-    this._service.getEmpresasCentros().subscribe((response) => {
+    this._service.getEmpresasCentrosActivas().subscribe((response) => {
       this.empresasCentros = response;
       this.publicEmpresasCentros = this.empresasCentros.filter(
         (empresaCentro) => empresaCentro.idTipoEmpresa == 1

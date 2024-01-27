@@ -572,7 +572,7 @@ export class ServicePrincipal {
     return this._http.delete(url + request, { headers: header });
   }
 
-  getEmpresasActivas(): Observable<any> {
+  getEmpresasCentrosActivas(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/EmpresasCentros/EmpresasCentrosEstado/1';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };

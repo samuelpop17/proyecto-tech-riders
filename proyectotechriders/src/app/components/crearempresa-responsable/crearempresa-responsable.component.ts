@@ -69,7 +69,7 @@ export class CrearempresaResponsableComponent implements OnInit {
                   color: '#333333',
                   icon: 'success',
                   showConfirmButton: false,
-                  text: 'Empresa creada. Tendrá que ser validado por el administrador',
+                  text: 'Empresa creada. Tendrá que ser validada por el administrador',
                   timer: 4000,
                   timerProgressBar: true,
                   title: 'Registro con éxito',
