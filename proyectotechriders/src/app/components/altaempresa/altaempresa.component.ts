@@ -14,13 +14,9 @@ export class AltaempresaComponent implements OnInit {
   public role!: number | null;
 
   ngOnInit(): void {
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-    if (this.role == 1) {
-      this.cargarDatos();
-    } else {
-      this._router.navigate(['/']);
-    }
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 1) this.cargarDatos();
+    else this._router.navigate(['/']);
   }
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -28,9 +24,7 @@ export class AltaempresaComponent implements OnInit {
     this.altaEmpresa = [];
     this._service.getPeticionesCentroEmpresa().subscribe((response) => {
       this.peticionesAltaEmpresa = response;
-      //console.log(this.peticionesAltaUsuarios);
       this._service.getEmpresasCentros().subscribe((response) => {
-        //console.log(response);
         for (let i = 0; i < response.length; i++) {
           for (let j = 0; j < this.peticionesAltaEmpresa.length; j++) {
             if (
@@ -53,7 +47,6 @@ export class AltaempresaComponent implements OnInit {
             }
           }
         }
-        //console.log(this.altaEmpresa);
       });
     });
   }

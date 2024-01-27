@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listados',
@@ -23,8 +24,7 @@ export class ListadosComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getCharlasView().subscribe((response: any) => {
       this.charlas = response;
       this.charlasFiltro = response;
@@ -68,5 +68,16 @@ export class ListadosComponent implements OnInit {
       );
     }
     this.charlas = this.filter_array;
+  }
+
+  getValoracion(valoracion: number, comentario: string) {
+    Swal.fire({
+      color: '#333333',
+      confirmButtonColor: '#212529',
+      confirmButtonText: 'Cerrar',
+      icon: 'info',
+      text: comentario,
+      title: 'Valoración: ' + valoracion + '/10',
+    });
   }
 }

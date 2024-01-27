@@ -21,6 +21,7 @@ export class CrearempresaResponsableComponent implements OnInit {
 
   public provincias!: Provincia[];
   public nomRepresentante!: string;
+  public role!: number | null;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -29,9 +30,12 @@ export class CrearempresaResponsableComponent implements OnInit {
       this._service.getProvincias().subscribe((response) => {
         this.provincias = response;
       });
-      this._service.getPerfilUsuario().subscribe((response) => {
-        this.nomRepresentante = response.nombre + ' ' + response.apellidos;
-      });
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 4) {
+        this._service.getPerfilUsuario().subscribe((response) => {
+          this.nomRepresentante = response.nombre + ' ' + response.apellidos;
+        });
+      }
     } else this._router.navigate(['/login']);
   }
 

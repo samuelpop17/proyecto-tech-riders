@@ -24,8 +24,7 @@ export class ListadocentrosComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
       this._service.getEmpresasCentros().subscribe((response: any) => {

@@ -13,8 +13,7 @@ export class AltausuarioComponent implements OnInit {
   public role!: number | null;
 
   ngOnInit(): void {
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     if (this.role == 1) {
       this.cargarDatos();
     } else {

@@ -97,6 +97,10 @@ body#bodyprincipal {
   inset: auto !important;
 }
 
+a.linkedin-button {
+  text-decoration-color: black;
+}
+
 .cal-month-view .cal-open-day-events {
   background-color: #212529;
 }

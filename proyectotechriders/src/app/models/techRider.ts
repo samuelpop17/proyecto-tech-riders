@@ -10,6 +10,7 @@ export class TechRider {
     public empresa: string,
     public direccion: string,
     public telefonoEmpresa: string,
-    public provinciaEmpresa: string
+    public provinciaEmpresa: string,
+    public linkedInVisible: number
   ) {}
 }

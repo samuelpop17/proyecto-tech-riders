@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./listadosempresa.component.css'],
 })
 export class ListadosempresaComponent implements OnInit {
-  public centros!: any[];
-  public centrosReset: any[] = [];
+  public empresas!: any[];
+  public empresasReset: any[] = [];
   public proFiltro!: any[];
-  public charlasFiltroEmpresa!: any[]; //meter desde consulta
-  public charlasFiltroPro!: any[]; //meter desde consulta
+  public empresasFiltroNombre!: any[]; //meter desde consulta
   public provincias!: any[];
   @ViewChild('selectprovincia') selectprovincia!: ElementRef;
   @ViewChild('selectempresa') selectempresa!: ElementRef;
@@ -19,45 +18,37 @@ export class ListadosempresaComponent implements OnInit {
   public provincia!: any;
   public filter_array!: any;
   public role!: number | null;
+  public empresasCargadas: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this.listaGeneral();
-  }
-
-  listaGeneral(): void {
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
       this._service.getEmpresasCentros().subscribe((response: any) => {
-        this.centros = response;
+        this.empresas = response;
 
-        this.centros.forEach((centro) => {
+        this.empresas.forEach((centro) => {
           centro.provincia =
             this.provincias[centro.idProvincia - 1].nombreProvincia;
-          if (centro.idTipoEmpresa == 1) this.centrosReset.push(centro);
+          if (centro.idTipoEmpresa == 1) this.empresasReset.push(centro);
         });
 
-        this.proFiltro = this.centrosReset;
-        this.charlasFiltroEmpresa = this.centrosReset;
-        this.charlasFiltroPro = this.centrosReset;
-        this.charlasFiltroEmpresa = this.charlasFiltroEmpresa.filter(
+        this.proFiltro = this.empresasReset;
+        this.empresasFiltroNombre = this.empresasReset;
+        this.empresasFiltroNombre = this.empresasFiltroNombre.filter(
           (valor, indice, self) =>
             indice === self.findIndex((v) => v.nombre === valor.nombre)
         );
-        this.charlasFiltroPro = this.charlasFiltroPro.filter(
-          (valor, indice, self) =>
-            indice ===
-            self.findIndex((v) => v.idProvincia === valor.idProvincia)
-        );
+
+        this.empresasCargadas = true;
       });
     });
   }
 
   filtrarTabla() {
-    this.centrosReset = this.proFiltro;
+    this.empresasReset = this.proFiltro;
     let i = 0;
     this.empresa = this.selectempresa.nativeElement.selectedOptions[0].value;
     this.provincia = parseInt(
@@ -67,25 +58,25 @@ export class ListadosempresaComponent implements OnInit {
     this.filter_array = [];
 
     if (this.empresa == 'todo' && this.provincia == 0) {
-      this.listaGeneral();
-      console.log('entra');
+      this.empresasReset = this.proFiltro;
+      return;
     } else if (this.provincia == 0 && this.empresa != 'todo') {
-      this.filter_array = this.centrosReset.filter(
+      this.filter_array = this.empresasReset.filter(
         (x) => x.nombre === this.empresa
       );
     } else if (this.provincia != 0 && this.empresa == 'todo') {
-      this.filter_array = this.centrosReset.filter(
+      this.filter_array = this.empresasReset.filter(
         (x) => x.idProvincia === this.provincia
       );
       console.log(this.filter_array);
     } else {
-      this.filter_array = this.centrosReset.filter(
+      this.filter_array = this.empresasReset.filter(
         (x) => x.nombre === this.empresa
       );
       this.filter_array = this.filter_array.filter(
         (x: { idProvincia: any }) => x.idProvincia === this.provincia
       );
     }
-    this.centrosReset = this.filter_array;
+    this.empresasReset = this.filter_array;
   }
 }

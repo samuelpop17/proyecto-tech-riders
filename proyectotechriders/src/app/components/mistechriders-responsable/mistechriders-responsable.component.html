@@ -32,7 +32,7 @@
       <tbody>
         <tr *ngFor="let charla of charlas">
           <th>{{ charla.descripcionCharla }}</th>
-          <td>{{ charla.fechaCharla | date : "medium" }}</td>
+          <td>{{ charla.fechaCharla | date : "mediumDate" }}</td>
           <td>{{ charla.turno }}</td>
           <td>{{ charla.observacionesCharla }}</td>
           <td>{{ charla.estadoCharla }}</td>

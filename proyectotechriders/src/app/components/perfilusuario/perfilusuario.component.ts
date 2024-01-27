@@ -1,11 +1,10 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Usuario } from 'src/app/models/Usuario';
 import { Router } from '@angular/router';
 import { Provincia } from 'src/app/models/Provincia';
 import { EmpresaCentro } from 'src/app/models/EmpresaCentro';
 import { Role } from 'src/app/models/Role';
-import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-perfilusuario',

@@ -8,10 +8,10 @@
           <select class="form-select" #selectempresa name="selectempresa">
             <option value="todo">Todos</option>
             <option
-              *ngFor="let charla of centrosFiltroNombre"
-              value="{{ charla.nombre }}"
+              *ngFor="let centro of centrosFiltroNombre"
+              value="{{ centro.nombre }}"
             >
-              {{ charla.nombre }}
+              {{ centro.nombre }}
             </option>
           </select>
         </div>
@@ -61,7 +61,7 @@
               </svg>
               {{ cen.direccion }}
             </h6>
-            <h6 class="card-subtitle mb-2 text-body-secondary text-center">
+            <h6 class="card-subtitle text-body-secondary text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

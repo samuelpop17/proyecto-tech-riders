@@ -13,8 +13,7 @@ export class AniadirtecnologiaComponent implements OnInit {
   public peticionesTecnologias!: PeticionTecnologia[];
 
   ngOnInit(): void {
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     if (this.role == 1) {
       this.cargarDatos();
     } else {

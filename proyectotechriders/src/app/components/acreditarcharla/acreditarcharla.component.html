@@ -15,8 +15,8 @@
       <tr *ngFor="let charla of charlas">
         <td>{{ charla.idCharla }}</td>
         <td>{{ charla.descripcion }}</td>
-        <td>{{ charla.fechaCharla | date : "medium" }}</td>
-        <td>{{ charla.fechaSolicitud | date : "medium" }}</td>
+        <td>{{ charla.fechaCharla | date : "mediumDate" }}</td>
+        <td>{{ charla.fechaSolicitud | date : "mediumDate" }}</td>
         <td>{{ charla.modalidad }}</td>
         <td>{{ charla.turno }}</td>
         <td>

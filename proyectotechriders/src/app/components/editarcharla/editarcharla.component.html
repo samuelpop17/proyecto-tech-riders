@@ -7,7 +7,7 @@
       (ngSubmit)="editarCharlaAdmin()"
       class="row"
     >
-      <div class="mt-1 col-md-6 mb-3 mb-md-0">
+      <div class="mt-1 col-md-6 mb-3 mb-md-3">
         <label class="form-label fw-bold">TechRider</label>
         <select class="form-select" #controlTechRider name="controlTechRider">
           <option
@@ -15,12 +15,12 @@
             [value]="techrider.idUsuario"
             [selected]="techrider.idUsuario == charla.idTechRider"
           >
-            {{ techrider.nombre }} {{ techrider.apellidos }}
-            {{ techrider.idUsuario }}
+            {{ techrider.nombre }} {{ techrider.apellidos }} (ID
+            {{ techrider.idUsuario }})
           </option>
         </select>
       </div>
-      <div class="mt-1 col-md-6">
+      <div class="mt-1 col-md-6 mb-3 mb-md-3">
         <label class="form-label fw-bold">Estado</label>
         <select class="form-select" #controlEstado name="controlEstado">
           <option
@@ -32,7 +32,7 @@
           </option>
         </select>
       </div>
-      <div class="mt-1 col-md-6">
+      <div class="mt-1 col-md-6 mb-3 mb-md-0">
         <label class="form-label fw-bold">Descripción</label>
         <input
           class="form-control"
