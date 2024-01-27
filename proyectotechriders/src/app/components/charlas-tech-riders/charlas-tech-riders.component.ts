@@ -18,7 +18,6 @@ export class CharlasTechRidersComponent implements OnInit {
     this._service.charlasPorVerTechRiders().subscribe((response) => {
       this.charlas = response;
       this.charlasCargadas = true;
-      console.log('hola: ' + response);
     });
   }
 

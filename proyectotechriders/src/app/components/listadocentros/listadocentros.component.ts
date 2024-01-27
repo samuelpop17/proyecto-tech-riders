@@ -67,7 +67,6 @@ export class ListadocentrosComponent implements OnInit {
       this.filter_array = this.centrosReset.filter(
         (x) => x.idProvincia === this.provincia
       );
-      console.log(this.filter_array);
     } else {
       this.filter_array = this.centrosReset.filter(
         (x) => x.nombre === this.empresa

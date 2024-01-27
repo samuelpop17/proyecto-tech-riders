@@ -26,7 +26,7 @@ export class ListadosempresaComponent implements OnInit {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
-      this._service.getEmpresasCentros().subscribe((response: any) => {
+      this._service.getEmpresasActivas().subscribe((response: any) => {
         this.empresas = response;
 
         this.empresas.forEach((centro) => {
@@ -54,7 +54,6 @@ export class ListadosempresaComponent implements OnInit {
     this.provincia = parseInt(
       this.selectprovincia.nativeElement.selectedOptions[0].value
     );
-    console.log(this.provincia);
     this.filter_array = [];
 
     if (this.empresa == 'todo' && this.provincia == 0) {
@@ -68,7 +67,6 @@ export class ListadosempresaComponent implements OnInit {
       this.filter_array = this.empresasReset.filter(
         (x) => x.idProvincia === this.provincia
       );
-      console.log(this.filter_array);
     } else {
       this.filter_array = this.empresasReset.filter(
         (x) => x.nombre === this.empresa

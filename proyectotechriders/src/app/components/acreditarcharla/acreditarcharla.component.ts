@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
-import { PeticionAltaUser } from 'src/app/models/PeticionAltaUser';
 import { SolicitudAcreditacionCharla } from 'src/app/models/SolicitudAcreditacionCharla';
-import { Charla } from 'src/app/models/Charla';
+
 @Component({
   selector: 'app-acreditarcharla',
   templateUrl: './acreditarcharla.component.html',
@@ -13,39 +12,35 @@ export class AcreditarcharlaComponent implements OnInit {
   public peticionesCharlas!: SolicitudAcreditacionCharla[];
   public charlas: any[] = [];
   public role!: number | null;
+  public acreditacionesCargadas: boolean = false;
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    if (this.role == 1) {
-      this.cargarDatos();
-    } else {
-      this._router.navigate(['/']);
-    }
+    if (this.role == 1) this.cargarDatos();
+    else this._router.navigate(['/']);
   }
+
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cambiarEstado(idCharla: number, idPeticion: number) {
     this._service.updateEstadoCharla(idCharla, 6).subscribe((response) => {
-      console.log(response);
       this.eliminarAcreditacion(idPeticion);
-      this.cargarDatos();
     });
   }
 
   eliminarAcreditacion(idPeticion: number) {
     this._service
-      .cambiarEstadoCharlaEliminar(idPeticion)
+      .solicitudAcreditacionEliminar(idPeticion)
       .subscribe((response) => {
         this.cargarDatos();
-        console.log(response);
       });
   }
 
   cargarDatos() {
+    this.acreditacionesCargadas = false;
     this.charlas = [];
     this._service.getAcreditacionesCharlas().subscribe((response) => {
       this.peticionesCharlas = response;
-      console.log(this.peticionesCharlas);
       this._service.getCharlas().subscribe((response) => {
         for (let i = 0; i < response.length; i++) {
           for (let j = 0; j < this.peticionesCharlas.length; j++) {
@@ -63,7 +58,7 @@ export class AcreditarcharlaComponent implements OnInit {
             }
           }
         }
-        console.log(this.charlas);
+        this.acreditacionesCargadas = true;
       });
     });
   }

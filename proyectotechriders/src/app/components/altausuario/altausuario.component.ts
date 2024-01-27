@@ -11,24 +11,22 @@ export class AltausuarioComponent implements OnInit {
   public altaUsuarios: any[] = [];
   public peticionesAltaUsuarios!: PeticionAltaUser[];
   public role!: number | null;
+  public peticionesCargadas: boolean = false;
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    if (this.role == 1) {
-      this.cargarDatos();
-    } else {
-      this._router.navigate(['/']);
-    }
+    if (this.role == 1) this.cargarDatos();
+    else this._router.navigate(['/']);
   }
+
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cargarDatos() {
+    this.peticionesCargadas = false;
     this.altaUsuarios = [];
     this._service.getPeticionesAltaUser().subscribe((response) => {
       this.peticionesAltaUsuarios = response;
-      //console.log(this.peticionesAltaUsuarios);
       this._service.getUsuarios().subscribe((response) => {
-        //console.log(response);
         for (let i = 0; i < response.length; i++) {
           for (let j = 0; j < this.peticionesAltaUsuarios.length; j++) {
             if (
@@ -47,25 +45,27 @@ export class AltausuarioComponent implements OnInit {
               break;
             }
           }
+          this.peticionesCargadas = true;
         }
-        //console.log(this.altaUsuarios);
       });
     });
   }
 
   cambiarEstadoUsuario(idUsuario: number, idPeticion: number) {
     this._service.cambiarEstadoUsuario(idUsuario).subscribe((response) => {
-      console.log(response);
-      this.eliminarPeticionUsuario(idPeticion);
-      this.cargarDatos();
+      this._service
+        .eliminarPeticionUsuario(idPeticion)
+        .subscribe((response) => {
+          this.cargarDatos();
+        });
     });
   }
 
-  eliminarPeticionUsuario(idPeticion: number) {
+  eliminarPeticionUsuario(idUsuario: number, idPeticion: number) {
     this._service.eliminarPeticionUsuario(idPeticion).subscribe((response) => {
-      this.cargarDatos();
-      console.log(response);
-      this.cargarDatos();
+      this._service.deleteUsuario(idUsuario).subscribe((response) => {
+        this.cargarDatos();
+      });
     });
   }
 }

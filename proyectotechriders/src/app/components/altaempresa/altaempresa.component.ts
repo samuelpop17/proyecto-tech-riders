@@ -12,15 +12,18 @@ export class AltaempresaComponent implements OnInit {
   public altaEmpresa: any[] = [];
   public peticionesAltaEmpresa!: PeticionCentroEmpresa[];
   public role!: number | null;
+  public peticionesCargadas: boolean = false;
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
     if (this.role == 1) this.cargarDatos();
     else this._router.navigate(['/']);
   }
+
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cargarDatos() {
+    this.peticionesCargadas = false;
     this.altaEmpresa = [];
     this._service.getPeticionesCentroEmpresa().subscribe((response) => {
       this.peticionesAltaEmpresa = response;
@@ -47,20 +50,24 @@ export class AltaempresaComponent implements OnInit {
             }
           }
         }
+        this.peticionesCargadas = true;
       });
     });
   }
+
   cambiarEstadoEmpresa(idEmpresa: number, idPeticion: number) {
     this._service.cambiarEstadoEmpresa(idEmpresa).subscribe((response) => {
-      console.log(response);
-      this.EliminarPeticionEmpresa(idPeticion);
-      this.cargarDatos();
+      this._service.deletePeticionEmpresa(idPeticion).subscribe((response) => {
+        this.cargarDatos();
+      });
     });
   }
-  EliminarPeticionEmpresa(idPeticion: number) {
+
+  eliminarPeticionEmpresa(idEmpresa: number, idPeticion: number) {
     this._service.deletePeticionEmpresa(idPeticion).subscribe((response) => {
-      console.log(response);
-      this.cargarDatos();
+      this._service.deleteEmpresaCentro(idEmpresa).subscribe((response) => {
+        this.cargarDatos();
+      });
     });
   }
 }

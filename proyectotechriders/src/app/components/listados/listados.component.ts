@@ -75,7 +75,6 @@ export class ListadosComponent implements OnInit {
       color: '#333333',
       confirmButtonColor: '#212529',
       confirmButtonText: 'Cerrar',
-      icon: 'info',
       text: comentario,
       title: 'Valoración: ' + valoracion + '/10',
     });

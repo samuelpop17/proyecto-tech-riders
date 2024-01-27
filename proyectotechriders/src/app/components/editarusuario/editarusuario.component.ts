@@ -58,7 +58,6 @@ export class EditarusuarioComponent implements OnInit {
               .subscribe((response) => {
                 this.empresaLoaded = true;
                 this.empresaCentro = response;
-                console.log(response);
               });
           }
         });
@@ -67,7 +66,6 @@ export class EditarusuarioComponent implements OnInit {
   }
 
   editarPerfil(): void {
-    console.log(this.publico);
     let usuario: Usuario = {
       idUsuario: this.usuario.idUsuario,
       nombre: this.controlNombre.nativeElement.value,

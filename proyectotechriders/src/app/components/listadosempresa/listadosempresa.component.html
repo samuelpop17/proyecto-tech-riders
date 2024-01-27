@@ -1,17 +1,17 @@
 <div class="container mb-3">
   <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()">
     <div class="card shadow-card p-4">
-      <h1 class="fw-bold text-center">Centros</h1>
+      <h1 class="fw-bold text-center">Empresas</h1>
       <div class="row">
         <div class="mt-2 col-md-4">
           <label class="form-label fw-bold">Centro</label>
           <select class="form-select" #selectempresa name="selectempresa">
-            <option value="todo">Todos</option>
+            <option value="todo">Todas</option>
             <option
-              *ngFor="let centro of empresasFiltroNombre"
-              value="{{ centro.nombre }}"
+              *ngFor="let empresa of empresasFiltroNombre"
+              value="{{ empresa.nombre }}"
             >
-              {{ centro.nombre }}
+              {{ empresa.nombre }}
             </option>
           </select>
         </div>

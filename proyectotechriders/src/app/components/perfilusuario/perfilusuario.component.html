@@ -94,13 +94,6 @@
                   Modificar contraseña
                 </a>
               </li>
-
-              <!-- representante si no tiene empresa -->
-              <li *ngIf="role.idRole == 4 && !empresaExists">
-                <a class="dropdown-item" [routerLink]="['/crearempresa']">
-                  Crear empresa
-                </a>
-              </li>
             </ul>
           </div>
         </div>
