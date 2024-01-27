@@ -26,15 +26,14 @@ export class AcreditarcharlaComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cambiarEstado(idCharla: number, idPeticion: number) {
-    this._service
-      .cambiarEstadoCharlaAcreditar(idCharla)
-      .subscribe((response) => {
-        console.log(response);
-        this.EliminarAcreditacion(idPeticion);
-        this.cargarDatos();
-      });
+    this._service.updateEstadoCharla(idCharla, 6).subscribe((response) => {
+      console.log(response);
+      this.eliminarAcreditacion(idPeticion);
+      this.cargarDatos();
+    });
   }
-  EliminarAcreditacion(idPeticion: number) {
+
+  eliminarAcreditacion(idPeticion: number) {
     this._service
       .cambiarEstadoCharlaEliminar(idPeticion)
       .subscribe((response) => {
@@ -44,6 +43,7 @@ export class AcreditarcharlaComponent implements OnInit {
   }
 
   cargarDatos() {
+    this.charlas = [];
     this._service.getAcreditacionesCharlas().subscribe((response) => {
       this.peticionesCharlas = response;
       console.log(this.peticionesCharlas);
@@ -52,6 +52,7 @@ export class AcreditarcharlaComponent implements OnInit {
           for (let j = 0; j < this.peticionesCharlas.length; j++) {
             if (this.peticionesCharlas[j].idCharla == response[i].idCharla) {
               this.charlas.push({
+                idCharla: response[i].idCharla,
                 descripcion: response[i].descripcion,
                 fechaCharla: response[i].fechaCharla,
                 fechaSolicitud: response[i].fechaSolicitud,

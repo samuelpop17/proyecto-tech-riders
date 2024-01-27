@@ -24,6 +24,7 @@ export class AltausuarioComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cargarDatos() {
+    this.altaUsuarios = [];
     this._service.getPeticionesAltaUser().subscribe((response) => {
       this.peticionesAltaUsuarios = response;
       //console.log(this.peticionesAltaUsuarios);
@@ -56,13 +57,13 @@ export class AltausuarioComponent implements OnInit {
   cambiarEstadoUsuario(idUsuario: number, idPeticion: number) {
     this._service.cambiarEstadoUsuario(idUsuario).subscribe((response) => {
       console.log(response);
-      this.EliminarPeticionUSuario(idPeticion);
+      this.eliminarPeticionUsuario(idPeticion);
       this.cargarDatos();
     });
   }
 
-  EliminarPeticionUSuario(idPeticion: number) {
-    this._service.EliminarPeticionUSuario(idPeticion).subscribe((response) => {
+  eliminarPeticionUsuario(idPeticion: number) {
+    this._service.eliminarPeticionUsuario(idPeticion).subscribe((response) => {
       this.cargarDatos();
       console.log(response);
       this.cargarDatos();

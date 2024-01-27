@@ -23,6 +23,7 @@ export class EditarusuarioComponent implements OnInit {
   public empresaExists: boolean = false;
   public empresaLoaded: boolean = false;
   public role!: number;
+  public publico: number = 0;
 
   // usuario
   @ViewChild('controlnombre') controlNombre!: ElementRef;
@@ -46,6 +47,7 @@ export class EditarusuarioComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this._service.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
+        this.publico = this.usuario.linkedInVisible;
         this.role = parseInt(localStorage.getItem('role') ?? '0');
         this._service.getProvincias().subscribe((response) => {
           this.provincias = response;
@@ -65,6 +67,7 @@ export class EditarusuarioComponent implements OnInit {
   }
 
   editarPerfil(): void {
+    console.log(this.publico);
     let usuario: Usuario = {
       idUsuario: this.usuario.idUsuario,
       nombre: this.controlNombre.nativeElement.value,
@@ -77,6 +80,7 @@ export class EditarusuarioComponent implements OnInit {
       idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
       idEmpresaCentro: this.usuario.idEmpresaCentro,
       estado: this.usuario.estado,
+      linkedInVisible: this.publico ? 1 : 0,
     };
 
     this._service.editUsuario(usuario).subscribe((response) => {

@@ -61,8 +61,21 @@
         placeholder="612345678"
       />
     </div>
-    <div class="mt-3 col-md-6">
-      <label class="form-label fw-bold">LinkedIn</label>
+    <div class="mt-3">
+      <label class="form-label fw-bold d-inline">
+        <span>LinkedIn</span>
+        <div class="form-check form-switch">
+          <input
+            type="checkbox"
+            role="switch"
+            class="form-check-input"
+            [(ngModel)]="publico"
+            name="controllinkedinpublic"
+            #controllinkedinpublic
+          />
+          <label class="form-check-label fw-bold">¿Público?</label>
+        </div>
+      </label>
       <input
         type="text"
         class="form-control"
@@ -71,7 +84,7 @@
         placeholder="El enlace a tu LinkedIn"
       />
     </div>
-    <div class="mt-3 col-md-6">
+    <div class="mt-3">
       <label class="form-label fw-bold">Contraseña</label>
       <input
         type="password"
@@ -112,13 +125,18 @@
         #selectempresacentro
         *ngIf="publicEmpresasCentros"
       >
+        <option value="0" *ngIf="roleElegido == 3 || roleElegido == 4">
+          <span *ngIf="roleElegido == 3"> - A título personal - </span>
+          <span *ngIf="roleElegido == 4">
+            - Sin empresa (crear después) -
+          </span>
+        </option>
         <option
           *ngFor="let empresaCentro of publicEmpresasCentros"
           [value]="empresaCentro.idEmpresaCentro"
         >
           {{ empresaCentro.nombre }}
         </option>
-        <option value="0">-Otra empresa-</option>
       </select>
       <img
         *ngIf="!publicEmpresasCentros"

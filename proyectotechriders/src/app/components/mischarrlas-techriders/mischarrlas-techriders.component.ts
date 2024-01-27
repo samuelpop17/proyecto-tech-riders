@@ -18,7 +18,6 @@ export class MischarrlasTechridersComponent implements OnInit {
     this._service.estadoCharlasTechRiders().subscribe((response) => {
       this.charlas = response;
       this.charlasCargadas = true;
-      console.log('hola: ' + response);
     });
   }
 
@@ -36,7 +35,7 @@ export class MischarrlasTechridersComponent implements OnInit {
 
   acreditarCharla(idcharla: number) {
     this._service
-      .modificarEstadodeUnaCharlaTechRider(idcharla, 6)
+      .createSolicitudAcreditacionCharla(idcharla)
       .subscribe((response) => {
         this._router
           .navigate(['/usuario/perfil'], { skipLocationChange: true })

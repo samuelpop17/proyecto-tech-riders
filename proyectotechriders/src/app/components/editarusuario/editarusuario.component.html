@@ -46,8 +46,21 @@
         placeholder="612345678"
       />
     </div>
-    <div class="mt-3 col-md-6">
-      <label class="form-label fw-bold">LinkedIn</label>
+    <div class="mt-3">
+      <label class="form-label fw-bold d-inline">
+        <span>LinkedIn</span>
+        <div class="form-check form-switch">
+          <input
+            type="checkbox"
+            role="switch"
+            class="form-check-input"
+            [(ngModel)]="publico"
+            name="controllinkedinpublic"
+            #controllinkedinpublic
+          />
+          <label class="form-check-label fw-bold">¿Público?</label>
+        </div>
+      </label>
       <input
         type="text"
         class="form-control"
@@ -55,6 +68,18 @@
         name="controllinkedin"
         #controllinkedin
         placeholder="El enlace a tu LinkedIn"
+      />
+    </div>
+    <div class="mt-3 col-md-6">
+      <label class="form-label fw-bold">Contraseña</label>
+      <input
+        type="password"
+        autocomplete="current-password"
+        class="form-control"
+        [value]="usuario.password"
+        name="controlpassword"
+        #controlpassword
+        placeholder="Tu contraseña"
       />
     </div>
     <div class="mt-3 col-md-6">
@@ -81,7 +106,7 @@
           type="text"
           class="form-control"
           [value]="empresaCentro.nombre"
-          name="controllinkedin"
+          name="controlnombreempresa"
           #controlnombreempresa
         />
       </div>
@@ -91,7 +116,7 @@
           type="text"
           class="form-control"
           [value]="empresaCentro.telefono"
-          name="controllinkedin"
+          name="controltelefonoempresa"
           #controltelefonoempresa
         />
       </div>
@@ -101,7 +126,7 @@
           type="text"
           class="form-control"
           [value]="empresaCentro.cif"
-          name="controllinkedin"
+          name="cif"
           #cif
         />
       </div>
@@ -111,7 +136,7 @@
           type="text"
           class="form-control"
           [value]="empresaCentro.direccion"
-          name="controllinkedin"
+          name="direccion"
           #direccion
         />
       </div>
@@ -121,7 +146,7 @@
           type="text"
           class="form-control"
           [value]="empresaCentro.personaContacto"
-          name="controllinkedin"
+          name="personaContacto"
           #personaContacto
         />
       </div>
@@ -131,7 +156,7 @@
           type="text"
           class="form-control"
           [value]="empresaCentro.razonSocial"
-          name="controllinkedin"
+          name="razonsocial"
           #razonsocial
         />
       </div>

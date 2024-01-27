@@ -21,7 +21,7 @@
         </li>
 
         <!-- ADMIN -->
-        <li class="nav-item dropdown" *ngIf="role == 1">
+        <li class="nav-item dropdown" *ngIf="!role || role == 1">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -34,7 +34,7 @@
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" [routerLink]="['/listadostr']">
-                TechRider
+                Tech Riders
               </a>
             </li>
             <li>

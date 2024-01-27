@@ -11,7 +11,6 @@ import { PeticionTecnologia } from 'src/app/models/PeticionTecnologia';
 export class AniadirtecnologiaComponent implements OnInit {
   public role!: number | null;
   public peticionesTecnologias!: PeticionTecnologia[];
-  // public charlas: any[] = [];
 
   ngOnInit(): void {
     if (this.role != localStorage.getItem('role'))
@@ -22,6 +21,7 @@ export class AniadirtecnologiaComponent implements OnInit {
       this._router.navigate(['/']);
     }
   }
+
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cargarDatos() {
@@ -36,10 +36,10 @@ export class AniadirtecnologiaComponent implements OnInit {
       console.log(response);
       console.log(nombre);
       this.cargarDatos();
-      this.EliminarAcreditacion(idPeticionTecnologia);
+      this.eliminarPeticion(idPeticionTecnologia);
     });
   }
-  EliminarAcreditacion(idPeticionTecnologia: number) {
+  eliminarPeticion(idPeticionTecnologia: number) {
     this._service
       .deleteTeconologia(idPeticionTecnologia)
       .subscribe((response) => {

@@ -96,3 +96,15 @@ body#bodyprincipal {
 .dropdown-center > .dropdown-menu {
   inset: auto !important;
 }
+
+.cal-month-view .cal-open-day-events {
+  background-color: #212529;
+}
+
+.cal-month-view .cal-day-badge {
+  background-color: #327fb9;
+}
+
+.cal-month-view .cal-day-cell.cal-today .cal-day-number {
+  font-size: 1.2rem;
+}

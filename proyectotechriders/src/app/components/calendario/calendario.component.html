@@ -1,87 +1,58 @@
 <div>
-  <div class="row text-center">
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-dark"
-          mwlCalendarPreviousView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
+  <div class="row text-center shadow-card p-3">
+    <div class="mb-3">
+      <h1 class="fw-bold text-center">Calendario</h1>
+    </div>
+    <div class="col-3 text-sm">
+      <div
+        class="btn btn-dark w-100"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-caret-left-fill"
+          viewBox="0 0 16 16"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-caret-left-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"
-            />
-          </svg>
-        </div>
-        <div
-          class="btn btn-outline-dark"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
-          Hoy
-        </div>
-        <div
-          class="btn btn-dark"
-          mwlCalendarNextView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-caret-right-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
-            />
-          </svg>
-        </div>
+          <path
+            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"
+          />
+        </svg>
       </div>
     </div>
-    <div class="col-md-4 mt-2 mt-md-1">
+    <div class="col-6 mt-0 mt-md-1 text-muted">
       <h3>{{ viewDate | calendarDate : view + "ViewTitle" : "es" }}</h3>
     </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-dark"
-          (click)="setView(CalendarView.Month)"
-          [class.active]="view === CalendarView.Month"
+    <div class="col-3">
+      <div
+        class="btn btn-dark w-100"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-caret-right-fill"
+          viewBox="0 0 16 16"
         >
-          Mes
-        </div>
-        <div
-          class="btn btn-dark"
-          (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
-        >
-          Semana
-        </div>
-        <div
-          class="btn btn-dark"
-          (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day"
-        >
-          Día
-        </div>
+          <path
+            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
+          />
+        </svg>
       </div>
     </div>
   </div>
   <br />
-  <div [ngSwitch]="view">
+  <div class="shadow-card p-3" [ngSwitch]="view">
     <mwl-calendar-month-view
       *ngSwitchCase="CalendarView.Month"
       [viewDate]="viewDate"
@@ -94,24 +65,5 @@
       [weekStartsOn]="weekStartsOn"
     >
     </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="CalendarView.Week"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      [weekStartsOn]="weekStartsOn"
-    >
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="CalendarView.Day"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-day-view>
   </div>
 </div>

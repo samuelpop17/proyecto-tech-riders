@@ -25,6 +25,7 @@ export class AltaempresaComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   cargarDatos() {
+    this.altaEmpresa = [];
     this._service.getPeticionesCentroEmpresa().subscribe((response) => {
       this.peticionesAltaEmpresa = response;
       //console.log(this.peticionesAltaUsuarios);
@@ -57,7 +58,7 @@ export class AltaempresaComponent implements OnInit {
     });
   }
   cambiarEstadoEmpresa(idEmpresa: number, idPeticion: number) {
-    this._service.CambiarEstadoEmpresa(idEmpresa).subscribe((response) => {
+    this._service.cambiarEstadoEmpresa(idEmpresa).subscribe((response) => {
       console.log(response);
       this.EliminarPeticionEmpresa(idPeticion);
       this.cargarDatos();

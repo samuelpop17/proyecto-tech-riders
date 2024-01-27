@@ -44,15 +44,18 @@
     src="../../../assets/images/loading.gif"
   />
 
-  <div class="table-responsive" *ngIf="charlasCargadas">
-    <table class="table mt-4">
-      <thead>
+  <div
+    class="table-responsive card mt-3 border-bottom-0"
+    *ngIf="charlasCargadas"
+  >
+    <table class="table table-sm mb-0">
+      <thead class="small bg-black rounded-4 table-secondary">
         <tr>
-          <th class="text-muted">Descripción</th>
-          <th class="text-muted">Curso</th>
-          <th class="text-muted">Fecha</th>
-          <th class="text-muted">Estado</th>
-          <th class="text-muted">TechRider</th>
+          <th class="text-muted">DESCRIPCIÓN</th>
+          <th class="text-muted">CURSO</th>
+          <th class="text-muted">FECHA</th>
+          <th class="text-muted">ESTADO</th>
+          <th class="text-muted">TECHRIDER</th>
           <th></th>
         </tr>
       </thead>
@@ -79,13 +82,6 @@
               "
             >
               Editar
-            </a>
-            <a
-              class="btn btn-dark btn-sm me-1"
-              *ngIf="charla.estadoCharla == 'PROCESO'"
-              (click)="cerrarCharla(charla.idCharla)"
-            >
-              Cerrar
             </a>
             <a
               class="btn btn-dark btn-sm me-1"

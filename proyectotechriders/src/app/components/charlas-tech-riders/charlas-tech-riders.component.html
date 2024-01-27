@@ -1,6 +1,8 @@
 <div class="shadow-card p-4 mb-3" *ngIf="charlasCargadas">
-  <h1 class="fw-bold">Charlas Disponibles</h1>
-  <hr class="border border-dark opacity-50" />
+  <h1 class="fw-bold text-center">Charlas disponibles</h1>
+  <p class="text-muted text-center">
+    Todas las charlas sin TechRider según tus tecnologías
+  </p>
 
   <div class="table-responsive">
     <table class="table mt-3">
@@ -34,11 +36,11 @@
             <a
               class="btn btn-dark btn-sm"
               (click)="asignarCharla(charla.idCharla)"
-              >Asignarse</a
             >
+              Asignarse
+            </a>
           </td>
         </tr>
-        <!-- Puedes agregar más filas según tus necesidades -->
       </tbody>
     </table>
   </div>

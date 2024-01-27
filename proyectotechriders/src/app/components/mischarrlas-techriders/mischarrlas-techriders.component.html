@@ -1,6 +1,8 @@
 <div class="shadow-card p-4 mb-3" *ngIf="charlasCargadas">
-  <h1 class="fw-bold">Mis Charlas</h1>
-  <hr class="border border-dark opacity-50" />
+  <h1 class="fw-bold text-center">Mis charlas</h1>
+  <p class="text-muted text-center">
+    Todas las charlas a las que estás asignado
+  </p>
 
   <div class="table-responsive">
     <table class="table mt-3">
@@ -32,6 +34,7 @@
             </a>
             <!-- Botón DESASIGNARSE para charlas estado PROCESO  -->
             <a
+              *ngIf="charla.idEstadoCharla == 3"
               class="btn btn-dark btn-sm me-1"
               (click)="anularCharla(charla.idCharla)"
             >
@@ -39,6 +42,7 @@
             </a>
             <!-- Botón PEDIR ACRED. para charlas estado FINALIZADA -->
             <a
+              *ngIf="charla.idEstadoCharla == 5"
               class="btn btn-dark btn-sm me-1"
               (click)="acreditarCharla(charla.idCharla)"
             >
@@ -46,7 +50,6 @@
             </a>
           </td>
         </tr>
-        <!-- Puedes agregar más filas según tus necesidades -->
       </tbody>
     </table>
   </div>

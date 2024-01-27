@@ -2,6 +2,7 @@
   <table class="table table-responsive mt-3">
     <thead class="border-dark">
       <tr>
+        <th>ID</th>
         <th>Descripción</th>
         <th>Fecha Charla</th>
         <th>Fecha Solicitud</th>
@@ -12,9 +13,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let charla of charlas">
+        <td>{{ charla.idCharla }}</td>
         <td>{{ charla.descripcion }}</td>
-        <td>{{ charla.fechaCharla }}</td>
-        <td>{{ charla.fechaSolicitud }}</td>
+        <td>{{ charla.fechaCharla | date : "medium" }}</td>
+        <td>{{ charla.fechaSolicitud | date : "medium" }}</td>
         <td>{{ charla.modalidad }}</td>
         <td>{{ charla.turno }}</td>
         <td>
@@ -26,7 +28,7 @@
           </button>
           <button
             class="btn btn-dark btn-sm me-1"
-            (click)="EliminarAcreditacion(charla.idPeticionAltaUsers)"
+            (click)="eliminarAcreditacion(charla.idPeticionAltaUsers)"
           >
             Denegar
           </button>
