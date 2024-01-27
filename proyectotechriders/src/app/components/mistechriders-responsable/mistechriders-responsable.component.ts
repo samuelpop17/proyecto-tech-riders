@@ -14,7 +14,7 @@ export class MistechridersResponsableComponent implements OnInit {
   public charlas: DetallesCharlas[] = [];
   constructor(private _service: ServicePrincipal, private _router: Router) {}
   ngOnInit(): void {
-    this._service.getdatosusuarioparaidempresa().subscribe((response) => {
+    this._service.getPerfilUsuario().subscribe((response) => {
       this.idempresa = response;
       console.log('el id de empresa:' + response.idEmpresaCentro);
 

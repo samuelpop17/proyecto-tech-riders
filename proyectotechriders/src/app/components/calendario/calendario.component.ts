@@ -16,10 +16,11 @@ import {
 import { EventColor } from 'calendar-utils';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Charla } from 'src/app/models/Charla';
+import { Router } from '@angular/router';
 
 const colors: Record<string, EventColor> = {
-  grey: {
-    primary: '#4D5154',
+  blue: {
+    primary: '#327FB9',
     secondary: 'FAE3E3',
   },
 };
@@ -45,17 +46,15 @@ const colors: Record<string, EventColor> = {
 export class CalendarioComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
-  constructor(private _service: ServicePrincipal) {}
+  constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
-
   modalData!: {
     action: string;
     event: CalendarEvent;
   };
-
   refresh = new Subject<void>();
   events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = true;
@@ -64,7 +63,6 @@ export class CalendarioComponent implements OnInit {
   ngOnInit(): void {
     this._service.getCharlas().subscribe((response) => {
       let charlas: Charla[] = response;
-      console.log(charlas);
       charlas.forEach((charla: Charla) => {
         this.events.push({
           id: charla.idCharla,
@@ -73,8 +71,7 @@ export class CalendarioComponent implements OnInit {
           title: charla.descripcion,
           allDay: true,
           actions: [],
-
-          color: { ...colors['grey'] },
+          color: { ...colors['red'] },
         });
       });
       this.refresh.next();
@@ -112,11 +109,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
+    this._router.navigate(['/charlas', event.id]);
   }
 
   closeOpenMonthViewDay() {

@@ -46,7 +46,6 @@ export class EditarcharlaComponent implements OnInit {
               this.usuarios = this.usuarios.filter(
                 (usuario) => usuario.idRole == 3
               );
-              //console.log(this.charla.idTechRider)
             });
 
             this._service.getEstadosCharlas().subscribe((response) => {

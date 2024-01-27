@@ -10,6 +10,7 @@ export class Usuario {
     public idRole: number,
     public idProvincia: number,
     public idEmpresaCentro: number,
-    public estado: number
+    public estado: number,
+    public linkedInVisible: number
   ) {}
 }

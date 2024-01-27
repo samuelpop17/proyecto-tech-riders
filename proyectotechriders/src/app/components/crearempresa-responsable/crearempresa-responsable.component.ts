@@ -4,6 +4,7 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
 import { EmpresaCentro } from 'src/app/models/EmpresaCentro';
 import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-crearempresa-responsable',
@@ -21,6 +22,7 @@ export class CrearempresaResponsableComponent implements OnInit {
 
   public provincias!: Provincia[];
   public nomRepresentante!: string;
+  public role!: number | null;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -29,9 +31,12 @@ export class CrearempresaResponsableComponent implements OnInit {
       this._service.getProvincias().subscribe((response) => {
         this.provincias = response;
       });
-      this._service.getPerfilUsuario().subscribe((response) => {
-        this.nomRepresentante = response.nombre + ' ' + response.apellidos;
-      });
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 4) {
+        this._service.getPerfilUsuario().subscribe((response) => {
+          this.nomRepresentante = response.nombre + ' ' + response.apellidos;
+        });
+      }
     } else this._router.navigate(['/login']);
   }
 
@@ -52,18 +57,26 @@ export class CrearempresaResponsableComponent implements OnInit {
     this._service.createEmpresaCentro(empresa).subscribe((response) => {
       let idEmpresa = response.idEmpresaCentro;
       this._service
-        .createPeticionAltaEmpresa(idEmpresa)
+        .findUsuario(parseInt(localStorage.getItem('idUsuario') ?? '0'))
         .subscribe((response) => {
-          Swal.fire({
-            color: '#333333',
-            icon: 'success',
-            showConfirmButton: false,
-            text: 'Empresa creada. Tendrá que ser validado por el administrador',
-            timer: 4000,
-            timerProgressBar: true,
-            title: 'Registro con éxito',
-          }).then((result) => {
-            this._router.navigate(['/usuario/perfil']);
+          let usuario: Usuario = response;
+          usuario.idEmpresaCentro = idEmpresa;
+          this._service.editUsuario(usuario).subscribe((response) => {
+            this._service
+              .createPeticionAltaEmpresa(idEmpresa)
+              .subscribe((response) => {
+                Swal.fire({
+                  color: '#333333',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  text: 'Empresa creada. Tendrá que ser validada por el administrador',
+                  timer: 4000,
+                  timerProgressBar: true,
+                  title: 'Registro con éxito',
+                }).then((result) => {
+                  this._router.navigate(['/usuario/perfil']);
+                });
+              });
           });
         });
     });

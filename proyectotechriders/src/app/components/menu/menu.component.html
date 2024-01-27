@@ -21,9 +21,7 @@
         </li>
 
         <!-- ADMIN -->
-        <div *ngIf="role == 1"></div>
-
-        <li class="nav-item dropdown" *ngIf="role == 1">
+        <li class="nav-item dropdown" *ngIf="!role || role == 1">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -36,7 +34,7 @@
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" [routerLink]="['/listadostr']">
-                TechRider
+                TechRiders
               </a>
             </li>
             <li>
@@ -89,7 +87,7 @@
         </li>
 
         <!-- DropDown charlas TechRiders -->
-        <li class="nav-item dropdown" *ngIf="role == 3">
+        <li class="nav-item dropdown" *ngIf="role == 3 || role == 4">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -103,12 +101,12 @@
             <div>
               <li>
                 <a class="dropdown-item" [routerLink]="['/charlastechriders']">
-                  Charlas Disponibles
+                  Charlas disponibles
                 </a>
               </li>
               <li>
                 <a class="dropdown-item" [routerLink]="['/mischarlastech']">
-                  Mis Charlas
+                  Mis charlas
                 </a>
               </li>
               <li>
@@ -116,7 +114,7 @@
                   class="dropdown-item"
                   [routerLink]="['/calendariomitechrider']"
                 >
-                  Mi Calendario
+                  Mi calendario
                 </a>
               </li>
             </div>

@@ -36,7 +36,11 @@ export class EditartecnologiastechriderComponent implements OnInit {
     this._service
       .deleteTecnologiaTechRider(this.id, idTecnologia)
       .subscribe((response) => {
-        this._router.navigate(['/usuario/perfil']);
+        this._router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this._router.navigate(['/usuario/editar-tecnologias']);
+          });
       });
   }
 
@@ -44,7 +48,11 @@ export class EditartecnologiastechriderComponent implements OnInit {
     this._service
       .insertTecnologiaTechRider(this.id, idTecnologia)
       .subscribe((response) => {
-        this._router.navigate(['/usuario/perfil']);
+        this._router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this._router.navigate(['/usuario/editar-tecnologias']);
+          });
       });
   }
 }

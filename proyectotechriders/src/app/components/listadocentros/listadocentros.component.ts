@@ -11,8 +11,7 @@ export class ListadocentrosComponent implements OnInit {
   public centros!: any[];
   public centrosReset: any[] = [];
   public proFiltro!: any[];
-  public charlasFiltroEmpresa!: any[]; //meter desde consulta
-  public charlasFiltroPro!: any[]; //meter desde consulta
+  public centrosFiltroNombre!: any[]; //meter desde consulta
   public provincias!: any[];
   @ViewChild('selectprovincia') selectprovincia!: ElementRef;
   @ViewChild('selectempresa') selectempresa!: ElementRef;
@@ -20,62 +19,46 @@ export class ListadocentrosComponent implements OnInit {
   public provincia!: any;
   public filter_array!: any;
   public role!: number | null;
+  public centrosCargados: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.listaGeneral();
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-  }
-  listaGeneral(): void {
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
-    });
-    this._service.getEmpresasCentros().subscribe((response: any) => {
-      this.centros = response;
+      this._service.getEmpresasCentros().subscribe((response: any) => {
+        this.centros = response;
 
-      this.centros.forEach((centro) => {
-        console.log(centro.idTipoEmpresa);
-        this._service
-          .findProvincia(centro.idProvincia)
-          .subscribe((response) => {
-            centro.provincia = response.nombreProvincia;
-          });
+        this.centros.forEach((centro) => {
+          centro.provincia =
+            this.provincias[centro.idProvincia - 1].nombreProvincia;
+          if (centro.idTipoEmpresa == 2) this.centrosReset.push(centro);
+        });
 
-        if (centro.idTipoEmpresa == 2) {
-          this.centrosReset.push(centro);
-        }
-        console.log(this.centrosReset);
+        this.proFiltro = this.centrosReset;
+        this.centrosFiltroNombre = this.centrosReset;
+        this.centrosFiltroNombre = this.centrosFiltroNombre.filter(
+          (valor, indice, self) =>
+            indice === self.findIndex((v) => v.nombre === valor.nombre)
+        );
+        this.centrosCargados = true;
       });
-
-      this.proFiltro = this.centrosReset;
-      this.charlasFiltroEmpresa = this.centrosReset;
-      this.charlasFiltroPro = this.centrosReset;
-      this.charlasFiltroEmpresa = this.charlasFiltroEmpresa.filter(
-        (valor, indice, self) =>
-          indice === self.findIndex((v) => v.nombre === valor.nombre)
-      );
-      this.charlasFiltroPro = this.charlasFiltroPro.filter(
-        (valor, indice, self) =>
-          indice === self.findIndex((v) => v.idProvincia === valor.idProvincia)
-      );
     });
   }
 
   filtrarTabla() {
-    this.centros = this.proFiltro;
+    this.centrosReset = this.proFiltro;
     let i = 0;
-    this.empresa = this.selectempresa.nativeElement.value;
+    this.empresa = this.selectempresa.nativeElement.selectedOptions[0].value;
     this.provincia = parseInt(
       this.selectprovincia.nativeElement.selectedOptions[0].value
     );
-    console.log(this.provincia);
     this.filter_array = [];
 
     if (this.empresa == 'todo' && this.provincia == 0) {
-      this.listaGeneral();
-      console.log('entra');
+      this.centrosReset = this.proFiltro;
+      return;
     } else if (this.provincia == 0 && this.empresa != 'todo') {
       this.filter_array = this.centrosReset.filter(
         (x) => x.nombre === this.empresa
@@ -84,7 +67,6 @@ export class ListadocentrosComponent implements OnInit {
       this.filter_array = this.centrosReset.filter(
         (x) => x.idProvincia === this.provincia
       );
-      console.log(this.filter_array);
     } else {
       this.filter_array = this.centrosReset.filter(
         (x) => x.nombre === this.empresa
@@ -93,7 +75,6 @@ export class ListadocentrosComponent implements OnInit {
         (x: { idProvincia: any }) => x.idProvincia === this.provincia
       );
     }
-    //console.log(this.filter_array);
     this.centrosReset = this.filter_array;
   }
 }

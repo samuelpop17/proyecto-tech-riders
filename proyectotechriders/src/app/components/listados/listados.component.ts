@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listados',
@@ -18,35 +19,17 @@ export class ListadosComponent implements OnInit {
   public tr!: any;
   public filter_array!: any;
   public role!: number | null;
-
-  // let miArray = [
-  //   { id: 1, nombre: 'Objeto 1' },
-  //   { id: 2, nombre: 'Objeto 2' },
-  //   { id: 1, nombre: 'Objeto 1' },
-  //   { id: 3, nombre: 'Objeto 3' },
-  //   { id: 2, nombre: 'Objeto 2' }
-  // ];
-
-  //   miArray = miArray.filter((valor, indice, self) =>
-  //   indice === self.findIndex((v) => (
-  //     v.id === valor.id
-  //   ))
-  // );
+  public charlasCargadas: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.listaGeneral();
-    if (this.role != localStorage.getItem('role'))
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-  }
-  listaGeneral(): void {
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
     this._service.getCharlasView().subscribe((response: any) => {
       this.charlas = response;
       this.charlasFiltro = response;
       this.charlasFiltroTema = response;
       this.charlasFiltroTr = response;
-      //console.log(this.charlasFiltro);
       this.charlasFiltroTema = this.charlasFiltroTema.filter(
         (valor, indice, self) =>
           indice ===
@@ -56,27 +39,9 @@ export class ListadosComponent implements OnInit {
         (valor, indice, self) =>
           indice === self.findIndex((v) => v.techRider === valor.techRider)
       );
+      this.charlasCargadas = true;
     });
-
-    //console.log(this.charlasFiltro);
-
-    // console.log(this.charlasFiltro);
-    // this.charlasFiltro = this.charlasFiltro.filter((valor, indice, self)=>
-    // indice ===self.findIndex((v)=>(
-    //   v.descripcionCharla === valor.descripcionCharla
-    // ))
-    // );
   }
-  // filtarTemas(){
-
-  //   console.log(this.charlasFiltro);
-  //   this.charlasFiltro = this.charlasFiltro.filter((valor, indice, self)=>
-  //   indice ===self.findIndex((v)=>(
-  //     v.descripcionCharla === valor.descripcionCharla
-  //   ))
-  //   );
-
-  // }
 
   filtrarTabla() {
     this.charlas = this.charlasFiltro;
@@ -86,7 +51,8 @@ export class ListadosComponent implements OnInit {
     this.filter_array = [];
 
     if (this.tema == 'todo' && this.tr == 'todo') {
-      this.listaGeneral();
+      this.charlas = this.charlasFiltro;
+      return;
     } else if (this.tr == 'todo' && this.tema != 'todo') {
       this.filter_array = this.charlas.filter(
         (x) => x.descripcionCharla === this.tema
@@ -101,7 +67,16 @@ export class ListadosComponent implements OnInit {
         (x: { techRider: any }) => x.techRider === this.tr
       );
     }
-    //console.log(this.filter_array);
     this.charlas = this.filter_array;
+  }
+
+  getValoracion(valoracion: number, comentario: string) {
+    Swal.fire({
+      color: '#333333',
+      confirmButtonColor: '#212529',
+      confirmButtonText: 'Cerrar',
+      text: comentario,
+      title: 'Valoración: ' + valoracion + '/10',
+    });
   }
 }

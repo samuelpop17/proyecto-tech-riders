@@ -17,10 +17,11 @@ import { EventColor } from 'calendar-utils';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 
 import { DetallesEstadoCharlaTech } from 'src/app/models/DetallesEstadoCharlaTechRiders';
+import { Router } from '@angular/router';
 
 const colors: Record<string, EventColor> = {
-  grey: {
-    primary: '#4D5154',
+  blue: {
+    primary: '#327FB9',
     secondary: 'FAE3E3',
   },
 };
@@ -46,17 +47,15 @@ const colors: Record<string, EventColor> = {
 export class CalendarioTechRidersCharlasComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
-  constructor(private _service: ServicePrincipal) {}
+  constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
-
   modalData!: {
     action: string;
     event: CalendarEvent;
   };
-
   refresh = new Subject<void>();
   events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = true;
@@ -65,7 +64,6 @@ export class CalendarioTechRidersCharlasComponent implements OnInit {
   ngOnInit(): void {
     this._service.estadoCharlasTechRiders().subscribe((response) => {
       let charlas: DetallesEstadoCharlaTech[] = response;
-      console.log(charlas);
       charlas.forEach((charla: DetallesEstadoCharlaTech) => {
         this.events.push({
           id: charla.idCharla,
@@ -74,7 +72,7 @@ export class CalendarioTechRidersCharlasComponent implements OnInit {
           title: charla.descripcionCharla,
           allDay: true,
           actions: [],
-          color: { ...colors['grey'] },
+          color: { ...colors['blue'] },
         });
       });
       this.refresh.next();
@@ -112,11 +110,7 @@ export class CalendarioTechRidersCharlasComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
+    this._router.navigate(['/charlas', event.id]);
   }
 
   closeOpenMonthViewDay() {

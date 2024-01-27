@@ -43,13 +43,12 @@ export class CharlasprofesorComponent implements OnInit {
 
   filtrarCharlas(): void {
     let estado = this.selectEstado.nativeElement.selectedOptions[0].value;
-    this.charlasFiltradas = this.charlas.filter(
-      (charla) => charla.idEstadoCharla == estado
-    );
-  }
-
-  reiniciarFiltro(): void {
-    this.charlasFiltradas = this.charlas;
+    if (estado == 0) this.charlasFiltradas = this.charlas;
+    else {
+      this.charlasFiltradas = this.charlas.filter(
+        (charla) => charla.idEstadoCharla == estado
+      );
+    }
   }
 
   recargarCharlas(): void {
@@ -85,34 +84,6 @@ export class CharlasprofesorComponent implements OnInit {
             timer: 4000,
             timerProgressBar: true,
             title: 'Charla cancelada',
-          });
-          this.recargarCharlas();
-        });
-      }
-    });
-  }
-
-  cerrarCharla(idCharla: number): void {
-    Swal.fire({
-      cancelButtonText: 'No',
-      color: '#333333',
-      confirmButtonColor: '#212529',
-      confirmButtonText: 'Si, cerrar',
-      icon: 'question',
-      showCancelButton: true,
-      text: 'Esto significa que ya has cerrado todos los detalles y trámites de la charla con el Tech Rider',
-      title: '¿Quieres cerrar esta charla?',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // ESTADO CERRADA: ID 4
-        this._service.updateEstadoCharla(idCharla, 4).subscribe((response) => {
-          Swal.fire({
-            color: '#333333',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            title: 'Charla cerrada',
           });
           this.recargarCharlas();
         });

@@ -27,28 +27,8 @@ export class RegisterusuarioComponent implements OnInit {
   public provincias!: Provincia[];
   public empresasCentros!: EmpresaCentro[];
   public publicEmpresasCentros!: EmpresaCentro[];
-  private techRiderTituloPersonal: EmpresaCentro = {
-    idEmpresaCentro: 0,
-    nombre: ' - A título personal - ',
-    direccion: '',
-    telefono: '',
-    personaContacto: '',
-    cif: '',
-    idProvincia: 0,
-    idTipoEmpresa: 1,
-    estadoEmpresa: 1,
-  };
-  private representanteSinEmpresa: EmpresaCentro = {
-    idEmpresaCentro: 0,
-    nombre: ' - Sin empresa (crear después) - ',
-    direccion: '',
-    telefono: '',
-    personaContacto: '',
-    cif: '',
-    idProvincia: 0,
-    idTipoEmpresa: 1,
-    estadoEmpresa: 1,
-  };
+  public roleElegido!: number;
+  public publico: number = 0;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
@@ -61,27 +41,22 @@ export class RegisterusuarioComponent implements OnInit {
       { idRole: 3, tipoRole: 'TECHRIDER' },
       { idRole: 4, tipoRole: 'REPRESENTANTE' },
     ];
-    this._service.getEmpresasCentros().subscribe((response) => {
+    this.roleElegido = 3;
+    this._service.getEmpresasCentrosActivas().subscribe((response) => {
       this.empresasCentros = response;
       this.publicEmpresasCentros = this.empresasCentros.filter(
         (empresaCentro) => empresaCentro.idTipoEmpresa == 1
       );
-      this.publicEmpresasCentros.unshift(this.techRiderTituloPersonal);
     });
   }
 
   changeEmpresasCentros(): void {
     let tipoEmpresa!: number;
-    this.selectRole.nativeElement.selectedOptions[0].value == 2
-      ? (tipoEmpresa = 2)
-      : (tipoEmpresa = 1);
+    this.roleElegido = this.selectRole.nativeElement.selectedOptions[0].value;
+    this.roleElegido == 2 ? (tipoEmpresa = 2) : (tipoEmpresa = 1);
     this.publicEmpresasCentros = this.empresasCentros.filter(
       (empresaCentro) => empresaCentro.idTipoEmpresa == tipoEmpresa
     );
-    if (this.selectRole.nativeElement.selectedOptions[0].value == 3)
-      this.publicEmpresasCentros.unshift(this.techRiderTituloPersonal);
-    if (this.selectRole.nativeElement.selectedOptions[0].value == 4)
-      this.publicEmpresasCentros.unshift(this.representanteSinEmpresa);
   }
 
   registerUsu(): void {
@@ -100,6 +75,7 @@ export class RegisterusuarioComponent implements OnInit {
       idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
       idEmpresaCentro: idEmpresaCentro,
       estado: 2,
+      linkedInVisible: this.publico ? 1 : 0,
     };
     this._service.createUsuario(usuario).subscribe((response) => {
       let idUsuario = response.idUsuario;

@@ -18,7 +18,6 @@ export class CharlasTechRidersComponent implements OnInit {
     this._service.charlasPorVerTechRiders().subscribe((response) => {
       this.charlas = response;
       this.charlasCargadas = true;
-      console.log('hola: ' + response);
     });
   }
 
@@ -36,12 +35,10 @@ export class CharlasTechRidersComponent implements OnInit {
         .asignarseUnaCharlaTechRider(idUsuarioNum, idcharla)
         .subscribe((response) => {
           // Llamar al servicio para modificar el estado de la charla
-          this._service
-            .modificarEstadodeUnaCharlaTechRider(idcharla, 3)
-            .subscribe(() => {
-              // Redirigir a la página mischarlastech
-              this._router.navigate(['/mischarlastech']);
-            });
+          this._service.updateEstadoCharla(idcharla, 3).subscribe(() => {
+            // Redirigir a la página mischarlastech
+            this._router.navigate(['/mischarlastech']);
+          });
         });
     } else {
       console.error('Error: idUsuario no encontrado en el localStorage');

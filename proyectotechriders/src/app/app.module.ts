@@ -14,9 +14,6 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AcreditarcharlaComponent } from './components/acreditarcharla/acreditarcharla.component';
 import { AltaempresaComponent } from './components/altaempresa/altaempresa.component';
@@ -51,6 +48,7 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 import { ServicePrincipal } from './services/service.principal';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
+import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +85,7 @@ import { ValoracioncharlaComponent } from './components/valoracioncharla/valorac
     AcreditarcharlaComponent,
     AniadirtecnologiaComponent,
     AltaempresaComponent,
+    DetallesTechRiderComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,9 +100,6 @@ import { ValoracioncharlaComponent } from './components/valoracioncharla/valorac
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    MatInputModule,
-    MatTableModule,
-    MatFormFieldModule,
   ],
 
   providers: [

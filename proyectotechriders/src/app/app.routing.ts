@@ -31,6 +31,7 @@ import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/pr
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
+import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -77,6 +78,7 @@ const routes: Routes = [
     path: 'calendariomitechrider',
     component: CalendarioTechRidersCharlasComponent,
   },
+  { path: 'techrider/:id', component: DetallesTechRiderComponent },
   { path: 'peticiones', component: PanelPeticionesAdminComponent },
 ];
 
