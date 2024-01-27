@@ -44,7 +44,11 @@ export class EditarcursosComponent implements OnInit {
     this._service
       .deleteCursoProfesor(idCurso, this.id)
       .subscribe((response) => {
-        this._router.navigate(['/usuario/perfil']);
+        this._router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this._router.navigate(['/usuario/editar-cursos']);
+          });
       });
   }
 
@@ -52,7 +56,11 @@ export class EditarcursosComponent implements OnInit {
     this._service
       .insertCursoProfesor(idCurso, this.id)
       .subscribe((response) => {
-        this._router.navigate(['/usuario/perfil']);
+        this._router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this._router.navigate(['/usuario/editar-cursos']);
+          });
       });
   }
 }

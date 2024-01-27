@@ -34,7 +34,7 @@
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" [routerLink]="['/listadostr']">
-                Tech Riders
+                TechRiders
               </a>
             </li>
             <li>
@@ -87,7 +87,7 @@
         </li>
 
         <!-- DropDown charlas TechRiders -->
-        <li class="nav-item dropdown" *ngIf="role == 3">
+        <li class="nav-item dropdown" *ngIf="role == 3 || role == 4">
           <a
             class="nav-link dropdown-toggle"
             role="button"

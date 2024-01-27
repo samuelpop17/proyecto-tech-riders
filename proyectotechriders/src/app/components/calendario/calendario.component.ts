@@ -109,7 +109,6 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
     this._router.navigate(['/charlas', event.id]);
   }
 

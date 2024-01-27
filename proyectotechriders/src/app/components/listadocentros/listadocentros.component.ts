@@ -11,8 +11,7 @@ export class ListadocentrosComponent implements OnInit {
   public centros!: any[];
   public centrosReset: any[] = [];
   public proFiltro!: any[];
-  public charlasFiltroEmpresa!: any[]; //meter desde consulta
-  public charlasFiltroPro!: any[]; //meter desde consulta
+  public centrosFiltroNombre!: any[]; //meter desde consulta
   public provincias!: any[];
   @ViewChild('selectprovincia') selectprovincia!: ElementRef;
   @ViewChild('selectempresa') selectempresa!: ElementRef;
@@ -20,15 +19,13 @@ export class ListadocentrosComponent implements OnInit {
   public provincia!: any;
   public filter_array!: any;
   public role!: number | null;
+  public centrosCargados: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
     if (this.role != localStorage.getItem('role'))
       this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this.listaGeneral();
-  }
-  listaGeneral(): void {
     this._service.getProvincias().subscribe((response: any) => {
       this.provincias = response;
       this._service.getEmpresasCentros().subscribe((response: any) => {
@@ -41,17 +38,12 @@ export class ListadocentrosComponent implements OnInit {
         });
 
         this.proFiltro = this.centrosReset;
-        this.charlasFiltroEmpresa = this.centrosReset;
-        this.charlasFiltroPro = this.centrosReset;
-        this.charlasFiltroEmpresa = this.charlasFiltroEmpresa.filter(
+        this.centrosFiltroNombre = this.centrosReset;
+        this.centrosFiltroNombre = this.centrosFiltroNombre.filter(
           (valor, indice, self) =>
             indice === self.findIndex((v) => v.nombre === valor.nombre)
         );
-        this.charlasFiltroPro = this.charlasFiltroPro.filter(
-          (valor, indice, self) =>
-            indice ===
-            self.findIndex((v) => v.idProvincia === valor.idProvincia)
-        );
+        this.centrosCargados = true;
       });
     });
   }
@@ -63,12 +55,11 @@ export class ListadocentrosComponent implements OnInit {
     this.provincia = parseInt(
       this.selectprovincia.nativeElement.selectedOptions[0].value
     );
-    console.log(this.provincia);
     this.filter_array = [];
 
     if (this.empresa == 'todo' && this.provincia == 0) {
-      this.listaGeneral();
-      console.log('entra');
+      this.centrosReset = this.proFiltro;
+      return;
     } else if (this.provincia == 0 && this.empresa != 'todo') {
       this.filter_array = this.centrosReset.filter(
         (x) => x.nombre === this.empresa

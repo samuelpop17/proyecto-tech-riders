@@ -18,15 +18,13 @@ export class ListadosComponent implements OnInit {
   public tr!: any;
   public filter_array!: any;
   public role!: number | null;
+  public charlasCargadas: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.listaGeneral();
     if (this.role != localStorage.getItem('role'))
       this.role = parseInt(localStorage.getItem('role') ?? '0');
-  }
-  listaGeneral(): void {
     this._service.getCharlasView().subscribe((response: any) => {
       this.charlas = response;
       this.charlasFiltro = response;
@@ -41,6 +39,7 @@ export class ListadosComponent implements OnInit {
         (valor, indice, self) =>
           indice === self.findIndex((v) => v.techRider === valor.techRider)
       );
+      this.charlasCargadas = true;
     });
   }
 
@@ -52,7 +51,8 @@ export class ListadosComponent implements OnInit {
     this.filter_array = [];
 
     if (this.tema == 'todo' && this.tr == 'todo') {
-      this.listaGeneral();
+      this.charlas = this.charlasFiltro;
+      return;
     } else if (this.tr == 'todo' && this.tema != 'todo') {
       this.filter_array = this.charlas.filter(
         (x) => x.descripcionCharla === this.tema

@@ -1,23 +1,4 @@
 <div class="container">
-  <div class="text-center">
-    <button class="btn btn-dark" style="margin: 10px">
-      <a [routerLink]="['/listados']" class="btn btn-dark">Ver Charlas</a>
-    </button>
-    <button class="btn btn-dark" style="margin: 10px">
-      <a [routerLink]="['/listadostr']" class="btn btn-dark">Ver TechRiders</a>
-    </button>
-    <button class="btn btn-dark" style="margin: 10px">
-      <a [routerLink]="['/listadosempresas']" class="btn btn-dark">
-        Ver Empresas
-      </a>
-    </button>
-    <button class="btn btn-dark" style="margin: 10px">
-      <a [routerLink]="['/listadoscentros']" class="btn btn-dark">
-        Ver Centros
-      </a>
-    </button>
-  </div>
-
   <form #filtraoTabla="ngForm" (ngSubmit)="filtrarTabla()" class="row">
     <div class="mt-2 col-md-4">
       <label class="form-label fw-bold">Empresa</label>
@@ -34,7 +15,7 @@
     <div class="mt-2 col-md-4">
       <label class="form-label fw-bold">Provincia</label>
       <select class="form-select" #selectprovincia name="selectprovincia">
-        <option value="0">Todos</option>
+        <option value="0">Todas</option>
         <option *ngFor="let prov of provincias" value="{{ prov.idProvincia }}">
           {{ prov.nombreProvincia }}
         </option>

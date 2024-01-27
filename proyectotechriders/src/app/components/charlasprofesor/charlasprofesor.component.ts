@@ -43,13 +43,12 @@ export class CharlasprofesorComponent implements OnInit {
 
   filtrarCharlas(): void {
     let estado = this.selectEstado.nativeElement.selectedOptions[0].value;
-    this.charlasFiltradas = this.charlas.filter(
-      (charla) => charla.idEstadoCharla == estado
-    );
-  }
-
-  reiniciarFiltro(): void {
-    this.charlasFiltradas = this.charlas;
+    if (estado == 0) this.charlasFiltradas = this.charlas;
+    else {
+      this.charlasFiltradas = this.charlas.filter(
+        (charla) => charla.idEstadoCharla == estado
+      );
+    }
   }
 
   recargarCharlas(): void {

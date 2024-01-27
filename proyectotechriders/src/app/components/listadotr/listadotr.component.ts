@@ -17,28 +17,29 @@ export class ListadotrComponent implements OnInit {
   public tr!: any;
   public filter_array!: any;
   public role!: number | null;
+  public techRidersCargados: boolean = false;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.listaGeneral();
     if (this.role != localStorage.getItem('role'))
       this.role = parseInt(localStorage.getItem('role') ?? '0');
-  }
-  listaGeneral(): void {
-    this._service.getTechRiders().subscribe((response: any) => {
+    this._service.getTechRiders().subscribe((response: any[]) => {
       this.techriders = response;
       this.trFiltro = response;
       this.charlasFiltroEmpresa = response;
       this.charlasFiltroTr = response;
       this.charlasFiltroEmpresa = this.charlasFiltroEmpresa.filter(
         (valor, indice, self) =>
-          indice === self.findIndex((v) => v.empresa === valor.empresa)
+          indice === self.findIndex((v) => v.empresa === valor.empresa) &&
+          valor.empresa != ''
       );
       this.charlasFiltroTr = this.charlasFiltroTr.filter(
         (valor, indice, self) =>
-          indice === self.findIndex((v) => v.techRider === valor.techRider)
+          indice === self.findIndex((v) => v.techRider === valor.techRider) &&
+          valor.techRider != ''
       );
+      this.techRidersCargados = true;
     });
   }
 
@@ -50,7 +51,8 @@ export class ListadotrComponent implements OnInit {
     this.filter_array = [];
 
     if (this.empresa == 'todo' && this.tr == 'todo') {
-      this.listaGeneral();
+      this.techriders = this.trFiltro;
+      return;
     } else if (this.tr == 'todo' && this.empresa != 'todo') {
       this.filter_array = this.techriders.filter(
         (x) => x.empresa === this.empresa
