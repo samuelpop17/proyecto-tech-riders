@@ -1,11 +1,11 @@
-<div class="card shadow-card p-4 mb-3" *ngIf="charla">
-  <div *ngIf="role == 1">
-    <h1 class="fw-bold">Editar charla</h1>
-    <hr class="border border-dark opacity-50" />
+<div class="card shadow-card p-4 mb-3">
+  <div *ngIf="role == 1 && charla">
+    <h1 class="fw-bold text-center">Editar charla</h1>
+    <p class="text-muted text-center">Editar los detalles de la charla</p>
     <form
       #editarCharlaForm="ngForm"
       (ngSubmit)="editarCharlaAdmin()"
-      class="row"
+      class="row mt-3"
     >
       <div class="mt-1 col-md-6 mb-3 mb-md-3">
         <label class="form-label fw-bold">TechRider</label>
@@ -94,10 +94,19 @@
       </div>
     </form>
   </div>
-  <div *ngIf="role != 1">
-    <h1 class="fw-bold">Editar charla</h1>
-    <hr class="border border-dark opacity-50" />
-    <form #editarCharlaForm="ngForm" (ngSubmit)="editarCharla()" class="row">
+  <img
+    *ngIf="role == 1 && !charla"
+    class="d-block mx-auto w-25"
+    src="../../../assets/images/loading.gif"
+  />
+  <div *ngIf="role != 1 && charla">
+    <h1 class="fw-bold text-center">Editar charla</h1>
+    <p class="text-muted text-center">Editar los detalles de la charla</p>
+    <form
+      #editarCharlaForm="ngForm"
+      (ngSubmit)="editarCharla()"
+      class="row mt-3"
+    >
       <div class="mt-1 col-md-6 mb-3 mb-md-0">
         <label class="form-label fw-bold">Descripción</label>
         <input
@@ -159,9 +168,9 @@
       </div>
     </form>
   </div>
+  <img
+    *ngIf="role != 1 && !charla"
+    class="d-block mx-auto w-25"
+    src="../../../assets/images/loading.gif"
+  />
 </div>
-<img
-  *ngIf="!charla"
-  class="d-block mx-auto w-50"
-  src="../../../assets/images/loading.gif"
-/>

@@ -6,6 +6,7 @@ import { Usuario } from '../models/Usuario';
 import { Charla } from '../models/Charla';
 import { ValoracionCharla } from '../models/ValoracionCharla';
 import { EmpresaCentro } from '../models/EmpresaCentro';
+import { Curso } from '../models/Curso';
 
 @Injectable()
 export class ServicePrincipal {
@@ -584,5 +585,16 @@ export class ServicePrincipal {
     let request = 'api/Usuarios/' + idUsuario;
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
+  }
+
+  createCurso(curso: Curso): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/Cursos';
+    let json = JSON.stringify(curso);
+    let header = {
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token'),
+    };
+    return this._http.post(url + request, json, { headers: header });
   }
 }

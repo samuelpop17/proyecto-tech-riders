@@ -32,6 +32,7 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
+import { CursosCentroComponent } from './components/cursos-centro/cursos-centro.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -57,10 +58,6 @@ const routes: Routes = [
   { path: 'listadostr', component: ListadotrComponent },
   { path: 'listadoscentros', component: ListadocentrosComponent },
   { path: 'listadosempresas', component: ListadosempresaComponent },
-  { path: 'altausuario', component: AltausuarioComponent },
-  { path: 'acreditarcharla', component: AcreditarcharlaComponent },
-  { path: 'aniadirtecnologia', component: AniadirtecnologiaComponent },
-  { path: 'altaempresa', component: AltaempresaComponent },
   {
     path: 'charlas/valoracion/:idcharla',
     component: ValoracioncharlaComponent,
@@ -71,7 +68,7 @@ const routes: Routes = [
   { path: 'mischarlastech', component: MischarrlasTechridersComponent },
   { path: 'crearempresa', component: CrearempresaResponsableComponent },
   {
-    path: 'mischarlastechridersresponsable',
+    path: 'charlas-empleados-empresa',
     component: MistechridersResponsableComponent,
   },
   {
@@ -79,6 +76,7 @@ const routes: Routes = [
     component: CalendarioTechRidersCharlasComponent,
   },
   { path: 'techrider/:id', component: DetallesTechRiderComponent },
+  { path: 'cursos-centro/:idcentro', component: CursosCentroComponent },
   { path: 'peticiones', component: PanelPeticionesAdminComponent },
 ];
 

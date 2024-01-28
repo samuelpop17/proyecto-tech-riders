@@ -49,6 +49,7 @@ import { ServicePrincipal } from './services/service.principal';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
+import { CursosCentroComponent } from './components/cursos-centro/cursos-centro.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { DetallesTechRiderComponent } from './components/detalles-tech-rider/det
     AniadirtecnologiaComponent,
     AltaempresaComponent,
     DetallesTechRiderComponent,
+    CursosCentroComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,6 @@ import { DetallesTechRiderComponent } from './components/detalles-tech-rider/det
     HttpClientModule,
     routing,
     CommonModule,
-    FormsModule,
     BrowserAnimationsModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
