@@ -597,4 +597,11 @@ export class ServicePrincipal {
     };
     return this._http.post(url + request, json, { headers: header });
   }
+
+  getAllPeticiones(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/TodasPeticionesFormato';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
+  }
 }

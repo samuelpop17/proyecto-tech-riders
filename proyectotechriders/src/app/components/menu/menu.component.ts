@@ -10,6 +10,7 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 export class MenuComponent implements DoCheck {
   public role!: number | null;
   public estadoEmpresa: number = 1;
+  public countPeticiones: boolean = false;
 
   constructor(private _service: ServicePrincipal) {}
 
@@ -25,6 +26,12 @@ export class MenuComponent implements DoCheck {
                 this.estadoEmpresa = response.estadoEmpresa;
               });
           }
+        });
+      } else if (this.role == 1) {
+        this._service.getAllPeticiones().subscribe((response: any[]) => {
+          response.length > 0
+            ? (this.countPeticiones = true)
+            : (this.countPeticiones = false);
         });
       }
     }
