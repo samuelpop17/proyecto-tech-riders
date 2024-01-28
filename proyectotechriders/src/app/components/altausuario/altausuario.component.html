@@ -11,15 +11,13 @@
       <thead class="small rounded-4 table-secondary">
         <tr>
           <th class="text-muted">Usuario</th>
-          <th class="text-muted">Apellido</th>
           <th class="text-muted">Email</th>
           <th class="text-muted text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let pet of altaUsuarios">
-          <td class="fw-bold">{{ pet.nombre }}</td>
-          <td>{{ pet.apellidos }}</td>
+          <td class="fw-bold">{{ pet.nombre }} {{ pet.apellidos }}</td>
           <td>{{ pet.email }}</td>
           <td class="text-center">
             <div class="btn-group" role="group">

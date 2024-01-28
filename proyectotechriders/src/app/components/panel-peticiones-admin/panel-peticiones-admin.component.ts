@@ -14,6 +14,6 @@ export class PanelPeticionesAdminComponent {
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    if (this.role != 1) this._router.navigate(['/']);
+    if (this.role != 1) this._router.navigate(['/usuario/perfil']);
   }
 }

@@ -24,7 +24,6 @@ import { CalendarioTechRidersCharlasComponent } from './components/calendario-te
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
 import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
 import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
-import { CrearempresaResponsableComponent } from './components/crearempresa-responsable/crearempresa-responsable.component';
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
@@ -49,6 +48,8 @@ import { ServicePrincipal } from './services/service.principal';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
+import { CursosCentroComponent } from './components/cursos-centro/cursos-centro.component';
+import { CrearEmpresaCentroComponent } from './components/crear-empresa-centro/crear-empresa-centro.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import { DetallesTechRiderComponent } from './components/detalles-tech-rider/det
     MischarrlasTechridersComponent,
     ValoracioncharlaComponent,
     MistechridersResponsableComponent,
-    CrearempresaResponsableComponent,
+    CrearEmpresaCentroComponent,
     CalendarioTechRidersCharlasComponent,
     ListadotrComponent,
     ListadocentrosComponent,
@@ -86,6 +87,8 @@ import { DetallesTechRiderComponent } from './components/detalles-tech-rider/det
     AniadirtecnologiaComponent,
     AltaempresaComponent,
     DetallesTechRiderComponent,
+    CursosCentroComponent,
+    CrearEmpresaCentroComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,6 @@ import { DetallesTechRiderComponent } from './components/detalles-tech-rider/det
     HttpClientModule,
     routing,
     CommonModule,
-    FormsModule,
     BrowserAnimationsModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({

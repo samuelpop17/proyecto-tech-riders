@@ -13,7 +13,7 @@
           Eres un representante sin empresa.
           <a
             class="fw-bolder link-dark link-opacity-75-hover text-decoration-none"
-            [routerLink]="['/crearempresa']"
+            [routerLink]="['/crear-empresa']"
           >
             Crea una empresa
           </a>
@@ -53,9 +53,9 @@
                 </a>
               </li>
 
-              <!-- representante si no tiene empresa -->
+              <!-- Representante si no tiene empresa -->
               <li *ngIf="role.idRole == 4 && !empresaExists">
-                <a class="dropdown-item" [routerLink]="['/crearempresa']">
+                <a class="dropdown-item" [routerLink]="['/crear-empresa']">
                   Crear empresa
                 </a>
               </li>
@@ -253,7 +253,7 @@
         </div>
         <img
           *ngIf="!tecnologias && usuario.idRole == 3"
-          class="d-block mx-auto w-50"
+          class="d-block mx-auto w-25"
           src="../../../assets/images/loading.gif"
         />
 
@@ -285,7 +285,7 @@
         </div>
         <img
           *ngIf="!cursos && role.idRole == 2"
-          class="d-block mx-auto w-50"
+          class="d-block mx-auto w-25"
           src="../../../assets/images/loading.gif"
         />
       </div>
@@ -466,7 +466,7 @@
       </div>
       <img
         *ngIf="role.idRole == 4 && empresaExists && !empresaLoaded"
-        class="d-block mx-auto"
+        class="d-block mx-auto w-25"
         src="../../../assets/images/loading.gif"
       />
     </div>

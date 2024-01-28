@@ -63,7 +63,15 @@
               class="btn btn-dark btn-sm me-1"
               (click)="acreditarCharla(charla.idCharla)"
             >
-              Acreditar
+              Pedir acred.
+            </a>
+            <!-- Botón REASIGNAR para charlas estado FINALIZADA si eres RESPONSABLE -->
+            <a
+              *ngIf="charla.idEstadoCharla == 3 && role == 4"
+              class="btn btn-dark btn-sm me-1"
+              (click)="reasignarCharla(charla.idCharla)"
+            >
+              Reasignar
             </a>
           </td>
         </tr>

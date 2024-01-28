@@ -1,7 +1,14 @@
-<div class="card shadow-card p-4 mb-3" *ngIf="valoExiste">
-  <h1 class="fw-bold">Valoración de la charla {{ valoracion.idCharla }}</h1>
-  <hr class="border border-dark opacity-50" />
-  <form #valoracionForm="ngForm" (ngSubmit)="editarValoracion()" class="row">
+<div class="card shadow-card p-4 mb-3">
+  <h1 class="fw-bold text-center">Valoración de la charla</h1>
+  <p class="text-muted text-center">
+    Edita la valoración al TechRider que ha impartido la charla
+  </p>
+  <form
+    #valoracionForm="ngForm"
+    (ngSubmit)="editarValoracion()"
+    class="row"
+    *ngIf="valoExiste"
+  >
     <div class="mt-1 col-md-2">
       <label class="form-label fw-bold">Valoración</label>
       <input
@@ -30,9 +37,9 @@
       </button>
     </div>
   </form>
+  <img
+    *ngIf="!valoExiste"
+    class="d-block mx-auto w-25"
+    src="../../../assets/images/loading.gif"
+  />
 </div>
-<img
-  *ngIf="!valoExiste"
-  class="d-block mx-auto w-50"
-  src="../../../assets/images/loading.gif"
-/>
