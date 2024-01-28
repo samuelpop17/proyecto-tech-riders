@@ -6,8 +6,12 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title fw-bold">{{ usuario.techRider }}</h5>
-          <p class="card-text">Teléfono: {{ usuario.telefonoTechRider }}</p>
-          <p class="card-text">LinkedIn: {{ usuario.linkedIn }}</p>
+          <h6 class="card-subtitle text-body-secondary mb-1">
+            {{ usuario.email }}
+          </h6>
+          <h6 class="card-subtitle text-body-secondary mb-1">
+            Teléfono: {{ usuario.telefonoTechRider }}
+          </h6>
         </div>
       </div>
     </div>

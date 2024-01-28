@@ -17,7 +17,6 @@ export class AcreditarcharlaComponent implements OnInit {
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
     if (this.role == 1) this.cargarDatos();
-    else this._router.navigate(['/']);
   }
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}

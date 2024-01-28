@@ -33,6 +33,13 @@
           </button>
         </div>
       </div>
+      <a
+        *ngIf="role == 1"
+        class="btn btn-dark w-100 mt-3"
+        [routerLink]="['/crear-centro']"
+      >
+        Crear centro
+      </a>
     </div>
   </form>
 
