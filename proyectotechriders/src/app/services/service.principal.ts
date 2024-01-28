@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
@@ -10,7 +10,17 @@ import { Curso } from '../models/Curso';
 
 @Injectable()
 export class ServicePrincipal {
+  private peticionesActualizadas = new BehaviorSubject<number>(0);
+  numPeticiones$ = this.peticionesActualizadas.asObservable();
+
   constructor(private _http: HttpClient) {}
+
+  actualizacionPeticiones() {
+    console.log('actualización');
+    this.getAllPeticiones().subscribe((response: any[]) =>
+      this.peticionesActualizadas.next(response.length)
+    );
+  }
 
   loginUser(email: string, password: string): Observable<any> {
     let url = environment.urlApi;

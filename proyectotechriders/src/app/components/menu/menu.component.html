@@ -58,9 +58,9 @@
           <a class="nav-link" [routerLink]="['/peticiones']">
             Peticiones
             <span
-              class="position-absolute translate-middle p-2 bg-danger rounded-circle"
-              *ngIf="countPeticiones"
+              class="position-absolute translate-middle badge rounded-pill bg-danger"
             >
+              {{ numPeticiones }}
             </span>
           </a>
         </li>

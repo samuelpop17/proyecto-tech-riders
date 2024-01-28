@@ -37,6 +37,7 @@ export class AniadirtecnologiaComponent implements OnInit {
     this._service
       .deletePeticionTecnologia(idPeticionTecnologia)
       .subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this.cargarDatos();
       });
   }

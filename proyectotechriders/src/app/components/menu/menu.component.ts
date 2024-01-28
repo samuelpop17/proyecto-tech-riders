@@ -11,15 +11,18 @@ export class MenuComponent implements DoCheck {
   public role!: number | null;
   public token!: string | null;
   public estadoEmpresa: number = 0;
-  public countPeticiones: boolean = false;
+  public numPeticiones: number = 0;
 
   constructor(private _service: ServicePrincipal) {}
 
   ngDoCheck(): void {
     if (
-      parseInt(localStorage.getItem('idUsuario') ?? '0') != 0 &&
-      this.token != localStorage.getItem('token')
+      (parseInt(localStorage.getItem('role') ?? '0') != 0 &&
+        (this.role != localStorage.getItem('role') ||
+          this.token != localStorage.getItem('token'))) ||
+      (this.role != 0 && parseInt(localStorage.getItem('role') ?? '0') == 0)
     ) {
+      console.log('CUIDAO');
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       this.token = localStorage.getItem('token');
       if (this.role == 4) {
@@ -33,10 +36,9 @@ export class MenuComponent implements DoCheck {
           } else this.estadoEmpresa = 0;
         });
       } else if (this.role == 1) {
-        this._service.getAllPeticiones().subscribe((response: any[]) => {
-          response.length > 0
-            ? (this.countPeticiones = true)
-            : (this.countPeticiones = false);
+        this._service.actualizacionPeticiones();
+        this._service.numPeticiones$.subscribe((data) => {
+          this.numPeticiones = data;
         });
       }
     }
