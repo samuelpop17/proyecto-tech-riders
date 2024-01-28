@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('idUsuario', response.idUsuario);
           localStorage.setItem('role', response.idRole);
           if (response.idRole == 1) {
-            this._router.navigate(['/usuario/perfil']); //cambiar a admin panel
+            this._router.navigate(['/peticiones']); //cambiar a admin panel
           } else this._router.navigate(['/usuario/perfil']);
         } else {
           localStorage.removeItem('token');
