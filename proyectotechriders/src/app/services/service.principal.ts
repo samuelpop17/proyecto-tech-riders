@@ -508,7 +508,7 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
-  cambiarEstadoEmpresa(idEmpresa: number): Observable<any> {
+  cambiarEstadoEmpresaCentro(idEmpresa: number): Observable<any> {
     let url = environment.urlApi;
     let request =
       'api/empresascentros/updateestadoempresacentro/' + idEmpresa + '/1';
