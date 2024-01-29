@@ -576,13 +576,6 @@ export class ServicePrincipal {
     return this._http.delete(url + request, { headers: header });
   }
 
-  deleteEmpresaCentro(idEmpresaCentro: number): Observable<any> {
-    let url = environment.urlApi;
-    let request = 'api/EmpresasCentros/' + idEmpresaCentro;
-    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
-    return this._http.delete(url + request, { headers: header });
-  }
-
   getEmpresasCentrosActivas(): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/EmpresasCentros/EmpresasCentrosEstado/1';
@@ -613,5 +606,13 @@ export class ServicePrincipal {
     let request = 'api/QueryTools/TodasPeticionesFormato';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
+  }
+
+  anularPeticionEmpresa(idPeticion: number): Observable<any> {
+    let url = environment.urlApi;
+    let request =
+      'api/PeticionesCentroEmpresa/DeletePeticionEmpresaAll/' + idPeticion;
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.delete(url + request, { headers: header });
   }
 }

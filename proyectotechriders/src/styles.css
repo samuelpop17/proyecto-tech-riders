@@ -109,6 +109,10 @@ a.linkedin-button {
   background-color: #327fb9;
 }
 
+.cal-month-view .cal-day-cell.cal-today {
+  background-color: rgba(30, 144, 255, 0.2);
+}
+
 .cal-month-view .cal-day-cell.cal-today .cal-day-number {
   font-size: 1.2rem;
 }

@@ -24,6 +24,7 @@ export class ProponerTecnologiaComponent implements OnInit {
     this._service
       .createPeticionTecnologia(this.controlNombre.nativeElement.value)
       .subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this._router.navigate(['/usuario/editar-tecnologias']);
       });
 

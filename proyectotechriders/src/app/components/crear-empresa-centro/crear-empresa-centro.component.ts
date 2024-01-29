@@ -76,6 +76,7 @@ export class CrearEmpresaCentroComponent implements OnInit {
                 .createPeticionAltaEmpresa(idEmpresaCentro)
                 .subscribe((response) => {
                   if (this.isEmpresaOrCentro == 1) {
+                    this._service.actualizacionPeticiones();
                     Swal.fire({
                       color: '#333333',
                       icon: 'success',

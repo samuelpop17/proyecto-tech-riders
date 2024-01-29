@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 export class DetallesTechRiderComponent implements OnInit {
   public techrider!: any;
   public tecnologias!: any[];
+  public role!: number | null;
 
   constructor(
     private _service: ServicePrincipal,
@@ -19,6 +20,7 @@ export class DetallesTechRiderComponent implements OnInit {
   ngOnInit(): void {
     this._activeRoute.params.subscribe((params: Params) => {
       if (params['id']) {
+        this.role = parseInt(localStorage.getItem('role') ?? '0');
         let idTechRider = params['id'];
         this._service.getTechRiders().subscribe((response: any[]) => {
           this.techrider = response.filter((tr) => tr.id == idTechRider)[0];

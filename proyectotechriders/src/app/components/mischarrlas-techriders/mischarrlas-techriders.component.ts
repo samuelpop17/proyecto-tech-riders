@@ -40,6 +40,7 @@ export class MischarrlasTechridersComponent implements OnInit {
     this._service
       .createSolicitudAcreditacionCharla(idCharla)
       .subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this._router
           .navigate(['/usuario/perfil'], { skipLocationChange: true })
           .then(() => {
