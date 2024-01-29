@@ -31,6 +31,7 @@ export class AcreditarcharlaComponent implements OnInit {
     this._service
       .solicitudAcreditacionEliminar(idPeticion)
       .subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this.cargarDatos();
       });
   }

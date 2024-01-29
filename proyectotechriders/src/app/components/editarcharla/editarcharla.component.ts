@@ -16,6 +16,7 @@ export class EditarcharlaComponent implements OnInit {
   public role!: number;
   public usuarios!: Usuario[];
   public estados!: EstadoCharla[];
+  public camposAdminCargados: boolean = false;
 
   @ViewChild('controldescripcion') controlDescripcion!: ElementRef;
   @ViewChild('controlfecha') controlFecha!: ElementRef;
@@ -46,10 +47,10 @@ export class EditarcharlaComponent implements OnInit {
               this.usuarios = this.usuarios.filter(
                 (usuario) => usuario.idRole == 3
               );
-            });
-
-            this._service.getEstadosCharlas().subscribe((response) => {
-              this.estados = response;
+              this._service.getEstadosCharlas().subscribe((response) => {
+                this.estados = response;
+                this.camposAdminCargados = true;
+              });
             });
           }
         }
@@ -133,41 +134,8 @@ export class EditarcharlaComponent implements OnInit {
       idCurso: this.charla.idCurso,
       idProvincia: this.charla.idProvincia,
     };
-    this._service.getCharlas().subscribe((response) => {
-      let charlas = response;
-      let fecha = new Date(charla.fechaCharla);
-      charlas = charlas.filter((chrl: Charla) => {
-        let otraFecha = new Date(chrl.fechaCharla);
-        if (otraFecha.getMonth() >= 0 && otraFecha.getMonth() <= 7) {
-          var principio = new Date(otraFecha.getFullYear() - 1, 8, 1);
-          var final = new Date(otraFecha.getFullYear(), 7, 31);
-        } else {
-          var principio = new Date(otraFecha.getFullYear(), 8, 1);
-          var final = new Date(otraFecha.getFullYear() + 1, 7, 31);
-        }
-        console.log(principio);
-        console.log(final);
-        return (
-          chrl.idCurso == charla.idCurso &&
-          chrl.idCharla != charla.idCharla &&
-          fecha >= principio &&
-          fecha <= final
-        );
-      });
-      if (charlas.length == 0) {
-        this._service.updateCharla(charla).subscribe((response) => {
-          //this._router.navigate(['/charlas/mis-charlas']); navegar a la lista de charlas
-        });
-      } else {
-        Swal.fire({
-          color: '#333333',
-          confirmButtonColor: '#212529',
-          confirmButtonText: 'Cerrar',
-          icon: 'error',
-          text: 'Existe ya una charla para este curso solicitada en el curso escolar marcado',
-          title: 'Error',
-        });
-      }
+    this._service.updateCharla(charla).subscribe((response) => {
+      this._router.navigate(['/listados']);
     });
   }
 }

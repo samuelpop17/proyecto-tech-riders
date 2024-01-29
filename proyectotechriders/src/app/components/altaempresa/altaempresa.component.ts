@@ -55,16 +55,22 @@ export class AltaempresaComponent implements OnInit {
   }
 
   cambiarEstadoEmpresa(idEmpresa: number, idPeticion: number) {
-    this._service.cambiarEstadoEmpresa(idEmpresa).subscribe((response) => {
-      this._service.deletePeticionEmpresa(idPeticion).subscribe((response) => {
-        this.cargarDatos();
+    this._service
+      .cambiarEstadoEmpresaCentro(idEmpresa)
+      .subscribe((response) => {
+        this._service
+          .deletePeticionEmpresa(idPeticion)
+          .subscribe((response) => {
+            this._service.actualizacionPeticiones();
+            this.cargarDatos();
+          });
       });
-    });
   }
 
   eliminarPeticionEmpresa(idEmpresa: number, idPeticion: number) {
     this._service.deletePeticionEmpresa(idPeticion).subscribe((response) => {
       this._service.deleteEmpresaCentro(idEmpresa).subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this.cargarDatos();
       });
     });

@@ -55,6 +55,7 @@ export class AltausuarioComponent implements OnInit {
       this._service
         .eliminarPeticionUsuario(idPeticion)
         .subscribe((response) => {
+          this._service.actualizacionPeticiones();
           this.cargarDatos();
         });
     });
@@ -63,6 +64,7 @@ export class AltausuarioComponent implements OnInit {
   eliminarPeticionUsuario(idUsuario: number, idPeticion: number) {
     this._service.eliminarPeticionUsuario(idPeticion).subscribe((response) => {
       this._service.deleteUsuario(idUsuario).subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this.cargarDatos();
       });
     });

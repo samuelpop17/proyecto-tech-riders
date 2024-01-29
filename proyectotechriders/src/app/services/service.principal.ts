@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../models/Usuario';
@@ -10,7 +10,17 @@ import { Curso } from '../models/Curso';
 
 @Injectable()
 export class ServicePrincipal {
+  private peticionesActualizadas = new BehaviorSubject<number>(0);
+  numPeticiones$ = this.peticionesActualizadas.asObservable();
+
   constructor(private _http: HttpClient) {}
+
+  actualizacionPeticiones() {
+    console.log('actualización');
+    this.getAllPeticiones().subscribe((response: any[]) =>
+      this.peticionesActualizadas.next(response.length)
+    );
+  }
 
   loginUser(email: string, password: string): Observable<any> {
     let url = environment.urlApi;
@@ -498,7 +508,7 @@ export class ServicePrincipal {
     return this._http.get(url + request, { headers: header });
   }
 
-  cambiarEstadoEmpresa(idEmpresa: number): Observable<any> {
+  cambiarEstadoEmpresaCentro(idEmpresa: number): Observable<any> {
     let url = environment.urlApi;
     let request =
       'api/empresascentros/updateestadoempresacentro/' + idEmpresa + '/1';
@@ -596,5 +606,12 @@ export class ServicePrincipal {
       Authorization: 'bearer ' + localStorage.getItem('token'),
     };
     return this._http.post(url + request, json, { headers: header });
+  }
+
+  getAllPeticiones(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/TodasPeticionesFormato';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, { headers: header });
   }
 }

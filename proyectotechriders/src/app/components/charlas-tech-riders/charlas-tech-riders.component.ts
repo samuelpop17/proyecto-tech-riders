@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CharlasPendientes } from 'src/app/models/CharlasPendientesTechRiders';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-charlas-tech-riders',
@@ -22,27 +23,28 @@ export class CharlasTechRidersComponent implements OnInit {
   }
 
   asignarCharla(idcharla: number) {
-    // Obtener idUsuario del localStorage
-    var idusuario = localStorage.getItem('idUsuario');
-
-    // Verificar si idUsuario existe
-    if (idusuario) {
-      // Convertir idUsuario a número si es necesario
-      const idUsuarioNum = +idusuario;
-
-      // Llamar al servicio para asignar charla
-      this._service
-        .asignarseUnaCharlaTechRider(idUsuarioNum, idcharla)
-        .subscribe((response) => {
-          // Llamar al servicio para modificar el estado de la charla
-          this._service.updateEstadoCharla(idcharla, 3).subscribe(() => {
-            // Redirigir a la página mischarlastech
-            this._router.navigate(['/mischarlastech']);
-          });
-        });
-    } else {
-      console.error('Error: idUsuario no encontrado en el localStorage');
-      // Aquí puedes manejar el error como consideres apropiado
+    if (localStorage.getItem('idUsuario')) {
+      Swal.fire({
+        cancelButtonText: 'No',
+        color: '#333333',
+        confirmButtonColor: '#212529',
+        confirmButtonText: 'Si, asignarse',
+        icon: 'question',
+        showCancelButton: true,
+        text: 'Pasarás a hablar con el profesor sobre los detalles de la charla. Podrás desasignarte si quieres',
+        title: 'Asignarse a esta charla',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let idUsuario = parseInt(localStorage.getItem('idUsuario') ?? '0');
+          this._service
+            .asignarseUnaCharlaTechRider(idUsuario, idcharla)
+            .subscribe((response) => {
+              this._service.updateEstadoCharla(idcharla, 3).subscribe(() => {
+                this._router.navigate(['/mischarlastech']);
+              });
+            });
+        }
+      });
     }
   }
 }

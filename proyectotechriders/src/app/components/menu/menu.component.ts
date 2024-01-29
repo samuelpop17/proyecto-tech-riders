@@ -9,13 +9,22 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 })
 export class MenuComponent implements DoCheck {
   public role!: number | null;
-  public estadoEmpresa: number = 1;
+  public token!: string | null;
+  public estadoEmpresa: number = 0;
+  public numPeticiones: number = 0;
 
   constructor(private _service: ServicePrincipal) {}
 
   ngDoCheck(): void {
-    if (this.role != localStorage.getItem('role')) {
+    if (
+      (parseInt(localStorage.getItem('role') ?? '0') != 0 &&
+        (this.role != localStorage.getItem('role') ||
+          this.token != localStorage.getItem('token'))) ||
+      (this.role != 0 && parseInt(localStorage.getItem('role') ?? '0') == 0)
+    ) {
+      console.log('CUIDAO');
       this.role = parseInt(localStorage.getItem('role') ?? '0');
+      this.token = localStorage.getItem('token');
       if (this.role == 4) {
         this._service.getPerfilUsuario().subscribe((response) => {
           if (response.idEmpresaCentro) {
@@ -24,7 +33,12 @@ export class MenuComponent implements DoCheck {
               .subscribe((response) => {
                 this.estadoEmpresa = response.estadoEmpresa;
               });
-          }
+          } else this.estadoEmpresa = 0;
+        });
+      } else if (this.role == 1) {
+        this._service.actualizacionPeticiones();
+        this._service.numPeticiones$.subscribe((data) => {
+          this.numPeticiones = data;
         });
       }
     }
