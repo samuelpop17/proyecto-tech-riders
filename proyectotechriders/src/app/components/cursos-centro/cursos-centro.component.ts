@@ -13,6 +13,7 @@ export class CursosCentroComponent implements OnInit {
   public cursosCargados: boolean = false;
   public role!: number | null;
   public idCentro!: number;
+  public nombreCentro!: string;
 
   @ViewChild('controlnombre') controlNombre!: ElementRef;
   @ViewChild('controldescripcion') controlDescripcion!: ElementRef;
@@ -28,12 +29,15 @@ export class CursosCentroComponent implements OnInit {
     this._activeRoute.params.subscribe((params: Params) => {
       if (params['idcentro']) {
         this.idCentro = parseInt(params['idcentro']);
-        this._service.getCursos().subscribe((response) => {
-          this.cursos = response;
-          this.cursos = this.cursos.filter(
-            (curso) => curso.idCentro == this.idCentro
-          );
-          this.cursosCargados = true;
+        this._service.findEmpresaCentro(this.idCentro).subscribe((response) => {
+          this.nombreCentro = response.nombre;
+          this._service.getCursos().subscribe((response) => {
+            this.cursos = response;
+            this.cursos = this.cursos.filter(
+              (curso) => curso.idCentro == this.idCentro
+            );
+            this.cursosCargados = true;
+          });
         });
       }
     });
