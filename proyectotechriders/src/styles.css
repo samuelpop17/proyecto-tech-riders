@@ -109,6 +109,24 @@ a.linkedin-button {
   background-color: #327fb9;
 }
 
+.cal-month-view .cal-day-cell.cal-today {
+  background-color: rgba(30, 144, 255, 0.2);
+}
+
 .cal-month-view .cal-day-cell.cal-today .cal-day-number {
   font-size: 1.2rem;
+}
+
+[style^="--valoracion"]::after {
+  content: "★★★★★";
+  font-size: 2em;
+  white-space: nowrap;
+  background: linear-gradient(
+    90deg,
+    #327fb9 calc(var(--valoracion) * 20%),
+    #ddd calc(var(--valoracion) * 20%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: #0000;
 }

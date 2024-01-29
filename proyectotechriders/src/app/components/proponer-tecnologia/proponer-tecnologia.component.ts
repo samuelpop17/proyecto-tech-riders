@@ -7,6 +7,8 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
   styleUrls: ['./proponer-tecnologia.component.css'],
 })
 export class ProponerTecnologiaComponent implements OnInit {
+  public tiposCargados: boolean = false;
+
   constructor(private _router: Router, private _service: ServicePrincipal) {}
 
   @ViewChild('controlnombre') controlNombre!: ElementRef;
@@ -15,15 +17,16 @@ export class ProponerTecnologiaComponent implements OnInit {
   public tecnologias!: any[];
 
   ngOnInit(): void {
-    // TechRider
     this._service.getTipoTecnologias().subscribe((response) => {
       this.tecnologias = response;
+      this.tiposCargados = true;
     });
   }
   enviarSolicitud(): void {
     this._service
       .createPeticionTecnologia(this.controlNombre.nativeElement.value)
       .subscribe((response) => {
+        this._service.actualizacionPeticiones();
         this._router.navigate(['/usuario/editar-tecnologias']);
       });
 

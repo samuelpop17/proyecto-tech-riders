@@ -80,6 +80,7 @@ export class RegisterusuarioComponent implements OnInit {
     this._service.createUsuario(usuario).subscribe((response) => {
       let idUsuario = response.idUsuario;
       this._service.createPeticionAltaUser(idUsuario).subscribe((response) => {
+        this._service.actualizacionPeticiones();
         Swal.fire({
           color: '#333333',
           icon: 'success',

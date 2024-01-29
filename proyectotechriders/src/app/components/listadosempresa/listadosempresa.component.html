@@ -79,6 +79,7 @@
           <button
             class="btn btn-dark col-12 mt-3"
             (click)="getResponsables(empresa.idEmpresaCentro)"
+            *ngIf="role == 1"
           >
             Responsables
           </button>
