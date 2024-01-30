@@ -50,6 +50,7 @@ import { ValoracioncharlaComponent } from './components/valoracioncharla/valorac
 import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
 import { CursosCentroComponent } from './components/cursos-centro/cursos-centro.component';
 import { CrearEmpresaCentroComponent } from './components/crear-empresa-centro/crear-empresa-centro.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { CrearEmpresaCentroComponent } from './components/crear-empresa-centro/c
     DetallesTechRiderComponent,
     CursosCentroComponent,
     CrearEmpresaCentroComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
