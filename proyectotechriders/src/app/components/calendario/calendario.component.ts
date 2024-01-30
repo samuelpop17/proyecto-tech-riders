@@ -64,15 +64,17 @@ export class CalendarioComponent implements OnInit {
     this._service.getCharlas().subscribe((response) => {
       let charlas: Charla[] = response;
       charlas.forEach((charla: Charla) => {
-        this.events.push({
-          id: charla.idCharla,
-          start: new Date(charla.fechaCharla),
-          end: new Date(charla.fechaCharla),
-          title: charla.descripcion,
-          allDay: true,
-          actions: [],
-          color: { ...colors['red'] },
-        });
+        if (charla.idEstadoCharla != 1) {
+          this.events.push({
+            id: charla.idCharla,
+            start: new Date(charla.fechaCharla),
+            end: new Date(charla.fechaCharla),
+            title: charla.descripcion,
+            allDay: true,
+            actions: [],
+            color: { ...colors['red'] },
+          });
+        }
       });
       this.refresh.next();
     });
