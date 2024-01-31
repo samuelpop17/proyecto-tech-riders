@@ -10,17 +10,21 @@ import { Curso } from '../models/Curso';
 
 @Injectable()
 export class ServicePrincipal {
+  // Observable y observer con el número de peticiones pendientes
+  // PERMITE CAMBIAR EL NÚMERO EN UN COMPONENTE DE PETICIONES Y QUE SE ACTUALIZE EN EL MENÚ
   private peticionesActualizadas = new BehaviorSubject<number>(0);
+  // Menú se suscribe a numPeticiones$ para actualizarse a tiempo real
   numPeticiones$ = this.peticionesActualizadas.asObservable();
 
-  constructor(private _http: HttpClient) {}
-
+  // Actualiza el número de peticiones pendientes
   actualizacionPeticiones() {
     console.log('actualización');
     this.getAllPeticiones().subscribe((response: any[]) =>
       this.peticionesActualizadas.next(response.length)
     );
   }
+
+  constructor(private _http: HttpClient) {}
 
   loginUser(email: string, password: string): Observable<any> {
     let url = environment.urlApi;
@@ -614,5 +618,15 @@ export class ServicePrincipal {
       'api/PeticionesCentroEmpresa/DeletePeticionEmpresaAll/' + idPeticion;
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.delete(url + request, { headers: header });
+  }
+
+  getTecnologiasTechRider(idTechRider: number): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/FindTecnologiasTechrider';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, {
+      headers: header,
+      params: { idtechrider: idTechRider },
+    });
   }
 }

@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Observable, forkJoin } from 'rxjs';
 import { Charla } from 'src/app/models/Charla';
 import { EstadoCharla } from 'src/app/models/EstadoCharla';
+import { TecnologiaCharla } from 'src/app/models/TecnologiaCharla';
 import { Usuario } from 'src/app/models/Usuario';
 import { ServicePrincipal } from 'src/app/services/service.principal';
 import Swal from 'sweetalert2';
@@ -15,8 +17,10 @@ export class EditarcharlaComponent implements OnInit {
   public charla!: Charla;
   public role!: number;
   public usuarios!: Usuario[];
+  public allUsuarios!: Usuario[];
   public estados!: EstadoCharla[];
   public camposAdminCargados: boolean = false;
+  public techRidersCargados: boolean = true;
 
   @ViewChild('controldescripcion') controlDescripcion!: ElementRef;
   @ViewChild('controlfecha') controlFecha!: ElementRef;
@@ -43,10 +47,11 @@ export class EditarcharlaComponent implements OnInit {
           });
           if (this.role == 1) {
             this._service.getUsuarios().subscribe((response) => {
-              this.usuarios = response;
-              this.usuarios = this.usuarios.filter(
+              this.allUsuarios = response;
+              this.allUsuarios = this.allUsuarios.filter(
                 (usuario) => usuario.idRole == 3
               );
+              this.usuarios = this.allUsuarios;
               this._service.getEstadosCharlas().subscribe((response) => {
                 this.estados = response;
                 this.camposAdminCargados = true;
@@ -112,6 +117,47 @@ export class EditarcharlaComponent implements OnInit {
         });
       }
     });
+  }
+
+  changeTechRidersAdmin(event: any) {
+    if (event.target.checked) {
+      this.techRidersCargados = false;
+      this._service
+        .getTecnologiasCharla(this.charla.idCharla)
+        .subscribe((charlaResponse: TecnologiaCharla[]) => {
+          // Cogemos solo los IDs de las tecnologías de la charla
+          let tecnologiasCharla: number[] = charlaResponse.map(
+            (tecnologiaCharla: TecnologiaCharla) =>
+              tecnologiaCharla.idTecnologia
+          );
+
+          // Creamos un array de observables para esperar a recoger todas las tecnologías de todos los TRs
+          const tecnologiasTechRiders: Observable<Usuario[]>[] =
+            this.allUsuarios.map((usuario: Usuario) =>
+              this._service.getTecnologiasTechRider(usuario.idUsuario)
+            );
+
+          // forkJoin para esperar a que todos los observables se completen -> recoger todas las tecnologías de todos los TRs
+          forkJoin(tecnologiasTechRiders).subscribe(
+            (tecnologiasTR: any[][]) => {
+              this.usuarios = this.allUsuarios.filter((usuario, index) => {
+                // Recogemos todas las tecnologías de un TechRider
+                const tecnologiasTechRider: number[] = tecnologiasTR[index].map(
+                  (tecnologiaTR: any) => tecnologiaTR.idTecnologia
+                );
+
+                // Si alguna tecnología del TR coincide con alguna de la charla, aparecerá el TR en el select
+                return tecnologiasTechRider.some((idTecnologia) =>
+                  tecnologiasCharla.includes(idTecnologia)
+                );
+              });
+              this.techRidersCargados = true;
+            }
+          );
+        });
+    } else {
+      this.usuarios = this.allUsuarios;
+    }
   }
 
   editarCharlaAdmin() {

@@ -130,3 +130,9 @@ a.linkedin-button {
   -webkit-background-clip: text;
   color: #0000;
 }
+
+@media (min-width: 768px) {
+  #estadoEditarUsuAdmin {
+    margin-top: 1.4rem !important;
+  }
+}
