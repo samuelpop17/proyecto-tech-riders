@@ -25,7 +25,7 @@ export class EditarusuarioComponent implements OnInit {
   public role!: number;
   public publico: number = 0;
 
-  // usuario
+  // Usuario
   @ViewChild('controlnombre') controlNombre!: ElementRef;
   @ViewChild('controlapellidos') controlApellidos!: ElementRef;
   @ViewChild('controlemail') controlEmail!: ElementRef;
@@ -33,7 +33,7 @@ export class EditarusuarioComponent implements OnInit {
   @ViewChild('controllinkedin') controlLinkedin!: ElementRef;
   @ViewChild('selectprovincia') selectProvincia!: ElementRef;
 
-  //emrpesa
+  // Empresa
   @ViewChild('controlnombreempresa') controlnombreempresa!: ElementRef;
   @ViewChild('controltelefonoempresa') controltelefonoempresa!: ElementRef;
   @ViewChild('cif') cif!: ElementRef;

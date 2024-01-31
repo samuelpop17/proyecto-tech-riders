@@ -13,30 +13,34 @@ export class EditarcursosComponent implements OnInit {
   public cursos!: Curso[];
   public allCursos!: Curso[];
   private id!: number;
+  public role!: number;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-      this._service.findCursosProfesor(this.id).subscribe((response) => {
-        this.cursos = response;
-        let centro!: any;
-        this._service
-          .findEmpresaCentroUsuario(this.id)
-          .subscribe((response) => {
-            centro = response[0];
-            this._service.getCursos().subscribe((response) => {
-              this.allCursos = response;
-              let idsCursos = this.cursos.map((curso) => curso.idCurso);
-              this.allCursos = this.allCursos.filter(
-                (curso) =>
-                  !idsCursos.includes(curso.idCurso) &&
-                  curso.idCentro == centro.idEmpresa
-              );
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 2) {
+        this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+        this._service.findCursosProfesor(this.id).subscribe((response) => {
+          this.cursos = response;
+          let centro!: any;
+          this._service
+            .findEmpresaCentroUsuario(this.id)
+            .subscribe((response) => {
+              centro = response[0];
+              this._service.getCursos().subscribe((response) => {
+                this.allCursos = response;
+                let idsCursos = this.cursos.map((curso) => curso.idCurso);
+                this.allCursos = this.allCursos.filter(
+                  (curso) =>
+                    !idsCursos.includes(curso.idCurso) &&
+                    curso.idCentro == centro.idEmpresa
+                );
+              });
             });
-          });
-      });
+        });
+      } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
 

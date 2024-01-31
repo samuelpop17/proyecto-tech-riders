@@ -15,6 +15,7 @@ export class CharlasprofesorComponent implements OnInit {
   public estados!: EstadoCharla[];
   public charlasCargadas: boolean = false;
   private cursos!: any[];
+  public role!: number | null;
 
   @ViewChild('selectestado') selectEstado!: ElementRef;
 
@@ -22,22 +23,25 @@ export class CharlasprofesorComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-      this._service.getCharlasView().subscribe((response) => {
-        this.charlas = response;
-        this._service.findCursosProfesor(id).subscribe((response) => {
-          this.cursos = response;
-          this.cursos = this.cursos.map((curso) => curso.idCurso);
-          this.charlas = this.charlas.filter((charla) =>
-            this.cursos.includes(charla.idCurso)
-          );
-          this.charlasFiltradas = this.charlas;
-          this.charlasCargadas = true;
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 2) {
+        let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+        this._service.getCharlasView().subscribe((response) => {
+          this.charlas = response;
+          this._service.findCursosProfesor(id).subscribe((response) => {
+            this.cursos = response;
+            this.cursos = this.cursos.map((curso) => curso.idCurso);
+            this.charlas = this.charlas.filter((charla) =>
+              this.cursos.includes(charla.idCurso)
+            );
+            this.charlasFiltradas = this.charlas;
+            this.charlasCargadas = true;
+          });
         });
-      });
-      this._service.getEstadosCharlas().subscribe((response) => {
-        this.estados = response;
-      });
+        this._service.getEstadosCharlas().subscribe((response) => {
+          this.estados = response;
+        });
+      } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
 

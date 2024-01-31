@@ -16,6 +16,7 @@ export class SolicitarcharlaComponent implements OnInit {
   public tecnologias!: Tecnologia[];
   public cursos!: Curso[];
   public provincias!: Provincia[];
+  public role!: number | null;
 
   @ViewChild('selecttecnologias') selectTecnologias!: ElementRef;
   @ViewChild('controldescripcion') controlDescripcion!: ElementRef;
@@ -30,16 +31,19 @@ export class SolicitarcharlaComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      this._service.getTecnologias().subscribe((response) => {
-        this.tecnologias = response;
-      });
-      let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-      this._service.findCursosProfesor(id).subscribe((response) => {
-        this.cursos = response;
-      });
-      this._service.getProvincias().subscribe((response) => {
-        this.provincias = response;
-      });
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 2) {
+        this._service.getTecnologias().subscribe((response) => {
+          this.tecnologias = response;
+        });
+        let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+        this._service.findCursosProfesor(id).subscribe((response) => {
+          this.cursos = response;
+        });
+        this._service.getProvincias().subscribe((response) => {
+          this.provincias = response;
+        });
+      } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
 

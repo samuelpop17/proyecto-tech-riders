@@ -8,6 +8,7 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 })
 export class ProponerTecnologiaComponent implements OnInit {
   public tiposCargados: boolean = false;
+  public role!: number | null;
 
   constructor(private _router: Router, private _service: ServicePrincipal) {}
 
@@ -17,10 +18,15 @@ export class ProponerTecnologiaComponent implements OnInit {
   public tecnologias!: any[];
 
   ngOnInit(): void {
-    this._service.getTipoTecnologias().subscribe((response) => {
-      this.tecnologias = response;
-      this.tiposCargados = true;
-    });
+    if (localStorage.getItem('token')) {
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 3 || this.role == 4) {
+        this._service.getTipoTecnologias().subscribe((response) => {
+          this.tecnologias = response;
+          this.tiposCargados = true;
+        });
+      } else this._router.navigate(['/usuario/perfil']);
+    } else this._router.navigate(['/login']);
   }
   enviarSolicitud(): void {
     this._service

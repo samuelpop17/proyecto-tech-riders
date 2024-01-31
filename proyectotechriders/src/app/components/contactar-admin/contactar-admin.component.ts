@@ -10,6 +10,7 @@ export class ContactarAdminComponent {
   constructor(private _router: Router) {}
 
   enviarSolicitud(): void {
+    // COSA DEL BACK
     this._router.navigate(['/usuario/perfil']);
   }
 }

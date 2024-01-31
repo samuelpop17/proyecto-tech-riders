@@ -15,8 +15,11 @@ export class AltaempresaComponent implements OnInit {
   public peticionesCargadas: boolean = false;
 
   ngOnInit(): void {
-    this.role = parseInt(localStorage.getItem('role') ?? '0');
-    if (this.role == 1) this.cargarDatos();
+    if (localStorage.getItem('token')) {
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 1) this.cargarDatos();
+      else this._router.navigate(['/usuario/perfil']);
+    } else this._router.navigate(['/login']);
   }
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}

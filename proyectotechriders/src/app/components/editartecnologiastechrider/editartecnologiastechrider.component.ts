@@ -11,24 +11,31 @@ export class EditartecnologiastechriderComponent implements OnInit {
   public tecnologias!: any[];
   public allTecnologias!: any[];
   private id!: number;
+  public role!: number | null;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-      this._service.findTecnologiasTechRider(this.id).subscribe((response) => {
-        this.tecnologias = response;
-        this._service.getTecnologias().subscribe((response) => {
-          this.allTecnologias = response;
-          let idsTecnologias = this.tecnologias.map(
-            (tecnologia) => tecnologia.idTecnologia
-          );
-          this.allTecnologias = this.allTecnologias.filter(
-            (tecnologia) => !idsTecnologias.includes(tecnologia.idTecnologia)
-          );
-        });
-      });
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 3 || this.role == 4) {
+        this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+        this._service
+          .findTecnologiasTechRider(this.id)
+          .subscribe((response) => {
+            this.tecnologias = response;
+            this._service.getTecnologias().subscribe((response) => {
+              this.allTecnologias = response;
+              let idsTecnologias = this.tecnologias.map(
+                (tecnologia) => tecnologia.idTecnologia
+              );
+              this.allTecnologias = this.allTecnologias.filter(
+                (tecnologia) =>
+                  !idsTecnologias.includes(tecnologia.idTecnologia)
+              );
+            });
+          });
+      } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
 
