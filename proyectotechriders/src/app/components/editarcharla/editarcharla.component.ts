@@ -134,10 +134,10 @@ export class EditarcharlaComponent implements OnInit {
           );
 
           // Creamos un array de observables para esperar a recoger todas las tecnologías de todos los TRs
-          const tecnologiasTechRiders: Observable<Usuario[]>[] =
-            this.allUsuarios.map((usuario: Usuario) =>
+          const tecnologiasTechRiders: Observable<any>[] = this.allUsuarios.map(
+            (usuario: Usuario) =>
               this._service.getTecnologiasTechRider(usuario.idUsuario)
-            );
+          );
 
           // forkJoin para esperar a que todos los observables se completen -> recoger todas las tecnologías de todos los TRs
           forkJoin(tecnologiasTechRiders).subscribe(
