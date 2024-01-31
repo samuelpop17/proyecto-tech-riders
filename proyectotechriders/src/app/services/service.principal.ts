@@ -18,7 +18,6 @@ export class ServicePrincipal {
 
   // Actualiza el número de peticiones pendientes
   actualizacionPeticiones() {
-    console.log('actualización');
     this.getAllPeticiones().subscribe((response: any[]) =>
       this.peticionesActualizadas.next(response.length)
     );

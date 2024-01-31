@@ -11,15 +11,21 @@ import Swal from 'sweetalert2';
 })
 export class CharlasTechRidersComponent implements OnInit {
   public charlasCargadas: boolean = false;
-  charlas: CharlasPendientes[] = [];
+  public charlas: CharlasPendientes[] = [];
+  public role!: number | null;
 
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this._service.charlasPorVerTechRiders().subscribe((response) => {
-      this.charlas = response;
-      this.charlasCargadas = true;
-    });
+    if (localStorage.getItem('token')) {
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 3 || this.role == 4) {
+        this._service.charlasPorVerTechRiders().subscribe((response) => {
+          this.charlas = response;
+          this.charlasCargadas = true;
+        });
+      } else this._router.navigate(['/usuario/perfil']);
+    } else this._router.navigate(['/login']);
   }
 
   asignarCharla(idcharla: number) {

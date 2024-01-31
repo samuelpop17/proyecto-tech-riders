@@ -60,23 +60,29 @@ export class CalendarioTechRidersCharlasComponent implements OnInit {
   events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = true;
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+  role!: number | null;
 
   ngOnInit(): void {
-    this._service.estadoCharlasTechRiders().subscribe((response) => {
-      let charlas: DetallesEstadoCharlaTech[] = response;
-      charlas.forEach((charla: DetallesEstadoCharlaTech) => {
-        this.events.push({
-          id: charla.idCharla,
-          start: new Date(charla.fechaCharla),
-          end: new Date(charla.fechaCharla),
-          title: charla.descripcionCharla,
-          allDay: true,
-          actions: [],
-          color: { ...colors['blue'] },
+    if (localStorage.getItem('token')) {
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 3 || this.role == 4) {
+        this._service.estadoCharlasTechRiders().subscribe((response) => {
+          let charlas: DetallesEstadoCharlaTech[] = response;
+          charlas.forEach((charla: DetallesEstadoCharlaTech) => {
+            this.events.push({
+              id: charla.idCharla,
+              start: new Date(charla.fechaCharla),
+              end: new Date(charla.fechaCharla),
+              title: charla.descripcionCharla,
+              allDay: true,
+              actions: [],
+              color: { ...colors['blue'] },
+            });
+          });
+          this.refresh.next();
         });
-      });
-      this.refresh.next();
-    });
+      } else this._router.navigate(['/usuario/perfil']);
+    } else this._router.navigate(['/login']);
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

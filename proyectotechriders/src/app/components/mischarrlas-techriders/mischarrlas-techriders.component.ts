@@ -17,11 +17,15 @@ export class MischarrlasTechridersComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this._service.estadoCharlasTechRiders().subscribe((response) => {
-      this.charlas = response;
-      this.charlasCargadas = true;
-    });
+    if (localStorage.getItem('token')) {
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 3 || this.role == 4) {
+        this._service.estadoCharlasTechRiders().subscribe((response) => {
+          this.charlas = response;
+          this.charlasCargadas = true;
+        });
+      } else this._router.navigate(['/usuario/perfil']);
+    } else this._router.navigate(['/login']);
   }
 
   anularCharla(idCharla: number) {

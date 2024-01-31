@@ -33,21 +33,23 @@ export class RegisterusuarioComponent implements OnInit {
   constructor(private _service: ServicePrincipal, private _router: Router) {}
 
   ngOnInit(): void {
-    this._service.getProvincias().subscribe((response) => {
-      this.provincias = response;
-    });
-    this.roles = [
-      { idRole: 2, tipoRole: 'PROFESOR' },
-      { idRole: 3, tipoRole: 'TECHRIDER' },
-      { idRole: 4, tipoRole: 'REPRESENTANTE' },
-    ];
-    this.roleElegido = 3;
-    this._service.getEmpresasCentrosActivas().subscribe((response) => {
-      this.empresasCentros = response;
-      this.publicEmpresasCentros = this.empresasCentros.filter(
-        (empresaCentro) => empresaCentro.idTipoEmpresa == 1
-      );
-    });
+    if (!localStorage.getItem('token')) {
+      this._service.getProvincias().subscribe((response) => {
+        this.provincias = response;
+      });
+      this.roles = [
+        { idRole: 2, tipoRole: 'PROFESOR' },
+        { idRole: 3, tipoRole: 'TECHRIDER' },
+        { idRole: 4, tipoRole: 'REPRESENTANTE' },
+      ];
+      this.roleElegido = 3;
+      this._service.getEmpresasCentrosActivas().subscribe((response) => {
+        this.empresasCentros = response;
+        this.publicEmpresasCentros = this.empresasCentros.filter(
+          (empresaCentro) => empresaCentro.idTipoEmpresa == 1
+        );
+      });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   changeEmpresasCentros(): void {

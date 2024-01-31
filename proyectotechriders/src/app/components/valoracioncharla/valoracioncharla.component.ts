@@ -11,6 +11,7 @@ import { ServicePrincipal } from 'src/app/services/service.principal';
 export class ValoracioncharlaComponent implements OnInit {
   public valoracion!: ValoracionCharla;
   public valoExiste: boolean = false;
+  public role!: number | null;
 
   @ViewChild('controlvaloracion') controlValoracion!: ElementRef;
   @ViewChild('controlcomentario') controlComentario!: ElementRef;
@@ -23,21 +24,26 @@ export class ValoracioncharlaComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      this._activeRoute.params.subscribe((params: Params) => {
-        if (params['idcharla']) {
-          let idcharla = parseInt(params['idcharla']);
-          this.valoracion = {
-            idCharla: idcharla,
-            idValoracion: 0,
-            comentario: '',
-            valoracion: 0,
-          };
-          this._service.findValoracionCharla(idcharla).subscribe((response) => {
-            if (response[0] != undefined) this.valoracion = response[0];
-            this.valoExiste = true;
-          });
-        }
-      });
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role == 2) {
+        this._activeRoute.params.subscribe((params: Params) => {
+          if (params['idcharla']) {
+            let idcharla = parseInt(params['idcharla']);
+            this.valoracion = {
+              idCharla: idcharla,
+              idValoracion: 0,
+              comentario: '',
+              valoracion: 0,
+            };
+            this._service
+              .findValoracionCharla(idcharla)
+              .subscribe((response) => {
+                if (response[0] != undefined) this.valoracion = response[0];
+                this.valoExiste = true;
+              });
+          }
+        });
+      } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
 

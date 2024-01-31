@@ -13,7 +13,9 @@ export class PanelPeticionesAdminComponent {
   constructor(private _router: Router) {}
 
   ngOnInit(): void {
-    this.role = parseInt(localStorage.getItem('role') ?? '0');
-    if (this.role != 1) this._router.navigate(['/usuario/perfil']);
+    if (localStorage.getItem('token')) {
+      this.role = parseInt(localStorage.getItem('role') ?? '0');
+      if (this.role != 1) this._router.navigate(['/usuario/perfil']);
+    } else this._router.navigate(['/login']);
   }
 }
