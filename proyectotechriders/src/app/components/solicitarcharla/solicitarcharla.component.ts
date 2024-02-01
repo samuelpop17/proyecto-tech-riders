@@ -109,6 +109,7 @@ export class SolicitarcharlaComponent implements OnInit {
                 .createTecnologiaCharla(idCharla, tecnologias[i].value)
                 .subscribe((response) => {});
             }
+            this._service.actualizacionCharlas();
             this._router.navigate(['/charlas/mis-charlas']);
           });
         } else {

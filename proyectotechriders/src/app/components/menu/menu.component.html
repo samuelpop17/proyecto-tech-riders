@@ -107,6 +107,11 @@
             aria-expanded="false"
           >
             Charlas
+            <span
+              class="position-absolute translate-middle bg-danger border border-light rounded-circle"
+              style="padding: 0.4rem !important"
+            >
+            </span>
           </a>
 
           <ul class="dropdown-menu">
@@ -114,6 +119,11 @@
               <li>
                 <a class="dropdown-item" [routerLink]="['/charlastechriders']">
                   Charlas disponibles
+                  <span
+                    class="position-absolute translate-middle badge rounded-pill bg-danger"
+                  >
+                    {{ numCharlas }}
+                  </span>
                 </a>
               </li>
               <li>

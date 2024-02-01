@@ -35,6 +35,7 @@ export class MischarrlasTechridersComponent implements OnInit {
         this._router
           .navigate(['/usuario/perfil'], { skipLocationChange: true })
           .then(() => {
+            this._service.actualizacionCharlas();
             this._router.navigate(['/mischarlastech']);
           });
       });

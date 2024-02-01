@@ -23,6 +23,15 @@ export class ServicePrincipal {
     );
   }
 
+  // Num charlas pendientes
+  private charlasActualizadas = new BehaviorSubject<number>(0);
+  numCharlas$ = this.charlasActualizadas.asObservable();
+  actualizacionCharlas() {
+    this.charlasPorVerTechRiders().subscribe((response: any[]) => {
+      this.charlasActualizadas.next(response.length);
+    });
+  }
+
   constructor(private _http: HttpClient) {}
 
   //#region AUTH
