@@ -277,7 +277,12 @@
             </svg>
             Cursos
           </label>
-          <select class="form-select" multiple style="overflow-y: hidden">
+          <select
+            class="form-select"
+            multiple
+            style="overflow-y: hidden"
+            [size]="cursos.length"
+          >
             <option *ngFor="let curso of cursos">
               {{ curso.nombreCurso }} ({{ curso.descripcionCurso }})
             </option>
