@@ -25,16 +25,20 @@ export class DetallescharlaComponent implements OnInit {
         this._service.findCharlaView(idcharla).subscribe((response) => {
           this.charla = response;
         });
-        this._service.getTecnologiasCharla(idcharla).subscribe((response) => {
-          this.tecnologiasCargadas = true;
-          response.forEach((tecnologia: TecnologiaCharla) => {
-            this._service
-              .findTecnologia(tecnologia.idTecnologia)
-              .subscribe((response) => {
-                this.tecnologias.push(response.nombreTecnologia);
+        this._service
+          .getTecnologiasCharla(idcharla)
+          .subscribe((response: TecnologiaCharla[]) => {
+            if (response.length > 0) {
+              response.forEach((tecnologia: TecnologiaCharla) => {
+                this._service
+                  .findTecnologia(tecnologia.idTecnologia)
+                  .subscribe((response) => {
+                    this.tecnologias.push(response.nombreTecnologia);
+                    this.tecnologiasCargadas = true;
+                  });
               });
+            } else this.tecnologiasCargadas = true;
           });
-        });
       }
     });
   }
