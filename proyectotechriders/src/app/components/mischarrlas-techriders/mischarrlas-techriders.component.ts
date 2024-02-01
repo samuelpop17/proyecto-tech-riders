@@ -71,7 +71,7 @@ export class MischarrlasTechridersComponent implements OnInit {
             confirmButtonText: 'Asignar',
             input: 'select',
             title: 'Reasignar charla',
-            html: `<p class='text-muted text-center'>Reasigna esta charla asignada a ti a un TechRider de tu empresa</p>`,
+            html: `<p class='text-muted text-center'>Asigna esta charla a un TechRider de tu empresa</p>`,
             inputOptions: opciones,
             showCancelButton: true,
             inputValidator: (value) => {
