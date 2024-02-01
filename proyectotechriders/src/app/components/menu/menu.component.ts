@@ -12,6 +12,7 @@ export class MenuComponent implements DoCheck {
   public token!: string | null;
   public estadoEmpresa: number = 0;
   public numPeticiones: number = 0;
+  public numCharlas: number = 0;
 
   constructor(private _service: ServicePrincipal) {}
 
@@ -25,6 +26,12 @@ export class MenuComponent implements DoCheck {
       console.log('CUIDAO');
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       this.token = localStorage.getItem('token');
+      if (this.role == 3 || this.role == 4) {
+        this._service.actualizacionCharlas();
+        this._service.numCharlas$.subscribe((data) => {
+          this.numCharlas = data;
+        });
+      }
       if (this.role == 4) {
         this._service.getPerfilUsuario().subscribe((response) => {
           if (response.idEmpresaCentro) {
