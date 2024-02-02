@@ -12,6 +12,7 @@
         <tr>
           <th class="text-muted">Usuario</th>
           <th class="text-muted">Email</th>
+          <th class="text-muted">Rol</th>
           <th class="text-muted text-center">Acciones</th>
         </tr>
       </thead>
@@ -19,6 +20,12 @@
         <tr *ngFor="let pet of altaUsuarios">
           <td class="fw-bold">{{ pet.nombre }} {{ pet.apellidos }}</td>
           <td>{{ pet.email }}</td>
+          <td>
+            <span *ngIf="pet.role == 1">Admin</span>
+            <span *ngIf="pet.role == 2">Profesor</span>
+            <span *ngIf="pet.role == 3">TechRider</span>
+            <span *ngIf="pet.role == 4">Responsable</span>
+          </td>
           <td class="text-center">
             <div class="btn-group" role="group">
               <button

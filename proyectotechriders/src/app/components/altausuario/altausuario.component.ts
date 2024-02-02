@@ -43,6 +43,7 @@ export class AltausuarioComponent implements OnInit {
                 nombre: response[i].nombre,
                 apellidos: response[i].apellidos,
                 email: response[i].email,
+                role: response[i].idRole,
               });
               break;
             }
