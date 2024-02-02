@@ -131,7 +131,8 @@
                   class="btn btn-dark btn-sm"
                   *ngIf="
                     charla.estadoCharla != 'COMPLETADA' &&
-                    charla.estadoCharla != 'ACREDITADA'
+                    charla.estadoCharla != 'ACREDITADA' &&
+                    charla.estadoCharla != 'CANCELADA'
                   "
                   (click)="cancelarCharla(charla.idCharla)"
                 >
