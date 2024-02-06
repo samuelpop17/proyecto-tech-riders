@@ -52,8 +52,6 @@ export class AltaempresaComponent implements OnInit {
                       this.peticionesAltaEmpresa[j].idPeticionCentroEmpresa,
                     idCentroEmpresa:
                       this.peticionesAltaEmpresa[j].idCentroEmpresa,
-                    idTipoPeticionCategoria:
-                      this.peticionesAltaEmpresa[j].idTipoPeticionCategoria,
                     nombre: response[i].nombre,
                     cif: response[i].cif,
                     direccion: response[i].direccion,

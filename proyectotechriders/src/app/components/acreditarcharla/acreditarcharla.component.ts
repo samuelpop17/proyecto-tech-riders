@@ -64,8 +64,6 @@ export class AcreditarcharlaComponent implements OnInit {
                   descripcion: response[i].descripcion,
                   fechaCharla: response[i].fechaCharla,
                   fechaSolicitud: response[i].fechaSolicitud,
-                  modalidad: response[i].modalidad,
-                  turno: response[i].turno,
                   idPeticion: this.peticionesCharlas[j].idPeticionCharla,
                 });
                 break;

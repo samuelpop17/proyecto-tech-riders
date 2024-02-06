@@ -47,8 +47,6 @@ export class AltausuarioComponent implements OnInit {
                   idPeticionAltaUsers:
                     this.peticionesAltaUsuarios[j].idPeticionAltaUsers,
                   idUser: this.peticionesAltaUsuarios[j].idUser,
-                  idTipoPeticionCategoria:
-                    this.peticionesAltaUsuarios[j].idTipoPeticionCategoria,
                   nombre: response[i].nombre,
                   apellidos: response[i].apellidos,
                   email: response[i].email,
