@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PeticionCentroEmpresa } from 'src/app/models/PeticionCentroEmpresa';
+import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
+import { ServicePeticionesCentroEmpresa } from 'src/app/services/service.peticionescentroempresa';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 
 @Component({
   selector: 'app-altaempresa',
@@ -14,6 +16,13 @@ export class AltaempresaComponent implements OnInit {
   public role!: number | null;
   public peticionesCargadas: boolean = false;
 
+  constructor(
+    private _serviceQueryTools: ServiceQueryTools,
+    private _servicePeticionesCentroEmpresa: ServicePeticionesCentroEmpresa,
+    private _serviceEmpresasCentros: ServiceEmpresasCentros,
+    private _router: Router
+  ) {}
+
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
       this.role = parseInt(localStorage.getItem('role') ?? '0');
@@ -22,58 +31,63 @@ export class AltaempresaComponent implements OnInit {
     } else this._router.navigate(['/login']);
   }
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
-
   cargarDatos() {
     this.peticionesCargadas = false;
     this.altaEmpresa = [];
-    this._service.getPeticionesCentroEmpresa().subscribe((response) => {
-      this.peticionesAltaEmpresa = response;
-      this._service.getEmpresasCentros().subscribe((response) => {
-        for (let i = 0; i < response.length; i++) {
-          for (let j = 0; j < this.peticionesAltaEmpresa.length; j++) {
-            if (
-              this.peticionesAltaEmpresa[j].idCentroEmpresa ==
-              response[i].idEmpresaCentro
-            ) {
-              this.altaEmpresa.push({
-                idPeticionCentroEmpresa:
-                  this.peticionesAltaEmpresa[j].idPeticionCentroEmpresa,
-                idCentroEmpresa: this.peticionesAltaEmpresa[j].idCentroEmpresa,
-                idTipoPeticionCategoria:
-                  this.peticionesAltaEmpresa[j].idTipoPeticionCategoria,
-                nombre: response[i].nombre,
-                cif: response[i].cif,
-                direccion: response[i].direccion,
-                personaContacto: response[i].personaContacto,
-                telefono: response[i].telefono,
-              });
-              break;
+    this._servicePeticionesCentroEmpresa
+      .getPeticionesCentroEmpresa()
+      .subscribe((response) => {
+        this.peticionesAltaEmpresa = response;
+        this._serviceEmpresasCentros
+          .getEmpresasCentros()
+          .subscribe((response) => {
+            for (let i = 0; i < response.length; i++) {
+              for (let j = 0; j < this.peticionesAltaEmpresa.length; j++) {
+                if (
+                  this.peticionesAltaEmpresa[j].idCentroEmpresa ==
+                  response[i].idEmpresaCentro
+                ) {
+                  this.altaEmpresa.push({
+                    idPeticionCentroEmpresa:
+                      this.peticionesAltaEmpresa[j].idPeticionCentroEmpresa,
+                    idCentroEmpresa:
+                      this.peticionesAltaEmpresa[j].idCentroEmpresa,
+                    idTipoPeticionCategoria:
+                      this.peticionesAltaEmpresa[j].idTipoPeticionCategoria,
+                    nombre: response[i].nombre,
+                    cif: response[i].cif,
+                    direccion: response[i].direccion,
+                    personaContacto: response[i].personaContacto,
+                    telefono: response[i].telefono,
+                  });
+                  break;
+                }
+              }
             }
-          }
-        }
-        this.peticionesCargadas = true;
+            this.peticionesCargadas = true;
+          });
       });
-    });
   }
 
   cambiarEstadoEmpresa(idEmpresa: number, idPeticion: number) {
-    this._service
+    this._serviceEmpresasCentros
       .cambiarEstadoEmpresaCentro(idEmpresa)
       .subscribe((response) => {
-        this._service
+        this._servicePeticionesCentroEmpresa
           .deletePeticionEmpresa(idPeticion)
           .subscribe((response) => {
-            this._service.actualizacionPeticiones();
+            this._serviceQueryTools.actualizacionPeticiones();
             this.cargarDatos();
           });
       });
   }
 
   eliminarPeticionEmpresa(idPeticion: number) {
-    this._service.anularPeticionEmpresa(idPeticion).subscribe((response) => {
-      this._service.actualizacionPeticiones();
-      this.cargarDatos();
-    });
+    this._servicePeticionesCentroEmpresa
+      .anularEmpresa(idPeticion)
+      .subscribe((response) => {
+        this._serviceQueryTools.actualizacionPeticiones();
+        this.cargarDatos();
+      });
   }
 }

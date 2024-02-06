@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
-import { Router } from '@angular/router';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
+
 @Component({
   selector: 'app-listadotr',
   templateUrl: './listadotr.component.html',
@@ -19,11 +19,11 @@ export class ListadotrComponent implements OnInit {
   public role!: number | null;
   public techRidersCargados: boolean = false;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(private _serviceQueryTools: ServiceQueryTools) {}
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this._service.getTechRiders().subscribe((response: any[]) => {
+    this._serviceQueryTools.getTechRiders().subscribe((response: any[]) => {
       this.techriders = response;
       this.trFiltro = response;
       this.charlasFiltroEmpresa = response;

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
-import { Router } from '@angular/router';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,11 +20,11 @@ export class ListadosComponent implements OnInit {
   public role!: number | null;
   public charlasCargadas: boolean = false;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(private _serviceQueryTools: ServiceQueryTools) {}
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this._service.getCharlasView().subscribe((response: any) => {
+    this._serviceQueryTools.getCharlasView().subscribe((response: any) => {
       this.charlas = response;
       this.charlasFiltro = response;
       this.charlasFiltroTema = response;

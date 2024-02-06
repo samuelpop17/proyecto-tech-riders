@@ -14,10 +14,10 @@ import {
   DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-import { ServicePrincipal } from 'src/app/services/service.principal';
 
 import { DetallesEstadoCharlaTech } from 'src/app/models/DetallesEstadoCharlaTechRiders';
 import { Router } from '@angular/router';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 
 const colors: Record<string, EventColor> = {
   blue: {
@@ -47,7 +47,10 @@ const colors: Record<string, EventColor> = {
 export class CalendarioTechRidersCharlasComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceQueryTools: ServiceQueryTools,
+    private _router: Router
+  ) {}
 
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
@@ -66,21 +69,23 @@ export class CalendarioTechRidersCharlasComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       if (this.role == 3 || this.role == 4) {
-        this._service.estadoCharlasTechRiders().subscribe((response) => {
-          let charlas: DetallesEstadoCharlaTech[] = response;
-          charlas.forEach((charla: DetallesEstadoCharlaTech) => {
-            this.events.push({
-              id: charla.idCharla,
-              start: new Date(charla.fechaCharla),
-              end: new Date(charla.fechaCharla),
-              title: charla.descripcionCharla,
-              allDay: true,
-              actions: [],
-              color: { ...colors['blue'] },
+        this._serviceQueryTools
+          .estadoCharlasTechRiders()
+          .subscribe((response) => {
+            let charlas: DetallesEstadoCharlaTech[] = response;
+            charlas.forEach((charla: DetallesEstadoCharlaTech) => {
+              this.events.push({
+                id: charla.idCharla,
+                start: new Date(charla.fechaCharla),
+                end: new Date(charla.fechaCharla),
+                title: charla.descripcionCharla,
+                allDay: true,
+                actions: [],
+                color: { ...colors['blue'] },
+              });
             });
+            this.refresh.next();
           });
-          this.refresh.next();
-        });
       } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }

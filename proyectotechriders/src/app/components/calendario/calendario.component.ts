@@ -14,9 +14,9 @@ import {
   DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Charla } from 'src/app/models/Charla';
 import { Router } from '@angular/router';
+import { ServiceCharlas } from 'src/app/services/service.charlas';
 
 const colors: Record<string, EventColor> = {
   blue: {
@@ -46,7 +46,10 @@ const colors: Record<string, EventColor> = {
 export class CalendarioComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceCharlas: ServiceCharlas,
+    private _router: Router
+  ) {}
 
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
@@ -61,7 +64,7 @@ export class CalendarioComponent implements OnInit {
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
   ngOnInit(): void {
-    this._service.getCharlas().subscribe((response) => {
+    this._serviceCharlas.getCharlas().subscribe((response) => {
       let charlas: Charla[] = response;
       charlas.forEach((charla: Charla) => {
         if (charla.idEstadoCharla != 1) {

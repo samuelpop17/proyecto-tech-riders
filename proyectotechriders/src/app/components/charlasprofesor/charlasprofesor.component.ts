@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EstadoCharla } from 'src/app/models/EstadoCharla';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceCharlas } from 'src/app/services/service.charlas';
+import { ServiceEstadosCharlas } from 'src/app/services/service.estadoscharlas';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,28 +21,37 @@ export class CharlasprofesorComponent implements OnInit {
 
   @ViewChild('selectestado') selectEstado!: ElementRef;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceQueryTools: ServiceQueryTools,
+    private _serviceEstadosCharlas: ServiceEstadosCharlas,
+    private _serviceCharlas: ServiceCharlas,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       if (this.role == 2) {
         let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-        this._service.getCharlasView().subscribe((response) => {
+        this._serviceQueryTools.getCharlasView().subscribe((response) => {
           this.charlas = response;
-          this._service.findCursosProfesor(id).subscribe((response) => {
-            this.cursos = response;
-            this.cursos = this.cursos.map((curso) => curso.idCurso);
-            this.charlas = this.charlas.filter((charla) =>
-              this.cursos.includes(charla.idCurso)
-            );
-            this.charlasFiltradas = this.charlas;
-            this.charlasCargadas = true;
+          this._serviceQueryTools
+            .findCursosProfesor(id)
+            .subscribe((response) => {
+              this.cursos = response;
+              this.cursos = this.cursos.map((curso) => curso.idCurso);
+              this.charlas = this.charlas.filter((charla) =>
+                this.cursos.includes(charla.idCurso)
+              );
+              this.charlasFiltradas = this.charlas;
+              this.charlasCargadas = true;
+            });
+        });
+        this._serviceEstadosCharlas
+          .getEstadosCharlas()
+          .subscribe((response) => {
+            this.estados = response;
           });
-        });
-        this._service.getEstadosCharlas().subscribe((response) => {
-          this.estados = response;
-        });
       } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
@@ -57,7 +68,7 @@ export class CharlasprofesorComponent implements OnInit {
 
   recargarCharlas(): void {
     this.charlasCargadas = false;
-    this._service.getCharlasView().subscribe((response) => {
+    this._serviceQueryTools.getCharlasView().subscribe((response) => {
       this.charlas = response;
       this.charlas = this.charlas.filter((charla) =>
         this.cursos.includes(charla.idCurso)
@@ -80,17 +91,19 @@ export class CharlasprofesorComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // ESTADO CANCELADA: ID 1
-        this._service.updateEstadoCharla(idCharla, 1).subscribe((response) => {
-          Swal.fire({
-            color: '#333333',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            title: 'Charla cancelada',
+        this._serviceCharlas
+          .updateEstadoCharla(idCharla, 1)
+          .subscribe((response) => {
+            Swal.fire({
+              color: '#333333',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+              title: 'Charla cancelada',
+            });
+            this.recargarCharlas();
           });
-          this.recargarCharlas();
-        });
       }
     });
   }
@@ -108,17 +121,19 @@ export class CharlasprofesorComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // ESTADO COMPLETADA: ID 5
-        this._service.updateEstadoCharla(idCharla, 5).subscribe((response) => {
-          Swal.fire({
-            color: '#333333',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            title: 'Charla completada',
+        this._serviceCharlas
+          .updateEstadoCharla(idCharla, 5)
+          .subscribe((response) => {
+            Swal.fire({
+              color: '#333333',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+              title: 'Charla completada',
+            });
+            this.recargarCharlas();
           });
-          this.recargarCharlas();
-        });
       }
     });
   }

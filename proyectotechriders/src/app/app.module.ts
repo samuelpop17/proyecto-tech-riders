@@ -24,11 +24,15 @@ import { CalendarioTechRidersCharlasComponent } from './components/calendario-te
 import { CharlasTechRidersComponent } from './components/charlas-tech-riders/charlas-tech-riders.component';
 import { CharlasprofesorComponent } from './components/charlasprofesor/charlasprofesor.component';
 import { ContactarAdminComponent } from './components/contactar-admin/contactar-admin.component';
+import { CrearEmpresaCentroComponent } from './components/crear-empresa-centro/crear-empresa-centro.component';
+import { CursosCentroComponent } from './components/cursos-centro/cursos-centro.component';
+import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
 import { DetallescharlaComponent } from './components/detallescharla/detallescharla.component';
 import { EditarcharlaComponent } from './components/editarcharla/editarcharla.component';
 import { EditarcursosComponent } from './components/editarcursos/editarcursos.component';
 import { EditartecnologiastechriderComponent } from './components/editartecnologiastechrider/editartecnologiastechrider.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListadocentrosComponent } from './components/listadocentros/listadocentros.component';
 import { ListadosComponent } from './components/listados/listados.component';
@@ -44,53 +48,68 @@ import { PanelPeticionesAdminComponent } from './components/panel-peticiones-adm
 import { PerfilusuarioComponent } from './components/perfilusuario/perfilusuario.component';
 import { ProponerTecnologiaComponent } from './components/proponer-tecnologia/proponer-tecnologia.component';
 import { RegisterusuarioComponent } from './components/registerusuario/registerusuario.component';
-import { ServicePrincipal } from './services/service.principal';
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
-import { DetallesTechRiderComponent } from './components/detalles-tech-rider/detalles-tech-rider.component';
-import { CursosCentroComponent } from './components/cursos-centro/cursos-centro.component';
-import { CrearEmpresaCentroComponent } from './components/crear-empresa-centro/crear-empresa-centro.component';
-import { FooterComponent } from './components/footer/footer.component';
+
+import { ServiceAuth } from './services/service.auth';
+import { ServiceCharlas } from './services/service.charlas';
+import { ServiceCursos } from './services/service.cursos';
+import { ServiceCursosProfesores } from './services/service.cursosprofesores';
+import { ServiceEmpresasCentros } from './services/service.empresascentros';
+import { ServiceEstadosCharlas } from './services/service.estadoscharlas';
+import { ServicePeticionesAltaUsers } from './services/service.peticionesaltausers';
+import { ServicePeticionesCentroEmpresa } from './services/service.peticionescentroempresa';
+import { ServicePeticionesTecnologias } from './services/service.peticionestecnologias';
+import { ServiceProvincias } from './services/service.provincias';
+import { ServiceQueryTools } from './services/service.querytools';
+import { ServiceRoles } from './services/service.roles';
+import { ServiceSolicitudAcreditacionesCharlas } from './services/service.solicitudacreditacionescharlas';
+import { ServiceTecnologias } from './services/service.tecnologias';
+import { ServiceTecnologiasCharlas } from './services/service.tecnologiascharlas';
+import { ServiceTecnologiasTechRiders } from './services/service.tecnologiastechriders';
+import { ServiceTipoTecnologias } from './services/service.tipotecnologias';
+import { ServiceUsuarios } from './services/service.usuarios';
+import { ServiceValoracionesCharlas } from './services/service.valoracionescharlas';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AcreditarcharlaComponent,
+    AltaempresaComponent,
+    AltausuarioComponent,
+    AniadirtecnologiaComponent,
+    CalendarioComponent,
+    CalendarioTechRidersCharlasComponent,
+    CharlasTechRidersComponent,
+    CharlasprofesorComponent,
+    ContactarAdminComponent,
+    CrearEmpresaCentroComponent,
+    CrearEmpresaCentroComponent,
+    CursosCentroComponent,
+    DetallesTechRiderComponent,
+    DetallescharlaComponent,
+    EditarcharlaComponent,
+    EditarcursosComponent,
+    EditartecnologiastechriderComponent,
+    EditarusuarioComponent,
+    FooterComponent,
     HomeComponent,
+    ListadocentrosComponent,
+    ListadosComponent,
+    ListadosempresaComponent,
+    ListadotrComponent,
     LoginComponent,
-    PerfilusuarioComponent,
     LogoutComponent,
     MenuComponent,
-    EditarusuarioComponent,
-    ModificarcontrasenyaComponent,
-    EditartecnologiastechriderComponent,
-    RegisterusuarioComponent,
-    EditarcursosComponent,
-    CharlasprofesorComponent,
-    DetallescharlaComponent,
-    SolicitarcharlaComponent,
-    EditarcharlaComponent,
-    CalendarioComponent,
-    ListadosComponent,
-    CharlasTechRidersComponent,
-    ContactarAdminComponent,
-    ProponerTecnologiaComponent,
     MischarrlasTechridersComponent,
-    ValoracioncharlaComponent,
     MistechridersResponsableComponent,
-    CrearEmpresaCentroComponent,
-    CalendarioTechRidersCharlasComponent,
-    ListadotrComponent,
-    ListadocentrosComponent,
-    ListadosempresaComponent,
+    ModificarcontrasenyaComponent,
     PanelPeticionesAdminComponent,
-    AltausuarioComponent,
-    AcreditarcharlaComponent,
-    AniadirtecnologiaComponent,
-    AltaempresaComponent,
-    DetallesTechRiderComponent,
-    CursosCentroComponent,
-    CrearEmpresaCentroComponent,
-    FooterComponent,
+    PerfilusuarioComponent,
+    ProponerTecnologiaComponent,
+    RegisterusuarioComponent,
+    SolicitarcharlaComponent,
+    ValoracioncharlaComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,8 +126,26 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
 
   providers: [
+    ServiceAuth,
+    ServiceCharlas,
+    ServiceCursos,
+    ServiceCursosProfesores,
+    ServiceEmpresasCentros,
+    ServiceEstadosCharlas,
+    ServicePeticionesAltaUsers,
+    ServicePeticionesCentroEmpresa,
+    ServicePeticionesTecnologias,
+    ServiceProvincias,
+    ServiceQueryTools,
+    ServiceRoles,
+    ServiceSolicitudAcreditacionesCharlas,
+    ServiceTecnologias,
+    ServiceTecnologiasCharlas,
+    ServiceTecnologiasTechRiders,
+    ServiceTipoTecnologias,
+    ServiceUsuarios,
+    ServiceValoracionesCharlas,
     appRoutingProvider,
-    ServicePrincipal,
     { provide: LOCALE_ID, useValue: 'es' },
   ],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
-import { Router } from '@angular/router';
+import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
+import { ServiceProvincias } from 'src/app/services/service.provincias';
 
 @Component({
   selector: 'app-listadocentros',
@@ -21,29 +21,34 @@ export class ListadocentrosComponent implements OnInit {
   public role!: number | null;
   public centrosCargados: boolean = false;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceProvincias: ServiceProvincias,
+    private _serviceEmpresasCentros: ServiceEmpresasCentros
+  ) {}
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this._service.getProvincias().subscribe((response: any) => {
+    this._serviceProvincias.getProvincias().subscribe((response: any) => {
       this.provincias = response;
-      this._service.getEmpresasCentros().subscribe((response: any) => {
-        this.centros = response;
+      this._serviceEmpresasCentros
+        .getEmpresasCentros()
+        .subscribe((response: any) => {
+          this.centros = response;
 
-        this.centros.forEach((centro) => {
-          centro.provincia =
-            this.provincias[centro.idProvincia - 1].nombreProvincia;
-          if (centro.idTipoEmpresa == 2) this.centrosReset.push(centro);
+          this.centros.forEach((centro) => {
+            centro.provincia =
+              this.provincias[centro.idProvincia - 1].nombreProvincia;
+            if (centro.idTipoEmpresa == 2) this.centrosReset.push(centro);
+          });
+
+          this.proFiltro = this.centrosReset;
+          this.centrosFiltroNombre = this.centrosReset;
+          this.centrosFiltroNombre = this.centrosFiltroNombre.filter(
+            (valor, indice, self) =>
+              indice === self.findIndex((v) => v.nombre === valor.nombre)
+          );
+          this.centrosCargados = true;
         });
-
-        this.proFiltro = this.centrosReset;
-        this.centrosFiltroNombre = this.centrosReset;
-        this.centrosFiltroNombre = this.centrosFiltroNombre.filter(
-          (valor, indice, self) =>
-            indice === self.findIndex((v) => v.nombre === valor.nombre)
-        );
-        this.centrosCargados = true;
-      });
     });
   }
 

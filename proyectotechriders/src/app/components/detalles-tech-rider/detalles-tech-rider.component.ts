@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 
 @Component({
   selector: 'app-detalles-tech-rider',
@@ -13,7 +13,7 @@ export class DetallesTechRiderComponent implements OnInit {
   public role!: number | null;
 
   constructor(
-    private _service: ServicePrincipal,
+    private _serviceQueryTools: ServiceQueryTools,
     private _activeRoute: ActivatedRoute
   ) {}
 
@@ -22,9 +22,9 @@ export class DetallesTechRiderComponent implements OnInit {
       if (params['id']) {
         this.role = parseInt(localStorage.getItem('role') ?? '0');
         let idTechRider = params['id'];
-        this._service.getTechRiders().subscribe((response: any[]) => {
+        this._serviceQueryTools.getTechRiders().subscribe((response: any[]) => {
           this.techrider = response.filter((tr) => tr.id == idTechRider)[0];
-          this._service
+          this._serviceQueryTools
             .findTecnologiasTechRider(this.techrider.idTechRider)
             .subscribe((response) => {
               this.tecnologias = response;

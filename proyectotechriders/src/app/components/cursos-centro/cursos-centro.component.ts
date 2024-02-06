@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Curso } from 'src/app/models/Curso';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceCursos } from 'src/app/services/service.cursos';
+import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
 
 @Component({
   selector: 'app-cursos-centro',
@@ -19,7 +20,8 @@ export class CursosCentroComponent implements OnInit {
   @ViewChild('controldescripcion') controlDescripcion!: ElementRef;
 
   constructor(
-    private _service: ServicePrincipal,
+    private _serviceEmpresasCentros: ServiceEmpresasCentros,
+    private _serviceCursos: ServiceCursos,
     private _activeRoute: ActivatedRoute,
     private _router: Router
   ) {}
@@ -29,16 +31,18 @@ export class CursosCentroComponent implements OnInit {
     this._activeRoute.params.subscribe((params: Params) => {
       if (params['idcentro']) {
         this.idCentro = parseInt(params['idcentro']);
-        this._service.findEmpresaCentro(this.idCentro).subscribe((response) => {
-          this.nombreCentro = response.nombre;
-          this._service.getCursos().subscribe((response) => {
-            this.cursos = response;
-            this.cursos = this.cursos.filter(
-              (curso) => curso.idCentro == this.idCentro
-            );
-            this.cursosCargados = true;
+        this._serviceEmpresasCentros
+          .findEmpresaCentro(this.idCentro)
+          .subscribe((response) => {
+            this.nombreCentro = response.nombre;
+            this._serviceCursos.getCursos().subscribe((response) => {
+              this.cursos = response;
+              this.cursos = this.cursos.filter(
+                (curso) => curso.idCentro == this.idCentro
+              );
+              this.cursosCargados = true;
+            });
           });
-        });
       }
     });
   }
@@ -50,7 +54,7 @@ export class CursosCentroComponent implements OnInit {
       nombreCurso: this.controlNombre.nativeElement.value,
       descripcion: this.controlDescripcion.nativeElement.value,
     };
-    this._service.createCurso(curso).subscribe((response) => {
+    this._serviceCursos.createCurso(curso).subscribe((response) => {
       this._router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this._router.navigate(['/cursos-centro', this.idCentro]);
       });

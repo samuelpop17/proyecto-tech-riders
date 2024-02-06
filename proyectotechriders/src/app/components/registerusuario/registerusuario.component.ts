@@ -4,7 +4,11 @@ import { EmpresaCentro } from 'src/app/models/EmpresaCentro';
 import { Provincia } from 'src/app/models/Provincia';
 import { Role } from 'src/app/models/Role';
 import { Usuario } from 'src/app/models/Usuario';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
+import { ServicePeticionesAltaUsers } from 'src/app/services/service.peticionesaltausers';
+import { ServiceProvincias } from 'src/app/services/service.provincias';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,11 +34,18 @@ export class RegisterusuarioComponent implements OnInit {
   public roleElegido!: number;
   public publico: number = 0;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceProvincias: ServiceProvincias,
+    private _serviceEmpresasCentros: ServiceEmpresasCentros,
+    private _serviceUsuarios: ServiceUsuarios,
+    private _servicePeticionesAltaUsers: ServicePeticionesAltaUsers,
+    private _serviceQueryTools: ServiceQueryTools,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (!localStorage.getItem('token')) {
-      this._service.getProvincias().subscribe((response) => {
+      this._serviceProvincias.getProvincias().subscribe((response) => {
         this.provincias = response;
       });
       this.roles = [
@@ -43,12 +54,14 @@ export class RegisterusuarioComponent implements OnInit {
         { idRole: 4, tipoRole: 'REPRESENTANTE' },
       ];
       this.roleElegido = 3;
-      this._service.getEmpresasCentrosActivas().subscribe((response) => {
-        this.empresasCentros = response;
-        this.publicEmpresasCentros = this.empresasCentros.filter(
-          (empresaCentro) => empresaCentro.idTipoEmpresa == 1
-        );
-      });
+      this._serviceEmpresasCentros
+        .getEmpresasCentrosActivas()
+        .subscribe((response) => {
+          this.empresasCentros = response;
+          this.publicEmpresasCentros = this.empresasCentros.filter(
+            (empresaCentro) => empresaCentro.idTipoEmpresa == 1
+          );
+        });
     } else this._router.navigate(['/usuario/perfil']);
   }
 
@@ -79,22 +92,24 @@ export class RegisterusuarioComponent implements OnInit {
       estado: 2,
       linkedInVisible: this.publico ? 1 : 0,
     };
-    this._service.createUsuario(usuario).subscribe((response) => {
+    this._serviceUsuarios.createUsuario(usuario).subscribe((response) => {
       let idUsuario = response.idUsuario;
-      this._service.createPeticionAltaUser(idUsuario).subscribe((response) => {
-        this._service.actualizacionPeticiones();
-        Swal.fire({
-          color: '#333333',
-          icon: 'success',
-          showConfirmButton: false,
-          text: 'Usuario creado. Tendrá que ser validado por el administrador',
-          timer: 4000,
-          timerProgressBar: true,
-          title: 'Registro con éxito',
-        }).then((result) => {
-          this._router.navigate(['/login']);
+      this._servicePeticionesAltaUsers
+        .createPeticionAltaUser(idUsuario)
+        .subscribe((response) => {
+          this._serviceQueryTools.actualizacionPeticiones();
+          Swal.fire({
+            color: '#333333',
+            icon: 'success',
+            showConfirmButton: false,
+            text: 'Usuario creado. Tendrá que ser validado por el administrador',
+            timer: 4000,
+            timerProgressBar: true,
+            title: 'Registro con éxito',
+          }).then((result) => {
+            this._router.navigate(['/login']);
+          });
         });
-      });
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ValoracionCharla } from 'src/app/models/ValoracionCharla';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceValoracionesCharlas } from 'src/app/services/service.valoracionescharlas';
 
 @Component({
   selector: 'app-valoracioncharla',
@@ -18,7 +18,7 @@ export class ValoracioncharlaComponent implements OnInit {
 
   constructor(
     private _activeRoute: ActivatedRoute,
-    private _service: ServicePrincipal,
+    private _serviceValoracionesCharlas: ServiceValoracionesCharlas,
     private _router: Router
   ) {}
 
@@ -35,7 +35,7 @@ export class ValoracioncharlaComponent implements OnInit {
               comentario: '',
               valoracion: 0,
             };
-            this._service
+            this._serviceValoracionesCharlas
               .findValoracionCharla(idcharla)
               .subscribe((response) => {
                 if (response[0] != undefined) this.valoracion = response[0];
@@ -51,13 +51,13 @@ export class ValoracioncharlaComponent implements OnInit {
     this.valoracion.valoracion = this.controlValoracion.nativeElement.value;
     this.valoracion.comentario = this.controlComentario.nativeElement.value;
     if (this.valoracion.idValoracion == 0) {
-      this._service
+      this._serviceValoracionesCharlas
         .createValoracionCharla(this.valoracion)
         .subscribe((response) => {
           this._router.navigate(['/charlas/mis-charlas']);
         });
     } else {
-      this._service
+      this._serviceValoracionesCharlas
         .updateValoracionCharla(this.valoracion)
         .subscribe((response) => {
           this._router.navigate(['/charlas/mis-charlas']);

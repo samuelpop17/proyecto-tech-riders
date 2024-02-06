@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SolicitudAcreditacionCharla } from 'src/app/models/SolicitudAcreditacionCharla';
+import { ServiceCharlas } from 'src/app/services/service.charlas';
+import { ServiceSolicitudAcreditacionesCharlas } from 'src/app/services/service.solicitudacreditacionescharlas';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 
 @Component({
   selector: 'app-acreditarcharla',
@@ -22,19 +24,26 @@ export class AcreditarcharlaComponent implements OnInit {
     } else this._router.navigate(['/login']);
   }
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceCharlas: ServiceCharlas,
+    private _serviceAcreditacionesCharlas: ServiceSolicitudAcreditacionesCharlas,
+    private _serviceQueryTools: ServiceQueryTools,
+    private _router: Router
+  ) {}
 
   cambiarEstado(idCharla: number, idPeticion: number) {
-    this._service.updateEstadoCharla(idCharla, 6).subscribe((response) => {
-      this.eliminarAcreditacion(idPeticion);
-    });
+    this._serviceCharlas
+      .updateEstadoCharla(idCharla, 6)
+      .subscribe((response) => {
+        this.eliminarAcreditacion(idPeticion);
+      });
   }
 
   eliminarAcreditacion(idPeticion: number) {
-    this._service
+    this._serviceAcreditacionesCharlas
       .solicitudAcreditacionEliminar(idPeticion)
       .subscribe((response) => {
-        this._service.actualizacionPeticiones();
+        this._serviceQueryTools.actualizacionPeticiones();
         this.cargarDatos();
       });
   }
@@ -42,27 +51,29 @@ export class AcreditarcharlaComponent implements OnInit {
   cargarDatos() {
     this.acreditacionesCargadas = false;
     this.charlas = [];
-    this._service.getAcreditacionesCharlas().subscribe((response) => {
-      this.peticionesCharlas = response;
-      this._service.getCharlas().subscribe((response) => {
-        for (let i = 0; i < response.length; i++) {
-          for (let j = 0; j < this.peticionesCharlas.length; j++) {
-            if (this.peticionesCharlas[j].idCharla == response[i].idCharla) {
-              this.charlas.push({
-                idCharla: response[i].idCharla,
-                descripcion: response[i].descripcion,
-                fechaCharla: response[i].fechaCharla,
-                fechaSolicitud: response[i].fechaSolicitud,
-                modalidad: response[i].modalidad,
-                turno: response[i].turno,
-                idPeticion: this.peticionesCharlas[j].idPeticionCharla,
-              });
-              break;
+    this._serviceAcreditacionesCharlas
+      .getAcreditacionesCharlas()
+      .subscribe((response) => {
+        this.peticionesCharlas = response;
+        this._serviceCharlas.getCharlas().subscribe((response) => {
+          for (let i = 0; i < response.length; i++) {
+            for (let j = 0; j < this.peticionesCharlas.length; j++) {
+              if (this.peticionesCharlas[j].idCharla == response[i].idCharla) {
+                this.charlas.push({
+                  idCharla: response[i].idCharla,
+                  descripcion: response[i].descripcion,
+                  fechaCharla: response[i].fechaCharla,
+                  fechaSolicitud: response[i].fechaSolicitud,
+                  modalidad: response[i].modalidad,
+                  turno: response[i].turno,
+                  idPeticion: this.peticionesCharlas[j].idPeticionCharla,
+                });
+                break;
+              }
             }
           }
-        }
-        this.acreditacionesCargadas = true;
+          this.acreditacionesCargadas = true;
+        });
       });
-    });
   }
 }

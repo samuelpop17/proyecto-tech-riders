@@ -4,7 +4,11 @@ import { Charla } from 'src/app/models/Charla';
 import { Curso } from 'src/app/models/Curso';
 import { Provincia } from 'src/app/models/Provincia';
 import { Tecnologia } from 'src/app/models/Tecnologia';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceCharlas } from 'src/app/services/service.charlas';
+import { ServiceProvincias } from 'src/app/services/service.provincias';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { ServiceTecnologias } from 'src/app/services/service.tecnologias';
+import { ServiceTecnologiasCharlas } from 'src/app/services/service.tecnologiascharlas';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,20 +31,27 @@ export class SolicitarcharlaComponent implements OnInit {
   @ViewChild('selectprovincia') selectProvincia!: ElementRef;
   @ViewChild('controlobservaciones') controlObservaciones!: ElementRef;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceTecnologias: ServiceTecnologias,
+    private _serviceQueryTools: ServiceQueryTools,
+    private _serviceProvincias: ServiceProvincias,
+    private _serviceCharlas: ServiceCharlas,
+    private _serviceTecnologiasCharlas: ServiceTecnologiasCharlas,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       if (this.role == 2) {
-        this._service.getTecnologias().subscribe((response) => {
+        this._serviceTecnologias.getTecnologias().subscribe((response) => {
           this.tecnologias = response;
         });
         let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-        this._service.findCursosProfesor(id).subscribe((response) => {
+        this._serviceQueryTools.findCursosProfesor(id).subscribe((response) => {
           this.cursos = response;
         });
-        this._service.getProvincias().subscribe((response) => {
+        this._serviceProvincias.getProvincias().subscribe((response) => {
           this.provincias = response;
         });
       } else this._router.navigate(['/usuario/perfil']);
@@ -79,7 +90,7 @@ export class SolicitarcharlaComponent implements OnInit {
         idProvincia:
           this.selectProvincia.nativeElement.selectedOptions[0].value,
       };
-      this._service.getCharlas().subscribe((response) => {
+      this._serviceCharlas.getCharlas().subscribe((response) => {
         let charlas = response;
         let fecha = new Date(charla.fechaCharla);
         charlas = charlas.filter((chrl: Charla) => {
@@ -100,16 +111,16 @@ export class SolicitarcharlaComponent implements OnInit {
           );
         });
         if (charlas.length == 0) {
-          this._service.createCharla(charla).subscribe((response) => {
+          this._serviceCharlas.createCharla(charla).subscribe((response) => {
             let idCharla = response.idCharla;
             let tecnologias =
               this.selectTecnologias.nativeElement.selectedOptions;
             for (let i = 0; i < tecnologias.length; i++) {
-              this._service
+              this._serviceTecnologiasCharlas
                 .createTecnologiaCharla(idCharla, tecnologias[i].value)
                 .subscribe((response) => {});
             }
-            this._service.actualizacionCharlas();
+            this._serviceQueryTools.actualizacionCharlas();
             this._router.navigate(['/charlas/mis-charlas']);
           });
         } else {

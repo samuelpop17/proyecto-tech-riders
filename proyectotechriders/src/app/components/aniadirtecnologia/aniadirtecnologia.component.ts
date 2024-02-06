@@ -1,7 +1,9 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PeticionTecnologia } from 'src/app/models/PeticionTecnologia';
+import { ServicePeticionesTecnologias } from 'src/app/services/service.peticionestecnologias';
+import { ServiceTecnologias } from 'src/app/services/service.tecnologias';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
 
 @Component({
   selector: 'app-aniadirtecnologia',
@@ -13,6 +15,13 @@ export class AniadirtecnologiaComponent implements OnInit {
   public peticionesTecnologias!: PeticionTecnologia[];
   public tecnologiasCargadas: boolean = false;
 
+  constructor(
+    private _servicePeticionesTecnologias: ServicePeticionesTecnologias,
+    private _serviceTecnologias: ServiceTecnologias,
+    private _serviceQueryTools: ServiceQueryTools,
+    private _router: Router
+  ) {}
+
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
       this.role = parseInt(localStorage.getItem('role') ?? '0');
@@ -21,26 +30,26 @@ export class AniadirtecnologiaComponent implements OnInit {
     } else this._router.navigate(['/login']);
   }
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
-
   cargarDatos() {
     this.tecnologiasCargadas = false;
-    this._service.getPeticionesTecnologia().subscribe((response) => {
-      this.peticionesTecnologias = response;
-      this.tecnologiasCargadas = true;
-    });
+    this._servicePeticionesTecnologias
+      .getPeticionesTecnologia()
+      .subscribe((response) => {
+        this.peticionesTecnologias = response;
+        this.tecnologiasCargadas = true;
+      });
   }
 
   insertTeconologia(nombre: string, idPeticionTecnologia: number) {
-    this._service.insertTecnologia(nombre).subscribe((response) => {
+    this._serviceTecnologias.insertTecnologia(nombre).subscribe((response) => {
       this.eliminarPeticion(idPeticionTecnologia);
     });
   }
   eliminarPeticion(idPeticionTecnologia: number) {
-    this._service
+    this._servicePeticionesTecnologias
       .deletePeticionTecnologia(idPeticionTecnologia)
       .subscribe((response) => {
-        this._service.actualizacionPeticiones();
+        this._serviceQueryTools.actualizacionPeticiones();
         this.cargarDatos();
       });
   }

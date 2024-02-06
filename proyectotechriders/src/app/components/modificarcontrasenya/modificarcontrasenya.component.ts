@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,7 +15,10 @@ export class ModificarcontrasenyaComponent implements OnInit {
   @ViewChild('controlnueva') controlNueva!: ElementRef;
   @ViewChild('controlrepetir') controlRepetir!: ElementRef;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceUsuarios: ServiceUsuarios,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (!localStorage.getItem('token')) this._router.navigate(['/login']);
@@ -25,7 +28,7 @@ export class ModificarcontrasenyaComponent implements OnInit {
     let antigua = this.controlAntigua.nativeElement.value;
     let nueva = this.controlNueva.nativeElement.value;
     let repetir = this.controlRepetir.nativeElement.value;
-    this._service.getPerfilUsuario().subscribe((response) => {
+    this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
       if (response.password != antigua) {
         Swal.fire({
           color: '#333333',
@@ -54,7 +57,7 @@ export class ModificarcontrasenyaComponent implements OnInit {
           title: 'Error',
         });
       } else {
-        this._service
+        this._serviceUsuarios
           .updatePasswordUsuario(response.idUsuario, nueva)
           .subscribe((response) => {
             this._router.navigate(['/usuario/perfil']);

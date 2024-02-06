@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CharlasPendientes } from 'src/app/models/CharlasPendientesTechRiders';
-import { ServicePrincipal } from 'src/app/services/service.principal';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { ServiceCharlas } from 'src/app/services/service.charlas';
 
 @Component({
   selector: 'app-charlas-tech-riders',
@@ -14,16 +15,22 @@ export class CharlasTechRidersComponent implements OnInit {
   public charlas: CharlasPendientes[] = [];
   public role!: number | null;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceQueryTools: ServiceQueryTools,
+    private _serviceCharlas: ServiceCharlas,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       if (this.role == 3 || this.role == 4) {
-        this._service.charlasPorVerTechRiders().subscribe((response) => {
-          this.charlas = response;
-          this.charlasCargadas = true;
-        });
+        this._serviceQueryTools
+          .charlasPorVerTechRiders()
+          .subscribe((response) => {
+            this.charlas = response;
+            this.charlasCargadas = true;
+          });
       } else this._router.navigate(['/usuario/perfil']);
     } else this._router.navigate(['/login']);
   }
@@ -42,12 +49,15 @@ export class CharlasTechRidersComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           let idUsuario = parseInt(localStorage.getItem('idUsuario') ?? '0');
-          this._service
+          this._serviceCharlas
             .asignarseUnaCharlaTechRider(idUsuario, idcharla)
             .subscribe((response) => {
-              this._service.updateEstadoCharla(idcharla, 3).subscribe(() => {
-                this._router.navigate(['/mischarlastech']);
-              });
+              this._serviceCharlas
+                .updateEstadoCharla(idcharla, 3)
+                .subscribe(() => {
+                  this._serviceQueryTools.actualizacionCharlas();
+                  this._router.navigate(['/mischarlastech']);
+                });
             });
         }
       });

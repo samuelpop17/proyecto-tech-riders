@@ -1,16 +1,12 @@
-import {
-  Component,
-  DoCheck,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Provincia } from 'src/app/models/Provincia';
 import { Usuario } from 'src/app/models/Usuario';
-import { ServicePrincipal } from 'src/app/services/service.principal';
 import { EmpresaCentro } from 'src/app/models/EmpresaCentro';
-import { Role } from 'src/app/models/Role';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
+import { ServiceProvincias } from 'src/app/services/service.provincias';
+import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
+
 @Component({
   selector: 'app-editarusuario',
   templateUrl: './editarusuario.component.html',
@@ -41,19 +37,24 @@ export class EditarusuarioComponent implements OnInit {
   @ViewChild('personaContacto') personaContacto!: ElementRef;
   @ViewChild('razonsocial') razonsocial!: ElementRef;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceUsuarios: ServiceUsuarios,
+    private _serviceProvincias: ServiceProvincias,
+    private _serviceEmpresasCentros: ServiceEmpresasCentros,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      this._service.getPerfilUsuario().subscribe((response) => {
+      this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
         this.publico = this.usuario.linkedInVisible;
         this.role = parseInt(localStorage.getItem('role') ?? '0');
-        this._service.getProvincias().subscribe((response) => {
+        this._serviceProvincias.getProvincias().subscribe((response) => {
           this.provincias = response;
           if (this.role == 4 && this.usuario.idEmpresaCentro) {
             this.empresaExists = true;
-            this._service
+            this._serviceEmpresasCentros
               .findEmpresaCentro(this.usuario.idEmpresaCentro)
               .subscribe((response) => {
                 this.empresaLoaded = true;
@@ -81,7 +82,7 @@ export class EditarusuarioComponent implements OnInit {
       linkedInVisible: this.publico ? 1 : 0,
     };
 
-    this._service.editUsuario(usuario).subscribe((response) => {
+    this._serviceUsuarios.editUsuario(usuario).subscribe((response) => {
       if (this.role == 4) {
         let empresa: EmpresaCentro = {
           idEmpresaCentro: this.empresaCentro.idEmpresaCentro,
@@ -95,7 +96,7 @@ export class EditarusuarioComponent implements OnInit {
           idTipoEmpresa: this.empresaCentro.idTipoEmpresa,
           estadoEmpresa: this.empresaCentro.estadoEmpresa,
         };
-        this._service
+        this._serviceEmpresasCentros
           .editEmpresaUsuarioRepresentante(empresa)
           .subscribe((response) => {
             this._router.navigate(['/usuario/perfil']);

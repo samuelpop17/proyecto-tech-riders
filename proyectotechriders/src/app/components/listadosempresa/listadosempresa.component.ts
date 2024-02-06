@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicePrincipal } from 'src/app/services/service.principal';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { TechRider } from 'src/app/models/techRider';
 import { Usuario } from 'src/app/models/Usuario';
+import { ServiceProvincias } from 'src/app/services/service.provincias';
+import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
+
 @Component({
   selector: 'app-listadosempresa',
   templateUrl: './listadosempresa.component.html',
@@ -23,30 +24,36 @@ export class ListadosempresaComponent implements OnInit {
   public role!: number | null;
   public empresasCargadas: boolean = false;
 
-  constructor(private _service: ServicePrincipal, private _router: Router) {}
+  constructor(
+    private _serviceProvincias: ServiceProvincias,
+    private _serviceEmpresasCentros: ServiceEmpresasCentros,
+    private _serviceUsuarios: ServiceUsuarios
+  ) {}
 
   ngOnInit(): void {
     this.role = parseInt(localStorage.getItem('role') ?? '0');
-    this._service.getProvincias().subscribe((response: any) => {
+    this._serviceProvincias.getProvincias().subscribe((response: any) => {
       this.provincias = response;
-      this._service.getEmpresasCentrosActivas().subscribe((response: any) => {
-        this.empresas = response;
+      this._serviceEmpresasCentros
+        .getEmpresasCentrosActivas()
+        .subscribe((response: any) => {
+          this.empresas = response;
 
-        this.empresas.forEach((centro) => {
-          centro.provincia =
-            this.provincias[centro.idProvincia - 1].nombreProvincia;
-          if (centro.idTipoEmpresa == 1) this.empresasReset.push(centro);
+          this.empresas.forEach((centro) => {
+            centro.provincia =
+              this.provincias[centro.idProvincia - 1].nombreProvincia;
+            if (centro.idTipoEmpresa == 1) this.empresasReset.push(centro);
+          });
+
+          this.proFiltro = this.empresasReset;
+          this.empresasFiltroNombre = this.empresasReset;
+          this.empresasFiltroNombre = this.empresasFiltroNombre.filter(
+            (valor, indice, self) =>
+              indice === self.findIndex((v) => v.nombre === valor.nombre)
+          );
+
+          this.empresasCargadas = true;
         });
-
-        this.proFiltro = this.empresasReset;
-        this.empresasFiltroNombre = this.empresasReset;
-        this.empresasFiltroNombre = this.empresasFiltroNombre.filter(
-          (valor, indice, self) =>
-            indice === self.findIndex((v) => v.nombre === valor.nombre)
-        );
-
-        this.empresasCargadas = true;
-      });
     });
   }
 
@@ -82,7 +89,7 @@ export class ListadosempresaComponent implements OnInit {
   }
 
   getResponsables(idEmpresa: number): void {
-    this._service.getUsuarios().subscribe((response) => {
+    this._serviceUsuarios.getUsuarios().subscribe((response) => {
       let usuarios: Usuario[] = response;
       usuarios = usuarios.filter(
         (usuario) => usuario.idEmpresaCentro == idEmpresa && usuario.idRole == 4

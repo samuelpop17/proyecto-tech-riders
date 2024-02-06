@@ -5,7 +5,11 @@ import { Charla } from 'src/app/models/Charla';
 import { EstadoCharla } from 'src/app/models/EstadoCharla';
 import { TecnologiaCharla } from 'src/app/models/TecnologiaCharla';
 import { Usuario } from 'src/app/models/Usuario';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceCharlas } from 'src/app/services/service.charlas';
+import { ServiceEstadosCharlas } from 'src/app/services/service.estadoscharlas';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { ServiceTecnologiasCharlas } from 'src/app/services/service.tecnologiascharlas';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,7 +35,11 @@ export class EditarcharlaComponent implements OnInit {
   @ViewChild('controlEstado') controlEstado!: ElementRef;
 
   constructor(
-    private _service: ServicePrincipal,
+    private _serviceCharlas: ServiceCharlas,
+    private _serviceUsuarios: ServiceUsuarios,
+    private _serviceEstadosCharlas: ServiceEstadosCharlas,
+    private _serviceTecnologiasCharlas: ServiceTecnologiasCharlas,
+    private _serviceQueryTools: ServiceQueryTools,
     private _router: Router,
     private _activeRoute: ActivatedRoute
   ) {}
@@ -43,20 +51,22 @@ export class EditarcharlaComponent implements OnInit {
         this._activeRoute.params.subscribe((params: Params) => {
           if (params['idcharla']) {
             let idcharla = parseInt(params['idcharla']);
-            this._service.findCharla(idcharla).subscribe((response) => {
+            this._serviceCharlas.findCharla(idcharla).subscribe((response) => {
               this.charla = response;
             });
             if (this.role == 1) {
-              this._service.getUsuarios().subscribe((response) => {
+              this._serviceUsuarios.getUsuarios().subscribe((response) => {
                 this.allUsuarios = response;
                 this.allUsuarios = this.allUsuarios.filter(
                   (usuario) => usuario.idRole == 3
                 );
                 this.usuarios = this.allUsuarios;
-                this._service.getEstadosCharlas().subscribe((response) => {
-                  this.estados = response;
-                  this.camposAdminCargados = true;
-                });
+                this._serviceEstadosCharlas
+                  .getEstadosCharlas()
+                  .subscribe((response) => {
+                    this.estados = response;
+                    this.camposAdminCargados = true;
+                  });
               });
             }
           }
@@ -85,7 +95,7 @@ export class EditarcharlaComponent implements OnInit {
       idCurso: this.charla.idCurso,
       idProvincia: this.charla.idProvincia,
     };
-    this._service.getCharlas().subscribe((response) => {
+    this._serviceCharlas.getCharlas().subscribe((response) => {
       let charlas = response;
       let fecha = new Date(charla.fechaCharla);
       charlas = charlas.filter((chrl: Charla) => {
@@ -105,7 +115,7 @@ export class EditarcharlaComponent implements OnInit {
         );
       });
       if (charlas.length == 0) {
-        this._service.updateCharla(charla).subscribe((response) => {
+        this._serviceCharlas.updateCharla(charla).subscribe((response) => {
           this._router.navigate(['/charlas/mis-charlas']);
         });
       } else {
@@ -124,7 +134,7 @@ export class EditarcharlaComponent implements OnInit {
   changeTechRidersAdmin(event: any) {
     if (event.target.checked) {
       this.techRidersCargados = false;
-      this._service
+      this._serviceTecnologiasCharlas
         .getTecnologiasCharla(this.charla.idCharla)
         .subscribe((charlaResponse: TecnologiaCharla[]) => {
           // Cogemos solo los IDs de las tecnologías de la charla
@@ -136,7 +146,7 @@ export class EditarcharlaComponent implements OnInit {
           // Creamos un array de observables para esperar a recoger todas las tecnologías de todos los TRs
           const tecnologiasTechRiders: Observable<any>[] = this.allUsuarios.map(
             (usuario: Usuario) =>
-              this._service.getTecnologiasTechRider(usuario.idUsuario)
+              this._serviceQueryTools.getTecnologiasTechRider(usuario.idUsuario)
           );
 
           // forkJoin para esperar a que todos los observables se completen -> recoger todas las tecnologías de todos los TRs
@@ -182,7 +192,7 @@ export class EditarcharlaComponent implements OnInit {
       idCurso: this.charla.idCurso,
       idProvincia: this.charla.idProvincia,
     };
-    this._service.updateCharla(charla).subscribe((response) => {
+    this._serviceCharlas.updateCharla(charla).subscribe((response) => {
       this._router.navigate(['/listados']);
     });
   }

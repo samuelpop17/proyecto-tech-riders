@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TecnologiaCharla } from 'src/app/models/TecnologiaCharla';
-import { ServicePrincipal } from 'src/app/services/service.principal';
+import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { ServiceTecnologias } from 'src/app/services/service.tecnologias';
+import { ServiceTecnologiasCharlas } from 'src/app/services/service.tecnologiascharlas';
 
 @Component({
   selector: 'app-detallescharla',
@@ -14,7 +16,9 @@ export class DetallescharlaComponent implements OnInit {
   public tecnologiasCargadas: boolean = false;
 
   constructor(
-    private _service: ServicePrincipal,
+    private _serviceQueryTools: ServiceQueryTools,
+    private _serviceTecnologiasCharlas: ServiceTecnologiasCharlas,
+    private _serviceTecnologias: ServiceTecnologias,
     private _activeRoute: ActivatedRoute
   ) {}
 
@@ -22,15 +26,17 @@ export class DetallescharlaComponent implements OnInit {
     this._activeRoute.params.subscribe((params: Params) => {
       if (params['idcharla']) {
         let idcharla = parseInt(params['idcharla']);
-        this._service.findCharlaView(idcharla).subscribe((response) => {
-          this.charla = response;
-        });
-        this._service
+        this._serviceQueryTools
+          .findCharlaView(idcharla)
+          .subscribe((response) => {
+            this.charla = response;
+          });
+        this._serviceTecnologiasCharlas
           .getTecnologiasCharla(idcharla)
           .subscribe((response: TecnologiaCharla[]) => {
             if (response.length > 0) {
               response.forEach((tecnologia: TecnologiaCharla) => {
-                this._service
+                this._serviceTecnologias
                   .findTecnologia(tecnologia.idTecnologia)
                   .subscribe((response) => {
                     this.tecnologias.push(response.nombreTecnologia);
