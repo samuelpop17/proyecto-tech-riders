@@ -22,6 +22,7 @@ export class MenuComponent implements DoCheck {
   ) {}
 
   ngDoCheck(): void {
+    // NO TOCAR CONDICIÓN (por favor)
     if (
       (parseInt(localStorage.getItem('role') ?? '0') != 0 &&
         (this.role != localStorage.getItem('role') ||

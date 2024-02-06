@@ -27,17 +27,17 @@ export class MischarrlasTechridersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 3 || this.role == 4) {
-        this._serviceQueryTools
-          .estadoCharlasTechRiders()
-          .subscribe((response) => {
-            this.charlas = response;
-            this.charlasCargadas = true;
-          });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 3 || this.role == 4) {
+      this._serviceQueryTools
+        .estadoCharlasTechRiders()
+        .subscribe((response) => {
+          this.charlas = response;
+          this.charlasCargadas = true;
+        });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   anularCharla(idCharla: number) {

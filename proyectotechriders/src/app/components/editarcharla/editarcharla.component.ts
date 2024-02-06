@@ -45,34 +45,34 @@ export class EditarcharlaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 1 || this.role == 2) {
-        this._activeRoute.params.subscribe((params: Params) => {
-          if (params['idcharla']) {
-            let idcharla = parseInt(params['idcharla']);
-            this._serviceCharlas.findCharla(idcharla).subscribe((response) => {
-              this.charla = response;
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 1 || this.role == 2) {
+      this._activeRoute.params.subscribe((params: Params) => {
+        if (params['idcharla']) {
+          let idcharla = parseInt(params['idcharla']);
+          this._serviceCharlas.findCharla(idcharla).subscribe((response) => {
+            this.charla = response;
+          });
+          if (this.role == 1) {
+            this._serviceUsuarios.getUsuarios().subscribe((response) => {
+              this.allUsuarios = response;
+              this.allUsuarios = this.allUsuarios.filter(
+                (usuario) => usuario.idRole == 3
+              );
+              this.usuarios = this.allUsuarios;
+              this._serviceEstadosCharlas
+                .getEstadosCharlas()
+                .subscribe((response) => {
+                  this.estados = response;
+                  this.camposAdminCargados = true;
+                });
             });
-            if (this.role == 1) {
-              this._serviceUsuarios.getUsuarios().subscribe((response) => {
-                this.allUsuarios = response;
-                this.allUsuarios = this.allUsuarios.filter(
-                  (usuario) => usuario.idRole == 3
-                );
-                this.usuarios = this.allUsuarios;
-                this._serviceEstadosCharlas
-                  .getEstadosCharlas()
-                  .subscribe((response) => {
-                    this.estados = response;
-                    this.camposAdminCargados = true;
-                  });
-              });
-            }
           }
-        });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+        }
+      });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   editarCharla() {

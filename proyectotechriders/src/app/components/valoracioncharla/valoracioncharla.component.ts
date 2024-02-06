@@ -23,28 +23,28 @@ export class ValoracioncharlaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 2) {
-        this._activeRoute.params.subscribe((params: Params) => {
-          if (params['idcharla']) {
-            let idcharla = parseInt(params['idcharla']);
-            this.valoracion = {
-              idCharla: idcharla,
-              idValoracion: 0,
-              comentario: '',
-              valoracion: 0,
-            };
-            this._serviceValoracionesCharlas
-              .findValoracionCharla(idcharla)
-              .subscribe((response) => {
-                if (response[0] != undefined) this.valoracion = response[0];
-                this.valoExiste = true;
-              });
-          }
-        });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 2) {
+      this._activeRoute.params.subscribe((params: Params) => {
+        if (params['idcharla']) {
+          let idcharla = parseInt(params['idcharla']);
+          this.valoracion = {
+            idCharla: idcharla,
+            idValoracion: 0,
+            comentario: '',
+            valoracion: 0,
+          };
+          this._serviceValoracionesCharlas
+            .findValoracionCharla(idcharla)
+            .subscribe((response) => {
+              if (response[0] != undefined) this.valoracion = response[0];
+              this.valoExiste = true;
+            });
+        }
+      });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   editarValoracion(): void {

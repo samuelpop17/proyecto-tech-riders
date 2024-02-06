@@ -23,27 +23,26 @@ export class EditartecnologiastechriderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 3 || this.role == 4) {
-        this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-        this._serviceQueryTools
-          .findTecnologiasTechRider(this.id)
-          .subscribe((response) => {
-            this.tecnologias = response;
-            this._serviceTecnologias.getTecnologias().subscribe((response) => {
-              this.allTecnologias = response;
-              let idsTecnologias = this.tecnologias.map(
-                (tecnologia) => tecnologia.idTecnologia
-              );
-              this.allTecnologias = this.allTecnologias.filter(
-                (tecnologia) =>
-                  !idsTecnologias.includes(tecnologia.idTecnologia)
-              );
-            });
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 3 || this.role == 4) {
+      this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+      this._serviceQueryTools
+        .findTecnologiasTechRider(this.id)
+        .subscribe((response) => {
+          this.tecnologias = response;
+          this._serviceTecnologias.getTecnologias().subscribe((response) => {
+            this.allTecnologias = response;
+            let idsTecnologias = this.tecnologias.map(
+              (tecnologia) => tecnologia.idTecnologia
+            );
+            this.allTecnologias = this.allTecnologias.filter(
+              (tecnologia) => !idsTecnologias.includes(tecnologia.idTecnologia)
+            );
           });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+        });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   eliminarTecnologia(idTecnologia: number): void {

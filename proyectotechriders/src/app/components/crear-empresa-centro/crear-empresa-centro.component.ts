@@ -39,21 +39,21 @@ export class CrearEmpresaCentroComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      this.isEmpresaOrCentro = this._router.url == '/crear-empresa' ? 1 : 2;
-      if (this.role == 1 || (this.isEmpresaOrCentro == 1 && this.role == 4)) {
-        this._serviceProvincias.getProvincias().subscribe((response) => {
-          this.provincias = response;
-        });
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
 
-        if (this.role == 4) {
-          this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
-            this.nomRepresentante = response.nombre + ' ' + response.apellidos;
-          });
-        } else this.nomRepresentante = '-';
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    this.isEmpresaOrCentro = this._router.url == '/crear-empresa' ? 1 : 2;
+    if (this.role == 1 || (this.isEmpresaOrCentro == 1 && this.role == 4)) {
+      this._serviceProvincias.getProvincias().subscribe((response) => {
+        this.provincias = response;
+      });
+
+      if (this.role == 4) {
+        this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
+          this.nomRepresentante = response.nombre + ' ' + response.apellidos;
+        });
+      } else this.nomRepresentante = '-';
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   registerEmpresaCentro(): void {

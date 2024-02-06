@@ -41,21 +41,21 @@ export class SolicitarcharlaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 2) {
-        this._serviceTecnologias.getTecnologias().subscribe((response) => {
-          this.tecnologias = response;
-        });
-        let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-        this._serviceQueryTools.findCursosProfesor(id).subscribe((response) => {
-          this.cursos = response;
-        });
-        this._serviceProvincias.getProvincias().subscribe((response) => {
-          this.provincias = response;
-        });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 2) {
+      this._serviceTecnologias.getTecnologias().subscribe((response) => {
+        this.tecnologias = response;
+      });
+      let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+      this._serviceQueryTools.findCursosProfesor(id).subscribe((response) => {
+        this.cursos = response;
+      });
+      this._serviceProvincias.getProvincias().subscribe((response) => {
+        this.provincias = response;
+      });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   solicitarCharla(): void {

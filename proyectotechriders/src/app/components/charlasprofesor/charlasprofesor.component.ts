@@ -29,31 +29,27 @@ export class CharlasprofesorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 2) {
-        let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-        this._serviceQueryTools.getCharlasView().subscribe((response) => {
-          this.charlas = response;
-          this._serviceQueryTools
-            .findCursosProfesor(id)
-            .subscribe((response) => {
-              this.cursos = response;
-              this.cursos = this.cursos.map((curso) => curso.idCurso);
-              this.charlas = this.charlas.filter((charla) =>
-                this.cursos.includes(charla.idCurso)
-              );
-              this.charlasFiltradas = this.charlas;
-              this.charlasCargadas = true;
-            });
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 2) {
+      let id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+      this._serviceQueryTools.getCharlasView().subscribe((response) => {
+        this.charlas = response;
+        this._serviceQueryTools.findCursosProfesor(id).subscribe((response) => {
+          this.cursos = response;
+          this.cursos = this.cursos.map((curso) => curso.idCurso);
+          this.charlas = this.charlas.filter((charla) =>
+            this.cursos.includes(charla.idCurso)
+          );
+          this.charlasFiltradas = this.charlas;
+          this.charlasCargadas = true;
         });
-        this._serviceEstadosCharlas
-          .getEstadosCharlas()
-          .subscribe((response) => {
-            this.estados = response;
-          });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+      });
+      this._serviceEstadosCharlas.getEstadosCharlas().subscribe((response) => {
+        this.estados = response;
+      });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   filtrarCharlas(): void {

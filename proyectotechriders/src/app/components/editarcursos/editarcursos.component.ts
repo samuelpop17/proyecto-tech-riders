@@ -24,32 +24,32 @@ export class EditarcursosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 2) {
-        this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
-        this._serviceQueryTools
-          .findCursosProfesor(this.id)
-          .subscribe((response) => {
-            this.cursos = response;
-            let centro!: any;
-            this._serviceQueryTools
-              .findEmpresaCentroUsuario(this.id)
-              .subscribe((response) => {
-                centro = response[0];
-                this._serviceCursos.getCursos().subscribe((response) => {
-                  this.allCursos = response;
-                  let idsCursos = this.cursos.map((curso) => curso.idCurso);
-                  this.allCursos = this.allCursos.filter(
-                    (curso) =>
-                      !idsCursos.includes(curso.idCurso) &&
-                      curso.idCentro == centro.idEmpresa
-                  );
-                });
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 2) {
+      this.id = parseInt(localStorage.getItem('idUsuario') ?? '0');
+      this._serviceQueryTools
+        .findCursosProfesor(this.id)
+        .subscribe((response) => {
+          this.cursos = response;
+          let centro!: any;
+          this._serviceQueryTools
+            .findEmpresaCentroUsuario(this.id)
+            .subscribe((response) => {
+              centro = response[0];
+              this._serviceCursos.getCursos().subscribe((response) => {
+                this.allCursos = response;
+                let idsCursos = this.cursos.map((curso) => curso.idCurso);
+                this.allCursos = this.allCursos.filter(
+                  (curso) =>
+                    !idsCursos.includes(curso.idCurso) &&
+                    curso.idCentro == centro.idEmpresa
+                );
               });
-          });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+            });
+        });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 
   eliminarCurso(idCurso: number): void {

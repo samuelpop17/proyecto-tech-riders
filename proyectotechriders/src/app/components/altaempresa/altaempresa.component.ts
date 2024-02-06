@@ -24,11 +24,11 @@ export class AltaempresaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 1) this.cargarDatos();
-      else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 1) this.cargarDatos();
+    else this._router.navigate(['/usuario/perfil']);
   }
 
   cargarDatos() {

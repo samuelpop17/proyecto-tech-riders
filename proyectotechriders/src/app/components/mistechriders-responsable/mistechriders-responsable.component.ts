@@ -24,25 +24,25 @@ export class MistechridersResponsableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 4) {
-        this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
-          this._serviceQueryTools
-            .getMisTechRidersResponsable(response.idEmpresaCentro)
-            .subscribe((response) => {
-              this.usuariosCargados = true;
-              this.usuarios = response;
-            });
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
 
-          this._serviceQueryTools
-            .getCharlasTechResponsable(response.idEmpresaCentro)
-            .subscribe((response) => {
-              this.charlasCargadas = true;
-              this.charlas = response;
-            });
-        });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 4) {
+      this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
+        this._serviceQueryTools
+          .getMisTechRidersResponsable(response.idEmpresaCentro)
+          .subscribe((response) => {
+            this.usuariosCargados = true;
+            this.usuarios = response;
+          });
+
+        this._serviceQueryTools
+          .getCharlasTechResponsable(response.idEmpresaCentro)
+          .subscribe((response) => {
+            this.charlasCargadas = true;
+            this.charlas = response;
+          });
+      });
+    } else this._router.navigate(['/usuario/perfil']);
   }
 }

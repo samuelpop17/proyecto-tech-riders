@@ -26,17 +26,17 @@ export class ProponerTecnologiaComponent implements OnInit {
   public tecnologias!: any[];
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.role = parseInt(localStorage.getItem('role') ?? '0');
-      if (this.role == 3 || this.role == 4) {
-        this._serviceTipoTecnologias
-          .getTipoTecnologias()
-          .subscribe((response) => {
-            this.tecnologias = response;
-            this.tiposCargados = true;
-          });
-      } else this._router.navigate(['/usuario/perfil']);
-    } else this._router.navigate(['/login']);
+    if (!localStorage.getItem('token')) this._router.navigate(['/login']);
+
+    this.role = parseInt(localStorage.getItem('role') ?? '0');
+    if (this.role == 3 || this.role == 4) {
+      this._serviceTipoTecnologias
+        .getTipoTecnologias()
+        .subscribe((response) => {
+          this.tecnologias = response;
+          this.tiposCargados = true;
+        });
+    } else this._router.navigate(['/usuario/perfil']);
   }
   enviarSolicitud(): void {
     this._servicePeticionesTecnologias

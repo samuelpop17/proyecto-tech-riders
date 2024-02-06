@@ -75,6 +75,7 @@ const routes: Routes = [
   { path: 'techrider/:id', component: DetallesTechRiderComponent },
   { path: 'cursos-centro/:idcentro', component: CursosCentroComponent },
   { path: 'peticiones', component: PanelPeticionesAdminComponent },
+  { path: '**', redirectTo: '/' },
 ];
 
 export const appRoutingProvider: any[] = [];
