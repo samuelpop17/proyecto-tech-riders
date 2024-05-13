@@ -27,7 +27,7 @@ export class ServiceQueryTools {
     });
   }
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   findTecnologiasTechRider(id: number): Observable<any> {
     let url = environment.urlApi;
@@ -123,6 +123,15 @@ export class ServiceQueryTools {
     return this._http.get(url + request, {
       headers: header,
       params: { idtechrider: idTechRider },
+    });
+  }
+
+  getCursosProfesorAll(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/CursosProfesorAll';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, {
+      headers: header,
     });
   }
 }
